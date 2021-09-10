@@ -38,6 +38,15 @@ class SampleImageListAdapter constructor(
         notifyDataSetChanged()
     }
 
+    fun getImageList(): List<Bitmap> {
+        val imageList = ArrayList<Bitmap>()
+        for (key in bitmapList.keys) {
+            val image = bitmapList[key]
+            if (image != null) imageList.add(image)
+        }
+        return imageList
+    }
+
     inner class ViewHolder (private val binding: SampleImageListItemBinding) : RecyclerView.ViewHolder(binding.root) {
         fun bind(item: Bitmap?, position: Int) {
             if (item == null) {

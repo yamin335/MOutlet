@@ -11,6 +11,7 @@ import com.rtchubs.edokanpat.ui.add_payment_methods.AddBankViewModel
 import com.rtchubs.edokanpat.ui.add_payment_methods.AddCardViewModel
 import com.rtchubs.edokanpat.ui.add_payment_methods.AddPaymentMethodsViewModel
 import com.rtchubs.edokanpat.ui.add_product.AddProductViewModel
+import com.rtchubs.edokanpat.ui.add_product.AllProductViewModel
 import com.rtchubs.edokanpat.ui.cart.CartViewModel
 import com.rtchubs.edokanpat.ui.chapter_list.ChapterListViewModel
 import com.rtchubs.edokanpat.ui.exams.ExamsViewModel
@@ -32,6 +33,8 @@ import com.rtchubs.edokanpat.ui.video_play.LoadWebViewViewModel
 import com.rtchubs.edokanpat.ui.video_play.VideoPlayViewModel
 import com.rtchubs.edokanpat.ui.login.ViewPagerViewModel
 import com.rtchubs.edokanpat.ui.more.MoreViewModel
+import com.rtchubs.edokanpat.ui.order.OrderTrackHistoryViewModel
+import com.rtchubs.edokanpat.ui.order.OrderViewModel
 import com.rtchubs.edokanpat.ui.otp_signin.OtpSignInViewModel
 import com.rtchubs.edokanpat.ui.pin_number.PinNumberViewModel
 import com.rtchubs.edokanpat.ui.profile_signin.ProfileSignInViewModel
@@ -297,4 +300,18 @@ abstract class ViewModelModule {
     @ViewModelKey(AddProductViewModel::class)
     abstract fun bindAddProductViewModel(viewModel: AddProductViewModel): ViewModel
 
+    @Binds
+    @IntoMap
+    @ViewModelKey(AllProductViewModel::class)
+    abstract fun bindAllProductViewModel(viewModel: AllProductViewModel): ViewModel
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(OrderViewModel::class)
+    abstract fun bindOrderViewModel(viewModel: OrderViewModel): ViewModel
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(OrderTrackHistoryViewModel::class)
+    abstract fun bindOrderTrackHistoryViewModel(viewModel: OrderTrackHistoryViewModel): ViewModel
 }

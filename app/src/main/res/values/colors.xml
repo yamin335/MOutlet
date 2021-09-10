@@ -15,6 +15,13 @@
     <color name="toast_warning">#C7A90D</color>
     <color name="toast_success">#0AB939</color>
 
+    // Order Status
+    <color name="orderProcessing">#FFC400</color>
+    <color name="orderPicked">#00B0FF</color>
+    <color name="orderShipped">#526DFF</color>
+    <color name="orderDelivered">#0EB53B</color>
+    <color name="orderCancelled">#d32f2f</color>
+
     <color name="colorPrimary">@color/themeColor</color>
     <color name="primary">@color/themeColor</color>
     <color name="primaryDark">@color/themeColor</color>
@@ -89,7 +96,7 @@
     <color name="agentMain">#EDEDED</color>
 
 
-    <color name="teal">#25A69A</color>
+    <color name="teal">#21B072</color>
     <color name="red">#EB407A</color>
 
     <color name="text_selected">#b0003a</color>
@@ -439,5 +446,6 @@
     <color name="md_blue_grey_700">#455A64</color>
     <color name="md_blue_grey_800">#37474F</color>
     <color name="md_blue_grey_900">#263238</color>
+    <color name="colorLightGray">#CED7D6</color>
 
 </resources>

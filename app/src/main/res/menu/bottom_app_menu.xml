@@ -8,10 +8,10 @@
         app:showAsAction="always"
         android:icon="@drawable/ic_outline_home_24" />
     <item
-        android:id="@+id/favorite_nav"
-        android:title="Favorites"
+        android:id="@+id/products_nav"
+        android:title="Products"
         app:showAsAction="always"
-        android:icon="@drawable/ic_outline_favorite_border_24"/>
+        android:icon="@drawable/ic_outline_feed_24"/>
     <item
         android:title="Live Chat"
         app:showAsAction="always"

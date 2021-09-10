@@ -102,7 +102,7 @@ class MainActivity : DaggerAppCompatActivity(), LogoutHandlerCallback, NavDrawer
 
         val navGraphIds = listOf(
             R.navigation.home_nav_graph,
-            R.navigation.favorite_nav_graph,
+            R.navigation.products_nav_graph,
             R.navigation.transaction_nav_graph,
             R.navigation.more_nav_graph
         )

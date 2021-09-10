@@ -7,9 +7,21 @@
 
     <fragment
         android:id="@+id/transactionFragment"
-        android:name="com.rtchubs.edokanpat.TransactionFragment"
+        android:name="com.rtchubs.edokanpat.ui.order.OrderListFragment"
         android:label="Transaction"
-        tools:layout="@layout/fragment_transaction" />
+        tools:layout="@layout/fragment_order_list" >
+        <action
+            android:id="@+id/action_transactionFragment_to_orderTrackHistoryFragment"
+            app:destination="@id/orderTrackHistoryFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"/>
+    </fragment>
 
     <include app:graph="@navigation/drawer_nav_graph" />
+    <fragment
+        android:id="@+id/orderTrackHistoryFragment"
+        android:name="com.rtchubs.edokanpat.ui.order.OrderTrackHistoryFragment"
+        tools:layout="@layout/fragment_order_track_history"/>
 </navigation>

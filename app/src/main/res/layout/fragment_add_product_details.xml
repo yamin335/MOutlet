@@ -3,11 +3,11 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
-    <data class="AddProductFragmentBinding">
+    <data class="AddProductDetailsFragmentBinding">
 
         <variable
             name="viewModel"
-            type="com.rtchubs.edokanpat.ui.add_product.AddProductViewModel" />
+            type="com.rtchubs.edokanpat.ui.add_product.AddProductDetailsViewModel" />
     </data>
 
 
@@ -24,7 +24,7 @@
             android:background="@color/themeColor"
             android:theme="@style/AppTheme.AppBarOverlay"
             app:popupTheme="@style/AppTheme.PopupOverlay"
-            app:title="Add New Product"
+            app:title="Product Details"
             app:titleTextColor="@color/white" />
 
         <ProgressBar
@@ -71,40 +71,9 @@
                         <ImageView
                             android:id="@+id/featureImage"
                             android:layout_width="match_parent"
-                            android:layout_height="match_parent" />
-
-                        <LinearLayout
-                            android:id="@+id/llAddFeatureImage"
-                            android:layout_width="match_parent"
                             android:layout_height="match_parent"
-                            android:gravity="center"
-                            android:orientation="vertical">
-
-                            <ImageView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:src="@drawable/ic_baseline_add_24" />
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="Click to Add Feature Image"
-                                android:textSize="16sp" />
-
-                        </LinearLayout>
-
-                        <ImageView
-                            android:id="@+id/btnAddFeatureImage"
-                            android:layout_width="40dp"
-                            android:layout_height="40dp"
-                            android:visibility="gone"
-                            android:background="@drawable/circle_bg_gray_transparent"
-                            android:layout_margin="16dp"
-                            android:padding="8dp"
-                            android:src="@drawable/ic_round_add_a_photo_24"
-                            app:layout_constraintBottom_toBottomOf="parent"
-                            app:layout_constraintEnd_toEndOf="parent"
-                            app:tint="@color/white" />
+                            android:scaleType="centerCrop"
+                            android:src="@drawable/image_placeholder"/>
 
                     </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -132,40 +101,40 @@
                     android:clipToPadding="false"
                     android:orientation="horizontal"
                     app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                    tools:listitem="@layout/list_item_add_product_sample_image"
+                    tools:listitem="@layout/list_item_product_sample_image"
                     tools:itemCount="3"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/textView4" />
 
-                <com.google.android.material.card.MaterialCardView
-                    android:id="@+id/cardSpinnerCategory"
-                    android:layout_width="0dp"
-                    android:layout_height="45dp"
+                <LinearLayout
+                    android:id="@+id/llCategory"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
                     android:layout_marginStart="16dp"
                     android:layout_marginEnd="16dp"
                     android:layout_marginTop="16dp"
-                    android:layout_marginBottom="8dp"
-                    android:background="@color/white"
-                    app:cardCornerRadius="8dp"
-                    app:cardElevation="0dp"
-                    app:cardUseCompatPadding="false"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/sampleImageRecycler"
-                    app:layout_constraintVertical_bias="0.0"
-                    app:strokeColor="@color/albumFontHint"
-                    app:strokeWidth="0.8dp">
+                    android:orientation="vertical"
+                    app:layout_constraintTop_toBottomOf="@+id/sampleImageRecycler">
 
-                    <Spinner
-                        android:id="@+id/spinnerCategory"
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Product Category"
+                        android:textColor="#555555"
+                        android:textSize="12sp" />
+
+                    <TextView
+                        android:id="@+id/category"
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:gravity="center_vertical"
-                        android:layout_marginStart="16dp" />
-
-                </com.google.android.material.card.MaterialCardView>
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/rounded_bg_common_edittext_gray"
+                        android:paddingStart="16dp"
+                        android:paddingEnd="8dp"
+                        android:paddingTop="10dp"
+                        android:paddingBottom="10dp"
+                        android:layout_marginTop="8dp"/>
+                </LinearLayout>
 
                 <LinearLayout
                     android:id="@+id/llName"
@@ -175,7 +144,7 @@
                     android:layout_marginEnd="16dp"
                     android:layout_marginTop="16dp"
                     android:orientation="vertical"
-                    app:layout_constraintTop_toBottomOf="@+id/cardSpinnerCategory">
+                    app:layout_constraintTop_toBottomOf="@+id/llCategory">
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -184,14 +153,11 @@
                         android:textColor="#555555"
                         android:textSize="12sp" />
 
-                    <EditText
+                    <TextView
                         android:id="@+id/name"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:background="@drawable/rounded_bg_common_edittext_gray"
-                        android:hint="name"
-                        android:inputType="text"
-                        android:imeOptions="actionNext"
                         android:paddingStart="16dp"
                         android:paddingEnd="8dp"
                         android:paddingTop="10dp"
@@ -216,14 +182,11 @@
                         android:textColor="#555555"
                         android:textSize="12sp" />
 
-                    <EditText
+                    <TextView
                         android:id="@+id/price"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:background="@drawable/rounded_bg_common_edittext_gray"
-                        android:imeOptions="actionNext"
-                        android:inputType="numberDecimal"
-                        android:hint="price"
                         android:paddingStart="16dp"
                         android:paddingEnd="8dp"
                         android:paddingTop="10dp"
@@ -238,9 +201,9 @@
                     android:layout_marginStart="16dp"
                     android:layout_marginEnd="16dp"
                     android:layout_marginTop="16dp"
-                    android:layout_marginBottom="16dp"
+                    android:layout_marginBottom="64dp"
                     android:orientation="vertical"
-                    app:layout_constraintBottom_toTopOf="@+id/btnAddProduct"
+                    app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/llPrice"
                     tools:layout_editor_absoluteX="16dp">
 
@@ -253,37 +216,17 @@
                         android:textColor="#555555"
                         android:textSize="12sp" />
 
-                    <EditText
+                    <TextView
                         android:id="@+id/description"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="8dp"
                         android:background="@drawable/rounded_bg_common_edittext_gray"
                         android:gravity="start|top"
-                        android:hint="description"
-                        android:imeOptions="actionDone"
-                        android:lines="6"
+                        android:lines="3"
                         android:padding="16dp"
                         android:scrollbars="vertical" />
                 </LinearLayout>
-
-                <com.google.android.material.button.MaterialButton
-                    android:id="@+id/btnAddProduct"
-                    style="@style/Widget.MaterialComponents.Button.UnelevatedButton"
-                    android:layout_width="match_parent"
-                    android:layout_height="50dp"
-                    android:text="Add Product"
-                    android:layout_marginStart="16dp"
-                    android:layout_marginEnd="16dp"
-                    android:layout_marginBottom="64dp"
-                    android:textColor="@android:color/white"
-                    android:textSize="16sp"
-                    app:backgroundTint="#E5525D"
-                    app:cornerRadius="8dp"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:rippleColor="@android:color/white" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
         </androidx.core.widget.NestedScrollView>

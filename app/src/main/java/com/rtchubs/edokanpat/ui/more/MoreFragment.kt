@@ -58,10 +58,6 @@ class MoreFragment : BaseFragment<MoreFragmentBinding, MoreViewModel>() {
         viewDataBinding.appLogo.setOnClickListener {
             drawerListener?.toggleNavDrawer()
         }
-
-        viewDataBinding.addProduct.setOnClickListener {
-            navigateTo(MoreFragmentDirections.actionMoreFragmentToAddProductFragment())
-        }
     }
 
 }

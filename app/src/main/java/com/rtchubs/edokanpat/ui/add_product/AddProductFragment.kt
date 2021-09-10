@@ -5,37 +5,29 @@ import android.content.DialogInterface
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.graphics.Bitmap
-import android.graphics.drawable.BitmapDrawable
 import android.graphics.drawable.Drawable
 import android.net.Uri
 import android.os.Bundle
 import android.os.Environment
 import android.provider.MediaStore
-import android.view.Menu
-import android.view.MenuInflater
 import android.view.MenuItem
 import android.view.View
-import android.widget.TextView
+import android.widget.AdapterView
+import android.widget.ArrayAdapter
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AlertDialog
 import androidx.core.content.ContextCompat
 import androidx.core.content.FileProvider
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.Observer
-import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.OrientationHelper
-import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.bumptech.glide.Glide
 import com.rtchubs.edokanpat.BR
 import com.rtchubs.edokanpat.BuildConfig
 import com.rtchubs.edokanpat.R
 import com.rtchubs.edokanpat.databinding.AddProductFragmentBinding
-import com.rtchubs.edokanpat.databinding.MoreShoppingListFragmentBinding
+import com.rtchubs.edokanpat.models.add_product.ItemAddProduct
 import com.rtchubs.edokanpat.ui.common.BaseFragment
-import com.rtchubs.edokanpat.ui.home.MoreShoppingMallFragmentDirections
 import com.rtchubs.edokanpat.util.BitmapUtilss
-import com.rtchubs.edokanpat.util.GridRecyclerItemDecorator
 import com.rtchubs.edokanpat.util.PermissionUtils.isCameraAndGalleryPermissionGranted
 import com.rtchubs.edokanpat.util.PermissionUtils.isCameraPermission
 import com.rtchubs.edokanpat.util.PermissionUtils.isGalleryPermission
@@ -67,6 +59,10 @@ class AddProductFragment : BaseFragment<AddProductFragmentBinding, AddProductVie
     lateinit var currentPhotoPath: String
 
     lateinit var sampleImageAdapter: SampleImageListAdapter
+
+    var productCategory = ""
+
+    var productCategories = arrayOf("Product Category", "Shirt", "Pant", "Skirt", "Shoes", "Hats")
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -163,6 +159,54 @@ class AddProductFragment : BaseFragment<AddProductFragmentBinding, AddProductVie
 
                 checkImages()
             }
+        }
+
+        val categoryAdapter = ArrayAdapter(requireContext(), R.layout.spinner_item, productCategories)
+        categoryAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+        viewDataBinding.spinnerCategory.adapter = categoryAdapter
+
+        viewDataBinding.spinnerCategory.onItemSelectedListener =
+            object : AdapterView.OnItemClickListener,
+            AdapterView.OnItemSelectedListener {
+            override fun onItemSelected(
+                parent: AdapterView<*>?,
+                view: View?,
+                position: Int,
+                id: Long
+            ) {
+                productCategory = if (position != 0) {
+                    productCategories[position]
+                } else {
+                    ""
+                }
+            }
+
+            override fun onNothingSelected(parent: AdapterView<*>?) {
+            }
+
+            override fun onItemClick(
+                parent: AdapterView<*>?,
+                view: View?,
+                position: Int,
+                id: Long
+            ) {
+
+            }
+
+        }
+
+        viewDataBinding.btnAddProduct.setOnClickListener {
+            val product = ItemAddProduct(
+                AllProductsFragment.id++,
+                viewDataBinding.name.text.toString(),
+                viewDataBinding.price.text.toString().toInt(),
+                productCategory,
+                viewDataBinding.description.text.toString(),
+                featureImage,
+                sampleImageAdapter.getImageList()
+            )
+            AllProductsFragment.allProductsList.add(product)
+            navController.popBackStack()
         }
 
     }

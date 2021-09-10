@@ -6,6 +6,7 @@ import com.rtchubs.edokanpat.ui.add_payment_methods.AddBankFragment
 import com.rtchubs.edokanpat.ui.add_payment_methods.AddCardFragment
 import com.rtchubs.edokanpat.ui.add_payment_methods.AddPaymentMethodsFragment
 import com.rtchubs.edokanpat.ui.add_product.AddProductFragment
+import com.rtchubs.edokanpat.ui.add_product.AllProductsFragment
 import com.rtchubs.edokanpat.ui.cart.CartFragment
 import com.rtchubs.edokanpat.ui.chapter_list.ChapterListFragment
 import com.rtchubs.edokanpat.ui.exams.ExamsFragment
@@ -27,6 +28,8 @@ import com.rtchubs.edokanpat.ui.video_play.LoadWebViewFragment
 import com.rtchubs.edokanpat.ui.video_play.VideoPlayFragment
 import com.rtchubs.edokanpat.ui.login.ViewPagerFragment
 import com.rtchubs.edokanpat.ui.more.MoreFragment
+import com.rtchubs.edokanpat.ui.order.OrderListFragment
+import com.rtchubs.edokanpat.ui.order.OrderTrackHistoryFragment
 import com.rtchubs.edokanpat.ui.otp_signin.OtpSignInFragment
 import com.rtchubs.edokanpat.ui.pin_number.PinNumberFragment
 import com.rtchubs.edokanpat.ui.profile_signin.ProfileSignInFragment
@@ -185,4 +188,13 @@ abstract class FragmentBuildersModule {
 
     @ContributesAndroidInjector
     abstract fun contributeAddProductFragment(): AddProductFragment
+
+    @ContributesAndroidInjector
+    abstract fun contributeAllProductsFragment(): AllProductsFragment
+
+    @ContributesAndroidInjector
+    abstract fun contributeOrderListFragment(): OrderListFragment
+
+    @ContributesAndroidInjector
+    abstract fun contributeOrderTrackHistoryFragment(): OrderTrackHistoryFragment
 }
