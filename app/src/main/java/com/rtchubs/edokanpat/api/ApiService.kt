@@ -6,6 +6,7 @@ import com.rtchubs.edokanpat.models.AllMerchantResponse
 import com.rtchubs.edokanpat.models.AllProductResponse
 import com.rtchubs.edokanpat.models.AllShoppingMallResponse
 import com.rtchubs.edokanpat.models.common.MyAccountListResponse
+import com.rtchubs.edokanpat.models.login.LoginResponse
 import com.rtchubs.edokanpat.models.payment_account_models.AddCardOrBankResponse
 import com.rtchubs.edokanpat.models.payment_account_models.BankOrCardListResponse
 import com.rtchubs.edokanpat.models.registration.InquiryResponse
@@ -92,6 +93,12 @@ interface ApiService {
 
 
     // eDokanPat
+    @Headers(ContentType)
+    @POST(ApiEndPoint.LOGIN)
+    suspend fun shopLogin(
+        @Body jsonObject: JsonObject
+    ): Response<LoginResponse>
+
     @GET(ApiEndPoint.ALL_MALL)
     suspend fun getAllMalls(): Response<AllShoppingMallResponse>
 

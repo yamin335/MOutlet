@@ -1,6 +1,8 @@
 package com.rtchubs.edokanpat.repos
 
+import com.google.gson.JsonObject
 import com.rtchubs.edokanpat.api.ApiService
+import com.rtchubs.edokanpat.models.login.LoginResponse
 import com.rtchubs.edokanpat.models.registration.InquiryResponse
 import com.rtchubs.edokanpat.models.registration.DefaultResponse
 import kotlinx.coroutines.Dispatchers
@@ -13,6 +15,20 @@ import javax.inject.Singleton
 
 @Singleton
 class LoginRepository @Inject constructor(private val apiService: ApiService) {
+
+    suspend fun shopLogin(email: String?, password: String?): Response<LoginResponse> {
+        val jsonObjectBody = JsonObject().apply {
+            addProperty("email", email)
+            addProperty("password", password)
+            addProperty("url", "shoplogin")
+            addProperty("userType", "0")
+            addProperty("usertype", "Shop Owner")
+        }
+
+        return withContext(Dispatchers.IO) {
+            apiService.shopLogin(jsonObjectBody)
+        }
+    }
 
     suspend fun inquireRepo(mobileNumber: String, deviceId: String): Response<InquiryResponse> {
         return withContext(Dispatchers.IO) {

@@ -1034,11 +1034,6 @@
                         </option>
                         <option name="myPositions">
                           <map>
-                            <entry key="action_pinNumberFragment_to_home">
-                              <value>
-                                <LayoutPositions />
-                              </value>
-                            </entry>
                             <entry key="action_pinNumberFragment_to_permissionsFragment">
                               <value>
                                 <LayoutPositions />
@@ -1075,8 +1070,8 @@
                       <LayoutPositions>
                         <option name="myPosition">
                           <Point>
-                            <option name="x" value="256" />
-                            <option name="y" value="32" />
+                            <option name="x" value="11" />
+                            <option name="y" value="85" />
                           </Point>
                         </option>
                         <option name="myPositions">
@@ -1087,27 +1082,6 @@
                               </value>
                             </entry>
                             <entry key="action_signInFragment_to_termsFragment">
-                              <value>
-                                <LayoutPositions />
-                              </value>
-                            </entry>
-                          </map>
-                        </option>
-                      </LayoutPositions>
-                    </value>
-                  </entry>
-                  <entry key="splashFragment">
-                    <value>
-                      <LayoutPositions>
-                        <option name="myPosition">
-                          <Point>
-                            <option name="x" value="-238" />
-                            <option name="y" value="28" />
-                          </Point>
-                        </option>
-                        <option name="myPositions">
-                          <map>
-                            <entry key="action_splash_to_login">
                               <value>
                                 <LayoutPositions />
                               </value>
@@ -1143,18 +1117,9 @@
                       <LayoutPositions>
                         <option name="myPosition">
                           <Point>
-                            <option name="x" value="12" />
-                            <option name="y" value="32" />
+                            <option name="x" value="304" />
+                            <option name="y" value="408" />
                           </Point>
-                        </option>
-                        <option name="myPositions">
-                          <map>
-                            <entry key="action_viewPagerFragment_to_signInFragment">
-                              <value>
-                                <LayoutPositions />
-                              </value>
-                            </entry>
-                          </map>
                         </option>
                       </LayoutPositions>
                     </value>

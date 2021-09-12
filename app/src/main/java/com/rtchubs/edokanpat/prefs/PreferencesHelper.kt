@@ -2,6 +2,7 @@ package com.rtchubs.edokanpat.prefs
 
 import com.rtchubs.edokanpat.api.ProfileInfo
 import com.rtchubs.edokanpat.api.TokenInformation
+import com.rtchubs.edokanpat.models.login.LoginResponseData
 
 
 interface PreferencesHelper {
@@ -32,7 +33,7 @@ interface PreferencesHelper {
 
     var phoneNumber: String?
 
-    var userId: Int
+    var merchantId: Int
 
     var userRole: String?
 
@@ -48,7 +49,7 @@ interface PreferencesHelper {
 
     fun saveToken(tokenInformation: TokenInformation)
 
-    fun saveUserProfile(profile: ProfileInfo)
+    fun saveMerchant(merchant: LoginResponseData)
 
     fun getToken(): TokenInformation
 

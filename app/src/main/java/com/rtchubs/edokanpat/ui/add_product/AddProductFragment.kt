@@ -205,7 +205,7 @@ class AddProductFragment : BaseFragment<AddProductFragmentBinding, AddProductVie
                 featureImage,
                 sampleImageAdapter.getImageList()
             )
-            AllProductsFragment.allProductsList.add(product)
+            //AllProductsFragment.allProductsList.add(product)
             navController.popBackStack()
         }
 

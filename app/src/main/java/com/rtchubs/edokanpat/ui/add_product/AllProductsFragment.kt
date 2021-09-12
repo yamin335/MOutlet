@@ -4,9 +4,11 @@ import android.content.Context
 import android.os.Bundle
 import android.view.*
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.Observer
 import com.rtchubs.edokanpat.BR
 import com.rtchubs.edokanpat.R
 import com.rtchubs.edokanpat.databinding.AllProductsFragmentBinding
+import com.rtchubs.edokanpat.models.Product
 import com.rtchubs.edokanpat.models.add_product.ItemAddProduct
 import com.rtchubs.edokanpat.ui.NavDrawerHandlerCallback
 import com.rtchubs.edokanpat.ui.common.BaseFragment
@@ -50,14 +52,7 @@ class AllProductsFragment : BaseFragment<AllProductsFragmentBinding, AllProductV
 
     override fun onResume() {
         super.onResume()
-        if (allProductsList.isEmpty()) {
-            viewDataBinding.container.visibility = View.GONE
-            viewDataBinding.emptyView.visibility = View.VISIBLE
-        } else {
-            viewDataBinding.container.visibility = View.VISIBLE
-            viewDataBinding.emptyView.visibility = View.GONE
-            allProductListAdapter.submitList(allProductsList)
-        }
+        viewModel.getProductList(preferencesHelper.merchantId.toString())
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -78,10 +73,30 @@ class AllProductsFragment : BaseFragment<AllProductsFragmentBinding, AllProductV
         viewDataBinding.addProduct.setOnClickListener {
             navigateTo(AllProductsFragmentDirections.actionAllProductsFragmentToAddProductFragment())
         }
+
+        viewModel.productListResponse.observe(viewLifecycleOwner, Observer { response ->
+            response?.let {
+                it.data?.let { products ->
+                    allProductsList = products
+                    showHideDataView()
+                    allProductListAdapter.submitList(allProductsList)
+                }
+            }
+        })
+    }
+
+    private fun showHideDataView() {
+        if (allProductsList.isEmpty()) {
+            viewDataBinding.container.visibility = View.GONE
+            viewDataBinding.emptyView.visibility = View.VISIBLE
+        } else {
+            viewDataBinding.container.visibility = View.VISIBLE
+            viewDataBinding.emptyView.visibility = View.GONE
+        }
     }
 
     companion object {
-        var allProductsList = ArrayList<ItemAddProduct>()
+        var allProductsList: List<Product> = ArrayList()
         var id = 0
     }
 }

@@ -11,6 +11,7 @@ import com.google.gson.reflect.TypeToken
 import com.rtchubs.edokanpat.api.ProfileInfo
 import com.rtchubs.edokanpat.api.TokenInformation
 import com.rtchubs.edokanpat.di.PreferenceInfo
+import com.rtchubs.edokanpat.models.login.LoginResponseData
 import com.rtchubs.edokanpat.worker.TokenRefreshWorker
 import java.util.concurrent.TimeUnit
 import javax.inject.Inject
@@ -45,7 +46,7 @@ class AppPreferencesHelper @Inject constructor(
 
     override var userRole by StringPreference(prefs, KEY_USER_ROLE, null, true)
 
-    override var userId by IntPreference(prefs, KEY_USER_ID, -1, true)
+    override var merchantId by IntPreference(prefs, KEY_USER_ID, -1, true)
 
     override var phoneNumber by StringPreference(prefs, KEY_PHONE_NUMBER, null, true)
 
@@ -83,10 +84,8 @@ class AppPreferencesHelper @Inject constructor(
         scheduleRefreshToken(tokenInformation.expire)
     }
 
-    /*save user Profile*/
-    override fun saveUserProfile(profile: ProfileInfo) {
-        userId = profile.userId
-        phoneNumber = profile.phoneNumber
+    override fun saveMerchant(merchant: LoginResponseData) {
+        merchantId = merchant.id ?: 0
     }
 
     /*schedule refresh token job*/

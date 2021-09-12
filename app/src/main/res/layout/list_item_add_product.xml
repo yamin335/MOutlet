@@ -7,7 +7,7 @@
         <import type="android.graphics.drawable.Drawable"/>
         <variable
             name="item"
-            type="com.rtchubs.edokanpat.models.add_product.ItemAddProduct" />
+            type="com.rtchubs.edokanpat.models.Product" />
         <variable
             name="imageUrl"
             type="String" />
@@ -37,6 +37,8 @@
                 android:layout_height="70dp"
                 android:adjustViewBounds="true"
                 android:scaleType="centerCrop"
+                app:imageRequestListener="@{imageRequestListener}"
+                app:imageUrl="@{imageUrl}"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
@@ -82,14 +84,14 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="$"
+                    android:text="@string/sign_taka"
                     android:textColor="#404040"
                     android:textStyle="bold" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@{item.price.toString()}"
+                    android:text="@{item.mrp.toString()}"
                     android:textColor="#404040"
                     tools:text="12000.00" />
 
@@ -120,7 +122,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@{item.category}"
+                    android:text="@{item.category.name}"
                     android:textColor="#404040"
                     tools:text="T-Shirt" />
 

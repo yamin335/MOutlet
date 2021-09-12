@@ -67,7 +67,7 @@ class AddProductDetailsFragment : BaseFragment<AddProductDetailsFragmentBinding,
         super.onViewCreated(view, savedInstanceState)
         registerToolbar(viewDataBinding.toolbar)
 
-        product = AllProductsFragment.allProductsList[productId]
+        //product = AllProductsFragment.allProductsList[productId]
 
         sampleImageAdapter = ProductDetailsSampleImageListAdapter()
         viewDataBinding.sampleImageRecycler.adapter = sampleImageAdapter

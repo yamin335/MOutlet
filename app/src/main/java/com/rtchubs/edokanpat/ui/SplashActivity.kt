@@ -15,6 +15,7 @@ import com.rtchubs.edokanpat.R
 import com.rtchubs.edokanpat.databinding.MainActivityBinding
 import com.rtchubs.edokanpat.databinding.SplashActivityBinding
 import com.rtchubs.edokanpat.databinding.SplashBinding
+import com.rtchubs.edokanpat.prefs.PreferencesHelper
 import com.rtchubs.edokanpat.ui.splash.SplashViewModel
 import dagger.android.support.DaggerAppCompatActivity
 import kotlinx.coroutines.delay
@@ -26,6 +27,9 @@ class SplashActivity : DaggerAppCompatActivity() {
 
     @Inject
     lateinit var viewModelFactory: ViewModelProvider.Factory
+
+    @Inject
+    lateinit var preferenceHelper: PreferencesHelper
 
     private val viewModel: SplashViewModel by viewModels {
         // Get the ViewModel.
@@ -56,9 +60,15 @@ class SplashActivity : DaggerAppCompatActivity() {
                         delay(1200L)
                     }
 
-                    startActivity(Intent(this@SplashActivity, MainActivity::class.java))
-                    this@SplashActivity.finish()
-                    overridePendingTransition(R.anim.slide_in_right, R.anim.fade_out)
+                    if (preferenceHelper.isLoggedIn) {
+                        startActivity(Intent(this@SplashActivity, MainActivity::class.java))
+                        this@SplashActivity.finish()
+                        overridePendingTransition(R.anim.slide_in_right, R.anim.fade_out)
+                    } else {
+                        startActivity(Intent(this@SplashActivity, LoginActivity::class.java))
+                        this@SplashActivity.finish()
+                        overridePendingTransition(R.anim.slide_in_right, R.anim.fade_out)
+                    }
                 }
             }
 
