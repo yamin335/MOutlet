@@ -8,10 +8,9 @@ import androidx.core.content.edit
 import androidx.work.*
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
-import com.rtchubs.edokanpat.api.ProfileInfo
 import com.rtchubs.edokanpat.api.TokenInformation
 import com.rtchubs.edokanpat.di.PreferenceInfo
-import com.rtchubs.edokanpat.models.login.LoginResponseData
+import com.rtchubs.edokanpat.models.login.Merchant
 import com.rtchubs.edokanpat.worker.TokenRefreshWorker
 import java.util.concurrent.TimeUnit
 import javax.inject.Inject
@@ -84,8 +83,17 @@ class AppPreferencesHelper @Inject constructor(
         scheduleRefreshToken(tokenInformation.expire)
     }
 
-    override fun saveMerchant(merchant: LoginResponseData) {
+    override fun saveMerchant(merchant: Merchant) {
         merchantId = merchant.id ?: 0
+        val merchantString = Gson().toJson(merchant)
+        prefs.value.edit {
+            putString(KEY_MERCHANT, merchantString)
+        }
+    }
+
+    override fun getMerchant(): Merchant {
+        val userString = prefs.value.getString(KEY_MERCHANT, "{}")
+        return Gson().fromJson(userString, Merchant::class.java)
     }
 
     /*schedule refresh token job*/
@@ -168,6 +176,7 @@ class AppPreferencesHelper @Inject constructor(
         private const val KEY_USER_ID = "USER_ID"
         private const val KEY_VALIDITY_RATE_MAP = "KEY_VALIDITY_RATE"
         private const val KEY_LANGUAGE = "KEY_LANGUAGE"
+        private const val KEY_MERCHANT = "KEY_MERCHANT"
         const val LANGUAGE_BENGALI = "bn"
         const val LANGUAGE_ENGLISH = "en"
 

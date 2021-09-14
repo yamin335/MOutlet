@@ -60,7 +60,9 @@ class MainActivity : DaggerAppCompatActivity(), LogoutHandlerCallback, NavDrawer
         R.id.otpSignInFragment,
         R.id.pinNumberFragment,
         R.id.profileSignInFragment,
-        R.id.ARLocationFragment
+        R.id.ARLocationFragment,
+        R.id.addProductFragment,
+        R.id.addCustomerFragment
     )
 
     private var navigatedFromDashboard = false
@@ -101,7 +103,7 @@ class MainActivity : DaggerAppCompatActivity(), LogoutHandlerCallback, NavDrawer
     private fun setupBottomNavigationBar() {
 
         val navGraphIds = listOf(
-            R.navigation.home_nav_graph,
+            R.navigation.customers_nav_graph,
             R.navigation.products_nav_graph,
             R.navigation.transaction_nav_graph,
             R.navigation.more_nav_graph

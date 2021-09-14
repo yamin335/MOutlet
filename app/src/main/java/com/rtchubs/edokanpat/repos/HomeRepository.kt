@@ -5,6 +5,8 @@ import com.rtchubs.edokanpat.api.ApiService
 import com.rtchubs.edokanpat.models.AllMerchantResponse
 import com.rtchubs.edokanpat.models.AllProductResponse
 import com.rtchubs.edokanpat.models.AllShoppingMallResponse
+import com.rtchubs.edokanpat.models.customers.AddCustomerResponse
+import com.rtchubs.edokanpat.models.customers.CustomerListResponse
 import com.rtchubs.edokanpat.models.payment_account_models.AddCardOrBankResponse
 import com.rtchubs.edokanpat.models.payment_account_models.BankOrCardListResponse
 import kotlinx.coroutines.Dispatchers
@@ -62,6 +64,38 @@ class HomeRepository @Inject constructor(private val apiService: ApiService) {
     suspend fun getAllProductsRepo(id: String): Response<AllProductResponse> {
         return withContext(Dispatchers.IO) {
             apiService.getAllProducts(id)
+        }
+    }
+
+    suspend fun allCustomers(token: String): Response<CustomerListResponse> {
+        val jsonObjectBody = JsonObject().apply {
+            addProperty("token", token)
+        }
+
+        return withContext(Dispatchers.IO) {
+            apiService.allCustomers(jsonObjectBody, 1)
+        }
+    }
+
+    suspend fun addCustomer(name: String, phone: String, email: String, contact_person: String,
+                            discountAmount: String, city: String, state: String, zipcode: String,
+                            address: String, merchant_id: Int): Response<AddCustomerResponse> {
+        val jsonObjectBody = JsonObject().apply {
+            addProperty("name", name)
+            addProperty("phone", phone)
+            addProperty("email", email)
+            addProperty("contact_person", contact_person)
+            addProperty("discountAmount", discountAmount)
+            addProperty("city", city)
+            addProperty("state", state)
+            addProperty("zipcode", zipcode)
+            addProperty("address", address)
+            addProperty("merchant_id", merchant_id)
+            addProperty("token", email)
+        }
+
+        return withContext(Dispatchers.IO) {
+            apiService.addCustomer(jsonObjectBody)
         }
     }
 }

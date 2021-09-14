@@ -1,8 +1,7 @@
 package com.rtchubs.edokanpat.prefs
 
-import com.rtchubs.edokanpat.api.ProfileInfo
 import com.rtchubs.edokanpat.api.TokenInformation
-import com.rtchubs.edokanpat.models.login.LoginResponseData
+import com.rtchubs.edokanpat.models.login.Merchant
 
 
 interface PreferencesHelper {
@@ -49,7 +48,9 @@ interface PreferencesHelper {
 
     fun saveToken(tokenInformation: TokenInformation)
 
-    fun saveMerchant(merchant: LoginResponseData)
+    fun saveMerchant(merchant: Merchant)
+
+    fun getMerchant(): Merchant
 
     fun getToken(): TokenInformation
 

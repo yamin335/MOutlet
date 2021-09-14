@@ -9,6 +9,8 @@ import com.rtchubs.edokanpat.ui.add_product.AddProductFragment
 import com.rtchubs.edokanpat.ui.add_product.AllProductsFragment
 import com.rtchubs.edokanpat.ui.cart.CartFragment
 import com.rtchubs.edokanpat.ui.chapter_list.ChapterListFragment
+import com.rtchubs.edokanpat.ui.customers.AddCustomerFragment
+import com.rtchubs.edokanpat.ui.customers.AllCustomersFragment
 import com.rtchubs.edokanpat.ui.exams.ExamsFragment
 import com.rtchubs.edokanpat.ui.home.*
 import com.rtchubs.edokanpat.ui.how_works.HowWorksFragment
@@ -197,4 +199,10 @@ abstract class FragmentBuildersModule {
 
     @ContributesAndroidInjector
     abstract fun contributeOrderTrackHistoryFragment(): OrderTrackHistoryFragment
+
+    @ContributesAndroidInjector
+    abstract fun contributeAllCustomersFragment(): AllCustomersFragment
+
+    @ContributesAndroidInjector
+    abstract fun contributeAddCustomerFragment(): AddCustomerFragment
 }

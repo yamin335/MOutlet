@@ -1,8 +1,8 @@
 package com.rtchubs.edokanpat.models.login
 
-data class LoginResponse(val success: Boolean?, val response: LoginResponseData?)
+data class LoginResponse(val success: Boolean?, val response: Merchant?)
 
-data class LoginResponseData(val id: Int?, val name: String?, val user_name: String?,
+data class Merchant(val id: Int?, val name: String?, val user_name: String?,
                              val password: String?, val shop_name: String?, val mobile: String?,
                              val lat: Double?, val long: Double?, val whatsApp: String?,
                              val email: String?, val address: String?, val shop_address: String?,

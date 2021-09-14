@@ -14,6 +14,8 @@ import com.rtchubs.edokanpat.ui.add_product.AddProductViewModel
 import com.rtchubs.edokanpat.ui.add_product.AllProductViewModel
 import com.rtchubs.edokanpat.ui.cart.CartViewModel
 import com.rtchubs.edokanpat.ui.chapter_list.ChapterListViewModel
+import com.rtchubs.edokanpat.ui.customers.AddCustomerViewModel
+import com.rtchubs.edokanpat.ui.customers.AllCustomersViewModel
 import com.rtchubs.edokanpat.ui.exams.ExamsViewModel
 import com.rtchubs.edokanpat.ui.home.*
 import com.rtchubs.edokanpat.ui.how_works.HowWorksViewModel
@@ -314,4 +316,14 @@ abstract class ViewModelModule {
     @IntoMap
     @ViewModelKey(OrderTrackHistoryViewModel::class)
     abstract fun bindOrderTrackHistoryViewModel(viewModel: OrderTrackHistoryViewModel): ViewModel
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(AllCustomersViewModel::class)
+    abstract fun bindAllCustomersViewModel(viewModel: AllCustomersViewModel): ViewModel
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(AddCustomerViewModel::class)
+    abstract fun bindAddCustomerViewModel(viewModel: AddCustomerViewModel): ViewModel
 }
