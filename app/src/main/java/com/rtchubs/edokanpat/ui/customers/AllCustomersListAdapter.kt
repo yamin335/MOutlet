@@ -1,21 +1,13 @@
 package com.rtchubs.edokanpat.ui.customers
 
 import android.annotation.SuppressLint
-import android.graphics.drawable.Drawable
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.DiffUtil
-import com.bumptech.glide.load.DataSource
-import com.bumptech.glide.load.engine.GlideException
-import com.bumptech.glide.request.RequestListener
-import com.bumptech.glide.request.target.Target
 import com.rtchubs.edokanpat.AppExecutors
 import com.rtchubs.edokanpat.R
-import com.rtchubs.edokanpat.databinding.AddProductListItemBinding
 import com.rtchubs.edokanpat.databinding.CustomerListItemBinding
-import com.rtchubs.edokanpat.models.Product
-import com.rtchubs.edokanpat.models.add_product.ItemAddProduct
 import com.rtchubs.edokanpat.models.customers.Customer
 import com.rtchubs.edokanpat.util.DataBoundListAdapter
 

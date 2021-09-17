@@ -9,7 +9,6 @@ import com.rtchubs.edokanpat.BR
 import com.rtchubs.edokanpat.R
 import com.rtchubs.edokanpat.databinding.AllProductsFragmentBinding
 import com.rtchubs.edokanpat.models.Product
-import com.rtchubs.edokanpat.models.add_product.ItemAddProduct
 import com.rtchubs.edokanpat.ui.NavDrawerHandlerCallback
 import com.rtchubs.edokanpat.ui.common.BaseFragment
 

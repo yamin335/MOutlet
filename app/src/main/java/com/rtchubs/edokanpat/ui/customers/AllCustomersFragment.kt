@@ -8,9 +8,6 @@ import androidx.lifecycle.Observer
 import com.rtchubs.edokanpat.BR
 import com.rtchubs.edokanpat.R
 import com.rtchubs.edokanpat.databinding.AllCustomersFragmentBinding
-import com.rtchubs.edokanpat.databinding.AllProductsFragmentBinding
-import com.rtchubs.edokanpat.models.Product
-import com.rtchubs.edokanpat.models.add_product.ItemAddProduct
 import com.rtchubs.edokanpat.models.customers.Customer
 import com.rtchubs.edokanpat.models.login.Merchant
 import com.rtchubs.edokanpat.ui.NavDrawerHandlerCallback

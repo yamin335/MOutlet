@@ -44,6 +44,7 @@ object ApiEndPoint {
     const val MERCHANT_PRODUCTS = "/$INDEX/$API_REPO/products-by-merchant/{id}"
     const val CUSTOMERS = "/$INDEX/$API_REPO/shop/customer?"
     const val ADD_CUSTOMER = "/$INDEX/$API_REPO/customer"
+    const val ADD_PRODUCT = "/$INDEX/$API_REPO/product"
     const val SALE = "/$API_REPO/sale"
 }
 

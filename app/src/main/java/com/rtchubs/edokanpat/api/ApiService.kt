@@ -5,6 +5,7 @@ import com.rtchubs.edokanpat.api.Api.ContentType
 import com.rtchubs.edokanpat.models.AllMerchantResponse
 import com.rtchubs.edokanpat.models.AllProductResponse
 import com.rtchubs.edokanpat.models.AllShoppingMallResponse
+import com.rtchubs.edokanpat.models.add_product.AddProductResponse
 import com.rtchubs.edokanpat.models.common.MyAccountListResponse
 import com.rtchubs.edokanpat.models.customers.AddCustomerResponse
 import com.rtchubs.edokanpat.models.customers.CustomerListResponse
@@ -124,5 +125,8 @@ interface ApiService {
     suspend fun addCustomer(
         @Body jsonObject: JsonObject
     ): Response<AddCustomerResponse>
+
+    @POST(ApiEndPoint.ADD_PRODUCT)
+    suspend fun addProduct(@Body partFormData: RequestBody): Response<AddProductResponse>
 
 }

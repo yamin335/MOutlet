@@ -14,7 +14,6 @@ import com.rtchubs.edokanpat.AppExecutors
 import com.rtchubs.edokanpat.R
 import com.rtchubs.edokanpat.databinding.AddProductListItemBinding
 import com.rtchubs.edokanpat.models.Product
-import com.rtchubs.edokanpat.models.add_product.ItemAddProduct
 import com.rtchubs.edokanpat.util.DataBoundListAdapter
 
 class AllProductListAdapter(

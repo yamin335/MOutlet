@@ -25,7 +25,7 @@ import com.rtchubs.edokanpat.BR
 import com.rtchubs.edokanpat.BuildConfig
 import com.rtchubs.edokanpat.R
 import com.rtchubs.edokanpat.databinding.AddProductFragmentBinding
-import com.rtchubs.edokanpat.models.add_product.ItemAddProduct
+import com.rtchubs.edokanpat.models.add_product.AddProductResponse
 import com.rtchubs.edokanpat.ui.common.BaseFragment
 import com.rtchubs.edokanpat.util.BitmapUtilss
 import com.rtchubs.edokanpat.util.PermissionUtils.isCameraAndGalleryPermissionGranted
@@ -195,18 +195,15 @@ class AddProductFragment : BaseFragment<AddProductFragmentBinding, AddProductVie
 
         }
 
+        viewModel.addProductResponse.observe(viewLifecycleOwner, androidx.lifecycle.Observer { response ->
+            response?.let {
+                if (it.data != null) navController.popBackStack()
+            }
+        })
+
         viewDataBinding.btnAddProduct.setOnClickListener {
-            val product = ItemAddProduct(
-                AllProductsFragment.id++,
-                viewDataBinding.name.text.toString(),
-                viewDataBinding.price.text.toString().toInt(),
-                productCategory,
-                viewDataBinding.description.text.toString(),
-                featureImage,
-                sampleImageAdapter.getImageList()
-            )
-            //AllProductsFragment.allProductsList.add(product)
-            navController.popBackStack()
+            viewModel.addProduct(1, preferencesHelper.merchantId, preferencesHelper.getMerchant().token)
+
         }
 
     }

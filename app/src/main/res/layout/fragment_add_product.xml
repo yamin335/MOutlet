@@ -127,163 +127,225 @@
                     android:id="@+id/sampleImageRecycler"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:paddingStart="8dp"
-                    android:paddingEnd="8dp"
                     android:clipToPadding="false"
                     android:orientation="horizontal"
+                    android:paddingStart="8dp"
+                    android:paddingEnd="8dp"
                     app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                    tools:listitem="@layout/list_item_add_product_sample_image"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/textView4"
                     tools:itemCount="3"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/textView4" />
+                    tools:listitem="@layout/list_item_add_product_sample_image" />
 
-                <com.google.android.material.card.MaterialCardView
-                    android:id="@+id/cardSpinnerCategory"
-                    android:layout_width="0dp"
-                    android:layout_height="45dp"
-                    android:layout_marginStart="16dp"
-                    android:layout_marginEnd="16dp"
-                    android:layout_marginTop="16dp"
-                    android:layout_marginBottom="8dp"
-                    android:background="@color/white"
-                    app:cardCornerRadius="8dp"
-                    app:cardElevation="0dp"
-                    app:cardUseCompatPadding="false"
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
                     app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/sampleImageRecycler"
-                    app:layout_constraintVertical_bias="0.0"
-                    app:strokeColor="@color/albumFontHint"
-                    app:strokeWidth="0.8dp">
-
-                    <Spinner
-                        android:id="@+id/spinnerCategory"
+                    app:layout_constraintTop_toBottomOf="@+id/sampleImageRecycler">
+                    <com.google.android.material.card.MaterialCardView
+                        android:id="@+id/cardSpinnerCategory"
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:gravity="center_vertical"
-                        android:layout_marginStart="16dp" />
-
-                </com.google.android.material.card.MaterialCardView>
-
-                <LinearLayout
-                    android:id="@+id/llName"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="16dp"
-                    android:layout_marginEnd="16dp"
-                    android:layout_marginTop="16dp"
-                    android:orientation="vertical"
-                    app:layout_constraintTop_toBottomOf="@+id/cardSpinnerCategory">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Product Name"
-                        android:textColor="#555555"
-                        android:textSize="12sp" />
-
-                    <EditText
-                        android:id="@+id/name"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:background="@drawable/rounded_bg_common_edittext_gray"
-                        android:hint="name"
-                        android:inputType="text"
-                        android:imeOptions="actionNext"
-                        android:paddingStart="16dp"
-                        android:paddingEnd="8dp"
-                        android:paddingTop="10dp"
-                        android:paddingBottom="10dp"
-                        android:layout_marginTop="8dp"/>
-                </LinearLayout>
-
-                <LinearLayout
-                    android:id="@+id/llPrice"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    app:layout_constraintTop_toBottomOf="@+id/llName"
-                    android:layout_marginStart="16dp"
-                    android:layout_marginEnd="16dp"
-                    android:layout_marginTop="16dp">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Product Price"
-                        android:textColor="#555555"
-                        android:textSize="12sp" />
-
-                    <EditText
-                        android:id="@+id/price"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:background="@drawable/rounded_bg_common_edittext_gray"
-                        android:imeOptions="actionNext"
-                        android:inputType="numberDecimal"
-                        android:hint="price"
-                        android:paddingStart="16dp"
-                        android:paddingEnd="8dp"
-                        android:paddingTop="10dp"
-                        android:paddingBottom="10dp"
-                        android:layout_marginTop="8dp" />
-                </LinearLayout>
-
-                <LinearLayout
-                    android:id="@+id/llDescription"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="16dp"
-                    android:layout_marginEnd="16dp"
-                    android:layout_marginTop="16dp"
-                    android:layout_marginBottom="16dp"
-                    android:orientation="vertical"
-                    app:layout_constraintBottom_toTopOf="@+id/btnAddProduct"
-                    app:layout_constraintTop_toBottomOf="@+id/llPrice"
-                    tools:layout_editor_absoluteX="16dp">
-
-                    <TextView
-                        android:id="@+id/textView2"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                        android:layout_height="45dp"
+                        android:layout_marginStart="16dp"
+                        android:layout_marginEnd="16dp"
                         android:layout_marginTop="16dp"
-                        android:text="Product Description"
-                        android:textColor="#555555"
-                        android:textSize="12sp" />
+                        android:layout_marginBottom="8dp"
+                        android:background="@color/white"
+                        app:cardCornerRadius="8dp"
+                        app:cardElevation="0dp"
+                        app:cardUseCompatPadding="false"
+                        app:strokeColor="@color/albumFontHint"
+                        app:strokeWidth="0.8dp">
 
-                    <EditText
-                        android:id="@+id/description"
+                        <Spinner
+                            android:id="@+id/spinnerCategory"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:gravity="center_vertical"
+                            android:layout_marginStart="16dp" />
+
+                    </com.google.android.material.card.MaterialCardView>
+
+                    <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="8dp"
-                        android:background="@drawable/rounded_bg_common_edittext_gray"
-                        android:gravity="start|top"
-                        android:hint="description"
-                        android:imeOptions="actionDone"
-                        android:lines="6"
-                        android:padding="16dp"
-                        android:scrollbars="vertical" />
-                </LinearLayout>
+                        android:layout_marginStart="16dp"
+                        android:layout_marginEnd="16dp"
+                        android:layout_marginTop="16dp"
+                        android:orientation="vertical"
+                        app:layout_constraintTop_toBottomOf="@+id/cardSpinnerCategory">
 
-                <com.google.android.material.button.MaterialButton
-                    android:id="@+id/btnAddProduct"
-                    style="@style/Widget.MaterialComponents.Button.UnelevatedButton"
-                    android:layout_width="match_parent"
-                    android:layout_height="50dp"
-                    android:text="Add Product"
-                    android:layout_marginStart="16dp"
-                    android:layout_marginEnd="16dp"
-                    android:layout_marginBottom="64dp"
-                    android:textColor="@android:color/white"
-                    android:textSize="16sp"
-                    app:backgroundTint="#E5525D"
-                    app:cornerRadius="8dp"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:rippleColor="@android:color/white" />
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Product Name"
+                            android:textColor="#555555"
+                            android:textSize="12sp" />
+
+                        <EditText
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/rounded_bg_common_edittext_gray"
+                            android:hint="name"
+                            android:text="@={viewModel.name}"
+                            android:inputType="text"
+                            android:imeOptions="actionNext"
+                            android:paddingStart="16dp"
+                            android:paddingEnd="8dp"
+                            android:paddingTop="10dp"
+                            android:paddingBottom="10dp"
+                            android:layout_marginTop="8dp"/>
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        app:layout_constraintTop_toBottomOf="@+id/llName"
+                        android:layout_marginStart="16dp"
+                        android:layout_marginEnd="16dp"
+                        android:layout_marginTop="16dp">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Buying Price"
+                            android:textColor="#555555"
+                            android:textSize="12sp" />
+
+                        <EditText
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/rounded_bg_common_edittext_gray"
+                            android:imeOptions="actionNext"
+                            android:inputType="numberDecimal"
+                            android:hint="buying price"
+                            android:text="@={viewModel.buyingPrice}"
+                            android:paddingStart="16dp"
+                            android:paddingEnd="8dp"
+                            android:paddingTop="10dp"
+                            android:paddingBottom="10dp"
+                            android:layout_marginTop="8dp" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        app:layout_constraintTop_toBottomOf="@+id/llName"
+                        android:layout_marginStart="16dp"
+                        android:layout_marginEnd="16dp"
+                        android:layout_marginTop="16dp">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Selling Price"
+                            android:textColor="#555555"
+                            android:textSize="12sp" />
+
+                        <EditText
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/rounded_bg_common_edittext_gray"
+                            android:imeOptions="actionNext"
+                            android:inputType="numberDecimal"
+                            android:hint="selling price"
+                            android:text="@={viewModel.sellingPrice}"
+                            android:paddingStart="16dp"
+                            android:paddingEnd="8dp"
+                            android:paddingTop="10dp"
+                            android:paddingBottom="10dp"
+                            android:layout_marginTop="8dp" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        app:layout_constraintTop_toBottomOf="@+id/llName"
+                        android:layout_marginStart="16dp"
+                        android:layout_marginEnd="16dp"
+                        android:layout_marginTop="16dp">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="MRP"
+                            android:textColor="#555555"
+                            android:textSize="12sp" />
+
+                        <EditText
+                            android:id="@+id/price"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/rounded_bg_common_edittext_gray"
+                            android:imeOptions="actionNext"
+                            android:inputType="numberDecimal"
+                            android:hint="mrp"
+                            android:text="@={viewModel.mrp}"
+                            android:paddingStart="16dp"
+                            android:paddingEnd="8dp"
+                            android:paddingTop="10dp"
+                            android:paddingBottom="10dp"
+                            android:layout_marginTop="8dp" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="16dp"
+                        android:layout_marginEnd="16dp"
+                        android:layout_marginTop="16dp"
+                        android:layout_marginBottom="16dp"
+                        android:orientation="vertical"
+                        app:layout_constraintBottom_toTopOf="@+id/btnAddProduct"
+                        app:layout_constraintTop_toBottomOf="@+id/llPrice"
+                        tools:layout_editor_absoluteX="16dp">
+
+                        <TextView
+                            android:id="@+id/textView2"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="16dp"
+                            android:text="Product Description"
+                            android:textColor="#555555"
+                            android:textSize="12sp" />
+
+                        <EditText
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="8dp"
+                            android:background="@drawable/rounded_bg_common_edittext_gray"
+                            android:gravity="start|top"
+                            android:hint="description"
+                            android:text="@={viewModel.description}"
+                            android:imeOptions="actionDone"
+                            android:lines="6"
+                            android:padding="16dp"
+                            android:scrollbars="vertical" />
+                    </LinearLayout>
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/btnAddProduct"
+                        style="@style/Widget.MaterialComponents.Button.UnelevatedButton"
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp"
+                        android:text="Add Product"
+                        android:layout_marginStart="16dp"
+                        android:layout_marginEnd="16dp"
+                        android:layout_marginBottom="64dp"
+                        android:textColor="@android:color/white"
+                        android:textSize="16sp"
+                        app:backgroundTint="#E5525D"
+                        app:cornerRadius="8dp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:rippleColor="@android:color/white" />
+                </LinearLayout>
 
             </androidx.constraintlayout.widget.ConstraintLayout>
         </androidx.core.widget.NestedScrollView>
