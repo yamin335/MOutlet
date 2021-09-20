@@ -34,6 +34,7 @@
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true"
         tools:ignore="AllowBackup"
+        android:requestLegacyExternalStorage="true"
         tools:targetApi="m">
 
         <!-- This tag indicates that this application requires ARCore. This results in the

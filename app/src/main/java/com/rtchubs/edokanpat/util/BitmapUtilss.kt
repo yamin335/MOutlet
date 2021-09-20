@@ -14,6 +14,7 @@ import android.util.Log
 import androidx.annotation.RequiresApi
 import androidx.camera.core.ExperimentalGetImage
 import androidx.camera.core.ImageProxy
+import androidx.core.content.ContextCompat
 import androidx.exifinterface.media.ExifInterface
 import com.rtchubs.edokanpat.nid_scan.FrameMetadata
 import java.io.*
@@ -24,6 +25,57 @@ import java.util.*
 object BitmapUtilss {
 
     private const val TAG = "BitmapUtilss"
+
+    @Suppress("unused")
+    @Throws(Exception::class)
+    fun saveBitmapFileIntoExternalStorageWithTitle(
+        bitmap: Bitmap,
+        file: File
+    ) {
+        try {
+            val fileOutputStream = FileOutputStream(file)
+            bitmap.compress(Bitmap.CompressFormat.JPEG, 100, fileOutputStream)
+            fileOutputStream.flush()
+            fileOutputStream.close()
+        } catch (e: IOException) {
+            throw e
+        }
+    }
+
+    fun makeEmptyFileIntoExternalStorageWithTitle(applicationContext: Context, folderName: String, title: String): File {
+        //If your app is used on a device that runs Android 4.3 (API level 18) or lower,
+        // then the array contains just one element,
+        // which represents the primary external storage volume
+        val externalStorageVolumes: Array<out File> = ContextCompat.getExternalFilesDirs(
+            applicationContext,
+            null
+        )
+        val primaryExternalStorage = externalStorageVolumes[0]
+        //path = "$primaryExternalStorage/$realDocId"
+
+        //val root: String = Environment.getExternalStorageDirectory().getAbsolutePath()
+        return File("${primaryExternalStorage.absolutePath}/$folderName", title)
+    }
+
+    fun makeEmptyFolderIntoExternalStorageWithTitle(applicationContext: Context, folderName: String): Boolean {
+        //If your app is used on a device that runs Android 4.3 (API level 18) or lower,
+        // then the array contains just one element,
+        // which represents the primary external storage volume
+        val externalStorageVolumes: Array<out File> = ContextCompat.getExternalFilesDirs(
+            applicationContext,
+            null
+        )
+        val primaryExternalStorage = externalStorageVolumes[0]
+        //path = "$primaryExternalStorage/$realDocId"
+
+        //val root: String = Environment.getExternalStorageDirectory().getAbsolutePath()
+        val folder = File(primaryExternalStorage.absolutePath, folderName)
+        if (!folder.exists()) {
+            if (!folder.mkdir())
+                return false
+        }
+        return true
+    }
 
     /**
      * Converts NV21 format byte buffer to bitmap.

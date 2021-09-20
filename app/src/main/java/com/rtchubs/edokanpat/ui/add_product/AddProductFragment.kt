@@ -24,6 +24,7 @@ import com.bumptech.glide.Glide
 import com.rtchubs.edokanpat.BR
 import com.rtchubs.edokanpat.BuildConfig
 import com.rtchubs.edokanpat.R
+import com.rtchubs.edokanpat.api.ApiCallStatus
 import com.rtchubs.edokanpat.databinding.AddProductFragmentBinding
 import com.rtchubs.edokanpat.models.add_product.AddProductResponse
 import com.rtchubs.edokanpat.ui.common.BaseFragment
@@ -39,6 +40,7 @@ import java.util.*
 const val PERMISSION_REQUEST_CODE = 111
 private const val FEATURE_IMAGE = 1
 private const val SAMPLE_IMAGE = 2
+private const val IMAGE_FOLDER_NAME = "product_images"
 class AddProductFragment : BaseFragment<AddProductFragmentBinding, AddProductViewModel>() {
     override val bindingVariable: Int
         get() = BR.viewModel
@@ -116,7 +118,7 @@ class AddProductFragment : BaseFragment<AddProductFragmentBinding, AddProductVie
 
             when(imageType) {
                 FEATURE_IMAGE -> {
-                    featureImage = BitmapUtilss.getResizedBitmap(bitmap, 1000)
+                    featureImage = BitmapUtilss.getResizedBitmap(bitmap, 700)
                     Glide.with(requireContext())
                         .load(featureImage)
                         .centerCrop()
@@ -142,7 +144,7 @@ class AddProductFragment : BaseFragment<AddProductFragmentBinding, AddProductVie
 
                 when(imageType) {
                     FEATURE_IMAGE -> {
-                        featureImage = BitmapUtilss.getResizedBitmap(bitmap, 1000)
+                        featureImage = BitmapUtilss.getResizedBitmap(bitmap, 700)
                         Glide.with(requireContext())
                             .load(featureImage)
                             .centerCrop()
@@ -201,9 +203,95 @@ class AddProductFragment : BaseFragment<AddProductFragmentBinding, AddProductVie
             }
         })
 
-        viewDataBinding.btnAddProduct.setOnClickListener {
-            viewModel.addProduct(1, preferencesHelper.merchantId, preferencesHelper.getMerchant().token)
+        viewModel.apiCallStatus.observe(viewLifecycleOwner, androidx.lifecycle.Observer {
+            viewDataBinding.btnAddProduct.isEnabled = it != ApiCallStatus.LOADING
+        })
 
+        viewDataBinding.btnAddProduct.setOnClickListener {
+            val sampleImages = sampleImageAdapter.getImageList()
+            if (BitmapUtilss.makeEmptyFolderIntoExternalStorageWithTitle(requireContext(), IMAGE_FOLDER_NAME)) {
+                var thumbPath: String? = null
+                var image1Path: String? = null
+                var image2Path: String? = null
+                var image3Path: String? = null
+                var image4Path: String? = null
+                var image5Path: String? = null
+
+                featureImage?.let {
+                    val file = BitmapUtilss.makeEmptyFileIntoExternalStorageWithTitle(requireContext(), IMAGE_FOLDER_NAME, "thumbnail.jpg")
+                    if (file.exists()) file.delete()
+
+                    try {
+                        BitmapUtilss.saveBitmapFileIntoExternalStorageWithTitle(it, file)
+                    } catch (e: IOException) {
+                        return@let
+                    }
+                    thumbPath = file.path
+                }
+
+                sampleImages[0]?.let {
+                    val file = BitmapUtilss.makeEmptyFileIntoExternalStorageWithTitle(requireContext(), IMAGE_FOLDER_NAME, "product_image1.jpg")
+                    if (file.exists()) file.delete()
+
+                    try {
+                        BitmapUtilss.saveBitmapFileIntoExternalStorageWithTitle(it, file)
+                    } catch (e: IOException) {
+                        return@let
+                    }
+                    image1Path = file.path
+                }
+
+                sampleImages[1]?.let {
+                    val file = BitmapUtilss.makeEmptyFileIntoExternalStorageWithTitle(requireContext(), IMAGE_FOLDER_NAME, "product_image2.jpg")
+                    if (file.exists()) file.delete()
+
+                    try {
+                        BitmapUtilss.saveBitmapFileIntoExternalStorageWithTitle(it, file)
+                    } catch (e: IOException) {
+                        return@let
+                    }
+                    image2Path = file.path
+                }
+
+                sampleImages[2]?.let {
+                    val file = BitmapUtilss.makeEmptyFileIntoExternalStorageWithTitle(requireContext(), IMAGE_FOLDER_NAME, "product_image3.jpg")
+                    if (file.exists()) file.delete()
+
+                    try {
+                        BitmapUtilss.saveBitmapFileIntoExternalStorageWithTitle(it, file)
+                    } catch (e: IOException) {
+                        return@let
+                    }
+                    image3Path = file.path
+                }
+
+                sampleImages[3]?.let {
+                    val file = BitmapUtilss.makeEmptyFileIntoExternalStorageWithTitle(requireContext(), IMAGE_FOLDER_NAME, "product_image4.jpg")
+                    if (file.exists()) file.delete()
+
+                    try {
+                        BitmapUtilss.saveBitmapFileIntoExternalStorageWithTitle(it, file)
+                    } catch (e: IOException) {
+                        return@let
+                    }
+                    image4Path = file.path
+                }
+
+                sampleImages[4]?.let {
+                    val file = BitmapUtilss.makeEmptyFileIntoExternalStorageWithTitle(requireContext(), IMAGE_FOLDER_NAME, "product_image5.jpg")
+                    if (file.exists()) file.delete()
+
+                    try {
+                        BitmapUtilss.saveBitmapFileIntoExternalStorageWithTitle(it, file)
+                    } catch (e: IOException) {
+                        return@let
+                    }
+                    image5Path = file.path
+                }
+
+
+                viewModel.addProduct(thumbPath, image1Path, image2Path, image3Path, image4Path, image5Path,1, preferencesHelper.merchantId, preferencesHelper.getMerchant().token)
+            }
         }
 
     }

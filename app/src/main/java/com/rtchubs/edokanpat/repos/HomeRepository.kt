@@ -105,8 +105,8 @@ class HomeRepository @Inject constructor(private val apiService: ApiService) {
         }
     }
 
-    suspend fun addProduct(thumbnail: Bitmap?, product_image1: Bitmap?, product_image2: Bitmap?,
-                           product_image3: Bitmap?, product_image4: Bitmap?, product_image5: Bitmap?, name: String?, barcode: String?,
+    suspend fun addProduct(thumbnail: String?, product_image1: String?, product_image2: String?,
+                           product_image3: String?, product_image4: String?, product_image5: String?, name: String?, barcode: String?,
                            description: String?, buying_price: String?, selling_price: String?, mrp: String?,
                            expired_date: String?, category_id: Int?, merchant_id: Int?, token: String?): Response<AddProductResponse> {
 
@@ -121,9 +121,46 @@ class HomeRepository @Inject constructor(private val apiService: ApiService) {
             addFormDataPart("category_id", category_id?.toString() ?: "")
             addFormDataPart("merchant_id", merchant_id?.toString() ?: "")
             addFormDataPart("token", token ?: "")
+
+            thumbnail?.let {
+                val thumbnailFile = File(it)
+                val thumbFileRequestBody = thumbnailFile.asRequestBody("multipart/form-data".toMediaTypeOrNull())
+                addFormDataPart("thumbnail", thumbnailFile.name, thumbFileRequestBody)
+            }
+
+            product_image1?.let {
+                val image1File = File(it)
+                val image1FileRequestBody = image1File.asRequestBody("multipart/form-data".toMediaTypeOrNull())
+                addFormDataPart("product_image1", image1File.name, image1FileRequestBody)
+            }
+
+            product_image2?.let {
+                val image2File = File(it)
+                val image2FileRequestBody = image2File.asRequestBody("multipart/form-data".toMediaTypeOrNull())
+                addFormDataPart("product_image2", image2File.name, image2FileRequestBody)
+            }
+
+            product_image3?.let {
+                val image3File = File(it)
+                val image3FileRequestBody = image3File.asRequestBody("multipart/form-data".toMediaTypeOrNull())
+                addFormDataPart("product_image3", image3File.name, image3FileRequestBody)
+            }
+
+            product_image4?.let {
+                val image4File = File(it)
+                val image4FileRequestBody = image4File.asRequestBody("multipart/form-data".toMediaTypeOrNull())
+                addFormDataPart("product_image4", image4File.name, image4FileRequestBody)
+            }
+
+            product_image5?.let {
+                val image5File = File(it)
+                val image5FileRequestBody = image5File.asRequestBody("multipart/form-data".toMediaTypeOrNull())
+                addFormDataPart("product_image5", image5File.name, image5FileRequestBody)
+            }
+
 //            tileList.forEachIndexed { index, tile ->
 //                val posterior = if (tile.frame == R.drawable.bold_frame) "bold" else "edge"
-//                val imageFile = File(tile.resizedImagePath ?: "")
+//                val imageFile = File(product_image ?: "")
 //                val fileRequestBody = imageFile.asRequestBody("multipart/form-data".toMediaTypeOrNull()) ?: return@forEachIndexed
 //                addFormDataPart("files[]", "${index}_$posterior.jpg", fileRequestBody)
 ////                val fileRequestBody = tile.bitmap?.toFile(context, posterior)?.asRequestBody("multipart/form-data".toMediaTypeOrNull()) ?: return@forEachIndexed

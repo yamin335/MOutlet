@@ -35,6 +35,7 @@ import com.rtchubs.edokanpat.ui.video_play.LoadWebViewViewModel
 import com.rtchubs.edokanpat.ui.video_play.VideoPlayViewModel
 import com.rtchubs.edokanpat.ui.login.ViewPagerViewModel
 import com.rtchubs.edokanpat.ui.more.MoreViewModel
+import com.rtchubs.edokanpat.ui.offers.OffersViewModel
 import com.rtchubs.edokanpat.ui.order.OrderTrackHistoryViewModel
 import com.rtchubs.edokanpat.ui.order.OrderViewModel
 import com.rtchubs.edokanpat.ui.otp_signin.OtpSignInViewModel
@@ -326,4 +327,9 @@ abstract class ViewModelModule {
     @IntoMap
     @ViewModelKey(AddCustomerViewModel::class)
     abstract fun bindAddCustomerViewModel(viewModel: AddCustomerViewModel): ViewModel
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(OffersViewModel::class)
+    abstract fun bindOffersViewModel(viewModel: OffersViewModel): ViewModel
 }

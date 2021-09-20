@@ -1,6 +1,5 @@
 package com.rtchubs.edokanpat.ui.add_product
 
-import android.annotation.SuppressLint
 import android.graphics.Bitmap
 import android.view.LayoutInflater
 import android.view.View
@@ -26,7 +25,7 @@ class SampleImageListAdapter constructor(
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.bind(bitmapList[position], position)
+        holder.bind(bitmapList[position])
     }
 
     override fun getItemCount(): Int {
@@ -38,17 +37,16 @@ class SampleImageListAdapter constructor(
         notifyDataSetChanged()
     }
 
-    fun getImageList(): List<Bitmap> {
-        val imageList = ArrayList<Bitmap>()
+    fun getImageList(): List<Bitmap?> {
+        val imageList: ArrayList<Bitmap?> = arrayListOf(null, null, null, null, null)
         for (key in bitmapList.keys) {
-            val image = bitmapList[key]
-            if (image != null) imageList.add(image)
+            imageList[key] = bitmapList[key]
         }
         return imageList
     }
 
     inner class ViewHolder (private val binding: SampleImageListItemBinding) : RecyclerView.ViewHolder(binding.root) {
-        fun bind(item: Bitmap?, position: Int) {
+        fun bind(item: Bitmap?) {
             if (item == null) {
                 binding.llAddImage.visibility = View.VISIBLE
                 binding.remove.visibility = View.GONE

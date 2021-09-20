@@ -35,7 +35,8 @@
             android:layout_marginTop="-6dp"
             android:layout_below="@id/toolbar"
             android:indeterminate="true"
-            android:indeterminateTint="@color/themeColor"
+            android:elevation="5dp"
+            android:indeterminateTint="@color/themeButtonColor"
             app:showLoader="@{viewModel.apiCallStatus}"/>
 
         <androidx.core.widget.NestedScrollView

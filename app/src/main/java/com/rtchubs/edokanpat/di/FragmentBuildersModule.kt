@@ -30,6 +30,7 @@ import com.rtchubs.edokanpat.ui.video_play.LoadWebViewFragment
 import com.rtchubs.edokanpat.ui.video_play.VideoPlayFragment
 import com.rtchubs.edokanpat.ui.login.ViewPagerFragment
 import com.rtchubs.edokanpat.ui.more.MoreFragment
+import com.rtchubs.edokanpat.ui.offers.OffersFragment
 import com.rtchubs.edokanpat.ui.order.OrderListFragment
 import com.rtchubs.edokanpat.ui.order.OrderTrackHistoryFragment
 import com.rtchubs.edokanpat.ui.otp_signin.OtpSignInFragment
@@ -205,4 +206,7 @@ abstract class FragmentBuildersModule {
 
     @ContributesAndroidInjector
     abstract fun contributeAddCustomerFragment(): AddCustomerFragment
+
+    @ContributesAndroidInjector
+    abstract fun contributeOffersFragment(): OffersFragment
 }

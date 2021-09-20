@@ -40,7 +40,9 @@ class AddProductViewModel @Inject constructor(
         MutableLiveData<AddProductResponse>()
     }
 
-    fun addProduct(categoryId: Int, merchantId: Int, token: String?) {
+    fun addProduct(thumbnail: String?, sampleImage1: String?, sampleImage2: String?,
+                   sampleImage3: String?, sampleImage4: String?, sampleImage5: String?,
+                   categoryId: Int, merchantId: Int, token: String?) {
         if (checkNetworkStatus()) {
             val handler = CoroutineExceptionHandler { _, exception ->
                 exception.printStackTrace()
@@ -50,8 +52,8 @@ class AddProductViewModel @Inject constructor(
 
             apiCallStatus.postValue(ApiCallStatus.LOADING)
             viewModelScope.launch(handler) {
-                when (val apiResponse = ApiResponse.create(homeRepository.addProduct(null, null,
-                    null, null, null, null, name.value, "",
+                when (val apiResponse = ApiResponse.create(homeRepository.addProduct(thumbnail, sampleImage1,
+                    sampleImage2, sampleImage3, sampleImage4, sampleImage5, name.value, "",
                     description.value, buyingPrice.value, sellingPrice.value, mrp.value, expiredDate.value,
                     categoryId, merchantId, token))) {
                     is ApiSuccessResponse -> {

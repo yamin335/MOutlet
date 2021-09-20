@@ -67,7 +67,7 @@ class MainActivity : DaggerAppCompatActivity(), LogoutHandlerCallback, NavDrawer
 
     private var navigatedFromDashboard = false
 
-    private var loginNavHostFragment: NavHostFragment? =null
+    private var loginNavHostFragment: NavHostFragment? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -78,10 +78,10 @@ class MainActivity : DaggerAppCompatActivity(), LogoutHandlerCallback, NavDrawer
         binding.mainContainer.showBottomNav = true
         binding.drawerNavigation.setNavigationItemSelectedListener(this)
 
-        binding.mainContainer.btnLiveChat.setOnClickListener {
-            startActivity(Intent(this, LiveChatActivity::class.java))
-            overridePendingTransition(R.anim.slide_up, R.anim.slide_down)
-        }
+//        binding.mainContainer.btnLiveChat.setOnClickListener {
+//            startActivity(Intent(this, LiveChatActivity::class.java))
+//            overridePendingTransition(R.anim.slide_up, R.anim.slide_down)
+//        }
 
         // Setup multi-backStack supported bottomNav
         if (savedInstanceState == null) {
@@ -105,6 +105,7 @@ class MainActivity : DaggerAppCompatActivity(), LogoutHandlerCallback, NavDrawer
         val navGraphIds = listOf(
             R.navigation.customers_nav_graph,
             R.navigation.products_nav_graph,
+            R.navigation.offers_nav_graph,
             R.navigation.transaction_nav_graph,
             R.navigation.more_nav_graph
         )
