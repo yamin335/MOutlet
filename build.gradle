@@ -24,7 +24,6 @@ buildscript {
 
         // Add the Navigation plugin.
         classpath deps.navigation.safe_args_plugin
-
     }
 }
 
@@ -36,6 +35,9 @@ allprojects {
         mavenLocal()
         maven {
             url "${project.rootDir}/../../libraries/m2repository"
+        }
+        maven {
+            url "https://repo.eclipse.org/content/repositories/paho-releases/"
         }
 
         maven { url 'https://jitpack.io' }

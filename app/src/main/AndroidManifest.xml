@@ -16,6 +16,9 @@
     <uses-permission android:name="android.permission.READ_CONTACTS" />
     <uses-permission android:name="android.permission.RECEIVE_SMS" />
     <uses-permission android:name="android.permission.CALL_PHONE"/>
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
     <!-- <uses-sdk tools:overrideLibrary="uk.co.arcorelocation"/> -->
 
     <!-- This tag indicates that this application requires ARCore. This results in the application
@@ -58,6 +61,7 @@
                 android:value="true" />
 
         </activity>
+        <service android:name="org.eclipse.paho.android.service.MqttService" />
         <activity
             android:name=".ui.LoginActivity"
             android:theme="@style/MainTheme"

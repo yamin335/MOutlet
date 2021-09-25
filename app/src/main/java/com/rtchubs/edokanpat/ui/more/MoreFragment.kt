@@ -49,7 +49,7 @@ class MoreFragment : BaseFragment<MoreFragmentBinding, MoreViewModel>() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        viewDataBinding.logout.setOnClickListener {
+        viewDataBinding.btnSignOut.setOnClickListener {
             SplashFragment.fromLogout = true
             preferencesHelper.isLoggedIn = false
             listener?.onLoggedOut()
@@ -58,6 +58,27 @@ class MoreFragment : BaseFragment<MoreFragmentBinding, MoreViewModel>() {
         viewDataBinding.appLogo.setOnClickListener {
             drawerListener?.toggleNavDrawer()
         }
+
+        viewDataBinding.menuMyDevices.setOnClickListener {
+            navigateTo(MoreFragmentDirections.actionMoreFragmentToMyDevicesFragment())
+        }
+
+        viewDataBinding.menuMyAccount.setOnClickListener {
+            navigateTo(MoreFragmentDirections.actionMoreFragmentToMyAccountsFragment())
+        }
+
+        viewDataBinding.menuProfiles.setOnClickListener {
+            navigateTo(MoreFragmentDirections.actionMoreFragmentToProfilesFragment())
+        }
+
+        viewDataBinding.menuTransactions.setOnClickListener {
+            navigateTo(MoreFragmentDirections.actionMoreFragmentToTransactionsFragment())
+        }
+
+        viewDataBinding.menuSettings.setOnClickListener {
+            navigateTo(MoreFragmentDirections.actionMoreFragmentToSettingsFragment())
+        }
+
     }
 
 }

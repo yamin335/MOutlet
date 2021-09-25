@@ -1,22 +1,23 @@
-package com.rtchubs.edokanpat.ui.profiles
+package com.rtchubs.edokanpat.ui.transactions
 
 import android.os.Bundle
-import android.view.Menu
-import android.view.MenuInflater
 import android.view.MenuItem
 import android.view.View
 import androidx.fragment.app.viewModels
 import com.rtchubs.edokanpat.R
 import com.rtchubs.edokanpat.BR
-import com.rtchubs.edokanpat.databinding.ProfileFragmentBinding
+import com.rtchubs.edokanpat.databinding.MyAccountsFragmentBinding
+import com.rtchubs.edokanpat.databinding.MyDevicesFragmentBinding
+import com.rtchubs.edokanpat.databinding.SettingsFragmentBinding
+import com.rtchubs.edokanpat.databinding.TransactionsFragmentBinding
 import com.rtchubs.edokanpat.ui.common.BaseFragment
 
-class ProfilesFragment : BaseFragment<ProfileFragmentBinding, ProfilesViewModel>() {
+class TransactionsFragment : BaseFragment<TransactionsFragmentBinding, TransactionsViewModel>() {
     override val bindingVariable: Int
         get() = BR.viewModel
     override val layoutId: Int
-        get() = R.layout.fragment_profiles
-    override val viewModel: ProfilesViewModel by viewModels {
+        get() = R.layout.fragment_transactions
+    override val viewModel: TransactionsViewModel by viewModels {
         viewModelFactory
     }
 

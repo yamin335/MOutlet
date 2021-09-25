@@ -35,6 +35,8 @@ import com.rtchubs.edokanpat.ui.video_play.LoadWebViewViewModel
 import com.rtchubs.edokanpat.ui.video_play.VideoPlayViewModel
 import com.rtchubs.edokanpat.ui.login.ViewPagerViewModel
 import com.rtchubs.edokanpat.ui.more.MoreViewModel
+import com.rtchubs.edokanpat.ui.myAccount.MyAccountViewModel
+import com.rtchubs.edokanpat.ui.myDevices.MyDevicesViewModel
 import com.rtchubs.edokanpat.ui.offers.OffersViewModel
 import com.rtchubs.edokanpat.ui.order.OrderTrackHistoryViewModel
 import com.rtchubs.edokanpat.ui.order.OrderViewModel
@@ -48,6 +50,7 @@ import com.rtchubs.edokanpat.ui.topup.TopUpAmountViewModel
 import com.rtchubs.edokanpat.ui.topup.TopUpBankCardViewModel
 import com.rtchubs.edokanpat.ui.topup.TopUpMobileViewModel
 import com.rtchubs.edokanpat.ui.topup.TopUpPinViewModel
+import com.rtchubs.edokanpat.ui.transactions.TransactionsViewModel
 import dagger.Binds
 import dagger.Module
 import dagger.multibindings.IntoMap
@@ -332,4 +335,19 @@ abstract class ViewModelModule {
     @IntoMap
     @ViewModelKey(OffersViewModel::class)
     abstract fun bindOffersViewModel(viewModel: OffersViewModel): ViewModel
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(MyAccountViewModel::class)
+    abstract fun bindMyAccountViewModel(viewModel: MyAccountViewModel): ViewModel
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(MyDevicesViewModel::class)
+    abstract fun bindMyDevicesViewModel(viewModel: MyDevicesViewModel): ViewModel
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(TransactionsViewModel::class)
+    abstract fun bindTransactionsViewModel(viewModel: TransactionsViewModel): ViewModel
 }

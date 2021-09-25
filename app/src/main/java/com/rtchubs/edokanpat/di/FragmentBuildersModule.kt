@@ -30,6 +30,8 @@ import com.rtchubs.edokanpat.ui.video_play.LoadWebViewFragment
 import com.rtchubs.edokanpat.ui.video_play.VideoPlayFragment
 import com.rtchubs.edokanpat.ui.login.ViewPagerFragment
 import com.rtchubs.edokanpat.ui.more.MoreFragment
+import com.rtchubs.edokanpat.ui.myAccount.MyAccountsFragment
+import com.rtchubs.edokanpat.ui.myDevices.MyDevicesFragment
 import com.rtchubs.edokanpat.ui.offers.OffersFragment
 import com.rtchubs.edokanpat.ui.order.OrderListFragment
 import com.rtchubs.edokanpat.ui.order.OrderTrackHistoryFragment
@@ -43,6 +45,7 @@ import com.rtchubs.edokanpat.ui.topup.TopUpAmountFragment
 import com.rtchubs.edokanpat.ui.topup.TopUpBankCardFragment
 import com.rtchubs.edokanpat.ui.topup.TopUpMobileFragment
 import com.rtchubs.edokanpat.ui.topup.TopUpPinFragment
+import com.rtchubs.edokanpat.ui.transactions.TransactionsFragment
 import dagger.Module
 import dagger.android.ContributesAndroidInjector
 
@@ -209,4 +212,13 @@ abstract class FragmentBuildersModule {
 
     @ContributesAndroidInjector
     abstract fun contributeOffersFragment(): OffersFragment
+
+    @ContributesAndroidInjector
+    abstract fun contributeMyDevicesFragment(): MyDevicesFragment
+
+    @ContributesAndroidInjector
+    abstract fun contributeMyAccountsFragment(): MyAccountsFragment
+
+    @ContributesAndroidInjector
+    abstract fun contributeTransactionsFragment(): TransactionsFragment
 }

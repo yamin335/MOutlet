@@ -3,11 +3,11 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
-    <data class="SettingsFragmentBinding">
+    <data class="MyAccountsFragmentBinding">
 
         <variable
             name="viewModel"
-            type="com.rtchubs.edokanpat.ui.settings.SettingsViewModel" />
+            type="com.rtchubs.edokanpat.ui.myAccount.MyAccountViewModel" />
     </data>
 
 
@@ -24,7 +24,7 @@
             android:background="@color/themeColor"
             android:theme="@style/AppTheme.AppBarOverlay"
             app:popupTheme="@style/AppTheme.PopupOverlay"
-            app:title="Settings"
+            app:title="My Accounts"
             app:titleTextColor="@color/white" />
 
         <ProgressBar
@@ -50,7 +50,7 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Settings"
+                    android:text="My Accounts"
                     android:textSize="30sp"
                     android:textAlignment="center"
                     app:layout_constraintBottom_toBottomOf="parent"

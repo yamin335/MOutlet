@@ -1,22 +1,21 @@
-package com.rtchubs.edokanpat.ui.profiles
+package com.rtchubs.edokanpat.ui.myAccount
 
 import android.os.Bundle
-import android.view.Menu
-import android.view.MenuInflater
 import android.view.MenuItem
 import android.view.View
 import androidx.fragment.app.viewModels
 import com.rtchubs.edokanpat.R
 import com.rtchubs.edokanpat.BR
-import com.rtchubs.edokanpat.databinding.ProfileFragmentBinding
+import com.rtchubs.edokanpat.databinding.MyAccountsFragmentBinding
+import com.rtchubs.edokanpat.databinding.SettingsFragmentBinding
 import com.rtchubs.edokanpat.ui.common.BaseFragment
 
-class ProfilesFragment : BaseFragment<ProfileFragmentBinding, ProfilesViewModel>() {
+class MyAccountsFragment : BaseFragment<MyAccountsFragmentBinding, MyAccountViewModel>() {
     override val bindingVariable: Int
         get() = BR.viewModel
     override val layoutId: Int
-        get() = R.layout.fragment_profiles
-    override val viewModel: ProfilesViewModel by viewModels {
+        get() = R.layout.fragment_my_accounts
+    override val viewModel: MyAccountViewModel by viewModels {
         viewModelFactory
     }
 

@@ -494,4 +494,8 @@
     <string name="choose_an_option">Choose an Option</string>
     <string name="sign_taka">৳</string>
     <string name="customers">Customers</string>
+
+    <string name="on">ON</string>
+    <string name="off">OFF</string>
+    <string name="status_">STATUS:</string>
 </resources>

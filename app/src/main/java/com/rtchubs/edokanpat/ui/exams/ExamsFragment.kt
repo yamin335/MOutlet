@@ -6,7 +6,6 @@ import androidx.fragment.app.viewModels
 import com.rtchubs.edokanpat.R
 import com.rtchubs.edokanpat.BR
 import com.rtchubs.edokanpat.databinding.ExamsFragmentBinding
-import com.rtchubs.edokanpat.databinding.SettingsBinding
 import com.rtchubs.edokanpat.ui.common.BaseFragment
 
 class ExamsFragment : BaseFragment<ExamsFragmentBinding, ExamsViewModel>() {
