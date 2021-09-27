@@ -11,6 +11,7 @@ import com.rtchubs.edokanpat.ui.cart.CartFragment
 import com.rtchubs.edokanpat.ui.chapter_list.ChapterListFragment
 import com.rtchubs.edokanpat.ui.customers.AddCustomerFragment
 import com.rtchubs.edokanpat.ui.customers.AllCustomersFragment
+import com.rtchubs.edokanpat.ui.customers.SelectCustomerFragment
 import com.rtchubs.edokanpat.ui.exams.ExamsFragment
 import com.rtchubs.edokanpat.ui.home.*
 import com.rtchubs.edokanpat.ui.how_works.HowWorksFragment
@@ -33,6 +34,7 @@ import com.rtchubs.edokanpat.ui.more.MoreFragment
 import com.rtchubs.edokanpat.ui.myAccount.MyAccountsFragment
 import com.rtchubs.edokanpat.ui.myDevices.MyDevicesFragment
 import com.rtchubs.edokanpat.ui.offers.OffersFragment
+import com.rtchubs.edokanpat.ui.order.CreateOrderFragment
 import com.rtchubs.edokanpat.ui.order.OrderListFragment
 import com.rtchubs.edokanpat.ui.order.OrderTrackHistoryFragment
 import com.rtchubs.edokanpat.ui.otp_signin.OtpSignInFragment
@@ -221,4 +223,10 @@ abstract class FragmentBuildersModule {
 
     @ContributesAndroidInjector
     abstract fun contributeTransactionsFragment(): TransactionsFragment
+
+    @ContributesAndroidInjector
+    abstract fun contributeCreateOrderFragment(): CreateOrderFragment
+
+    @ContributesAndroidInjector
+    abstract fun contributeSelectCustomerFragment(): SelectCustomerFragment
 }

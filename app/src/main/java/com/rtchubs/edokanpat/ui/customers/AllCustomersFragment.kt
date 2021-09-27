@@ -1,8 +1,11 @@
 package com.rtchubs.edokanpat.ui.customers
 
+import android.app.SearchManager
 import android.content.Context
 import android.os.Bundle
 import android.view.*
+import android.widget.EditText
+import androidx.appcompat.widget.SearchView
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import com.rtchubs.edokanpat.BR
@@ -27,6 +30,7 @@ class AllCustomersFragment : BaseFragment<AllCustomersFragmentBinding, AllCustom
     private var drawerListener: NavDrawerHandlerCallback? = null
 
     lateinit var merchant: Merchant
+    lateinit var searchView: SearchView
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
@@ -47,14 +51,14 @@ class AllCustomersFragment : BaseFragment<AllCustomersFragmentBinding, AllCustom
         setHasOptionsMenu(true)
     }
 
-    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
-        inflater.inflate(R.menu.toolbar_menu, menu)
-        super.onCreateOptionsMenu(menu, inflater)
-    }
-
     override fun onResume() {
         super.onResume()
-        viewModel.getCustomers(merchant.email ?: "")
+        if (allCustomers.isEmpty()) {
+            viewModel.getCustomers(merchant.email ?: "")
+        } else {
+            allCustomersListAdapter.submitDataList(allCustomers)
+            showHideDataView()
+        }
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -82,8 +86,12 @@ class AllCustomersFragment : BaseFragment<AllCustomersFragmentBinding, AllCustom
             customers?.let {
                 allCustomers = it
                 showHideDataView()
-                allCustomersListAdapter.submitList(allCustomers)
+                allCustomersListAdapter.submitDataList(allCustomers)
             }
+        })
+
+        viewModel.searchValue.observe(viewLifecycleOwner, Observer {
+            allCustomersListAdapter.filter.filter(it)
         })
     }
 

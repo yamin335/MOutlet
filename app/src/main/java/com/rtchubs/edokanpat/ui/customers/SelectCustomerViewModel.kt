@@ -21,14 +21,10 @@ import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
-class AllCustomersViewModel @Inject constructor(
+class SelectCustomerViewModel @Inject constructor(
     private val application: Application,
     private val repository: HomeRepository
 ) : BaseViewModel(application) {
-
-    val searchValue: MutableLiveData<String> by lazy {
-        MutableLiveData<String>()
-    }
 
     val customerList: MutableLiveData<List<Customer>> by lazy {
         MutableLiveData<List<Customer>>()

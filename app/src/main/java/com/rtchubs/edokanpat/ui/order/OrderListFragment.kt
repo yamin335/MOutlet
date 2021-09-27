@@ -86,6 +86,10 @@ class OrderListFragment : BaseFragment<OrderListFragmentBinding, OrderViewModel>
         orderList.add(Order(4, "#STF93847562", "12-09-2012, 10:23PM", orderCancelled))
         orderList.add(Order(5, "#STF93847562", "12-09-2012, 10:23PM", orderProcessing))
         orderList.add(Order(6, "#STF93847562", "12-09-2012, 10:23PM", orderPicked))
+
+        viewDataBinding.btnCreateOrder.setOnClickListener {
+            navigateTo(OrderListFragmentDirections.actionOrderFragmentToCreateOrderFragment())
+        }
     }
 
     companion object {

@@ -62,7 +62,9 @@ class MainActivity : DaggerAppCompatActivity(), LogoutHandlerCallback, NavDrawer
         R.id.profileSignInFragment,
         R.id.ARLocationFragment,
         R.id.addProductFragment,
-        R.id.addCustomerFragment
+        R.id.addCustomerFragment,
+        R.id.createOrderFragment,
+        R.id.selectCustomerFragment
     )
 
     private var navigatedFromDashboard = false

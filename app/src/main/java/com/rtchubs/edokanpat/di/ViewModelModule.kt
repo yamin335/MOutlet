@@ -16,6 +16,7 @@ import com.rtchubs.edokanpat.ui.cart.CartViewModel
 import com.rtchubs.edokanpat.ui.chapter_list.ChapterListViewModel
 import com.rtchubs.edokanpat.ui.customers.AddCustomerViewModel
 import com.rtchubs.edokanpat.ui.customers.AllCustomersViewModel
+import com.rtchubs.edokanpat.ui.customers.SelectCustomerViewModel
 import com.rtchubs.edokanpat.ui.exams.ExamsViewModel
 import com.rtchubs.edokanpat.ui.home.*
 import com.rtchubs.edokanpat.ui.how_works.HowWorksViewModel
@@ -38,6 +39,7 @@ import com.rtchubs.edokanpat.ui.more.MoreViewModel
 import com.rtchubs.edokanpat.ui.myAccount.MyAccountViewModel
 import com.rtchubs.edokanpat.ui.myDevices.MyDevicesViewModel
 import com.rtchubs.edokanpat.ui.offers.OffersViewModel
+import com.rtchubs.edokanpat.ui.order.CreateOrderViewModel
 import com.rtchubs.edokanpat.ui.order.OrderTrackHistoryViewModel
 import com.rtchubs.edokanpat.ui.order.OrderViewModel
 import com.rtchubs.edokanpat.ui.otp_signin.OtpSignInViewModel
@@ -350,4 +352,14 @@ abstract class ViewModelModule {
     @IntoMap
     @ViewModelKey(TransactionsViewModel::class)
     abstract fun bindTransactionsViewModel(viewModel: TransactionsViewModel): ViewModel
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(CreateOrderViewModel::class)
+    abstract fun bindCreateOrderViewModel(viewModel: CreateOrderViewModel): ViewModel
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(SelectCustomerViewModel::class)
+    abstract fun bindSelectCustomerViewModel(viewModel: SelectCustomerViewModel): ViewModel
 }

@@ -17,6 +17,13 @@
             app:exitAnim="@anim/slide_out_left"
             app:popEnterAnim="@anim/slide_in_left"
             app:popExitAnim="@anim/slide_out_right"/>
+        <action
+            android:id="@+id/action_orderFragment_to_createOrderFragment"
+            app:destination="@id/createOrderFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"/>
     </fragment>
 
     <include app:graph="@navigation/drawer_nav_graph" />
@@ -24,4 +31,18 @@
         android:id="@+id/orderTrackHistoryFragment"
         android:name="com.rtchubs.edokanpat.ui.order.OrderTrackHistoryFragment"
         tools:layout="@layout/fragment_order_track_history"/>
+    <fragment
+        android:id="@+id/createOrderFragment"
+        android:name="com.rtchubs.edokanpat.ui.order.CreateOrderFragment"
+        android:label="New Order"
+        tools:layout="@layout/fragment_create_order">
+        <action
+            android:id="@+id/action_createOrderFragment_to_select_customer_nav_graph"
+            app:destination="@id/select_customer_nav_graph"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"/>
+    </fragment>
+    <include app:graph="@navigation/select_customer_nav_graph" />
 </navigation>
