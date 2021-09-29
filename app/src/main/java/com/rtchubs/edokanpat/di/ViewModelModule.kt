@@ -44,6 +44,7 @@ import com.rtchubs.edokanpat.ui.order.OrderTrackHistoryViewModel
 import com.rtchubs.edokanpat.ui.order.OrderViewModel
 import com.rtchubs.edokanpat.ui.otp_signin.OtpSignInViewModel
 import com.rtchubs.edokanpat.ui.pin_number.PinNumberViewModel
+import com.rtchubs.edokanpat.ui.products.SelectProductViewModel
 import com.rtchubs.edokanpat.ui.profile_signin.ProfileSignInViewModel
 import com.rtchubs.edokanpat.ui.shops.ShopDetailsContactUsViewModel
 import com.rtchubs.edokanpat.ui.shops.ShopDetailsViewModel
@@ -362,4 +363,9 @@ abstract class ViewModelModule {
     @IntoMap
     @ViewModelKey(SelectCustomerViewModel::class)
     abstract fun bindSelectCustomerViewModel(viewModel: SelectCustomerViewModel): ViewModel
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(SelectProductViewModel::class)
+    abstract fun bindSelectProductViewModel(viewModel: SelectProductViewModel): ViewModel
 }

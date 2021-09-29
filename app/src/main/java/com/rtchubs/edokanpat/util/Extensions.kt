@@ -25,6 +25,7 @@ import androidx.drawerlayout.widget.DrawerLayout
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MediatorLiveData
+import androidx.lifecycle.MutableLiveData
 import com.google.android.material.textfield.TextInputLayout
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
@@ -35,6 +36,32 @@ import okhttp3.RequestBody.Companion.asRequestBody
 import java.io.File
 import java.math.BigDecimal
 import java.math.RoundingMode
+
+fun <T> MutableLiveData<MutableList<T>>.removeItem(item: T) {
+    if (!this.value.isNullOrEmpty()) {
+        val oldValue = this.value
+        oldValue?.remove(item)
+        this.value = oldValue
+    } else {
+        this.value = mutableListOf()
+    }
+}
+
+fun <T> MutableLiveData<MutableList<T>>.removeItemAt(index: Int) {
+    if (!this.value.isNullOrEmpty()) {
+        val oldValue = this.value
+        oldValue?.removeAt(index)
+        this.value = oldValue
+    } else {
+        this.value = mutableListOf()
+    }
+}
+
+fun <T> MutableLiveData<MutableList<T>>.addNewItem(item: T) {
+    val oldValue = this.value ?: mutableListOf()
+    oldValue.add(item)
+    this.value = oldValue
+}
 
 fun Double.toRounded(digit: Int): Double {
     return BigDecimal(this).setScale(digit, RoundingMode.HALF_UP).toDouble()

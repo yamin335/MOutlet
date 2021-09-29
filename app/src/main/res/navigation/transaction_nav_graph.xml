@@ -43,6 +43,14 @@
             app:exitAnim="@anim/slide_out_left"
             app:popEnterAnim="@anim/slide_in_left"
             app:popExitAnim="@anim/slide_out_right"/>
+        <action
+            android:id="@+id/action_createOrderFragment_to_select_product_nav_graph"
+            app:destination="@id/select_product_nav_graph"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"/>
     </fragment>
     <include app:graph="@navigation/select_customer_nav_graph" />
+    <include app:graph="@navigation/select_product_nav_graph" />
 </navigation>

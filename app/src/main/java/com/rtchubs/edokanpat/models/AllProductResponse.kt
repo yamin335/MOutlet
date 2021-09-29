@@ -28,4 +28,6 @@ data class Product(
     val merchant_id: Int?,
     val created_at: String?,
     val updated_at: String?,
-    val category: ProductCategory?): Serializable
+    val category: ProductCategory?,
+    var quantity: Int? = 1
+): Serializable

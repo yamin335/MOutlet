@@ -5,6 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.rtchubs.edokanpat.api.*
 import com.rtchubs.edokanpat.models.AllProductResponse
+import com.rtchubs.edokanpat.models.Product
 import com.rtchubs.edokanpat.models.add_product.AddProductResponse
 import com.rtchubs.edokanpat.models.customers.Customer
 import com.rtchubs.edokanpat.repos.HomeRepository
@@ -21,6 +22,10 @@ class CreateOrderViewModel @Inject constructor(
 
     val selectedCustomer: MutableLiveData<Customer> by lazy {
         MutableLiveData<Customer>()
+    }
+
+    val orderItems: MutableLiveData<MutableList<Product>> by lazy {
+        MutableLiveData<MutableList<Product>>()
     }
 
     val name: MutableLiveData<String> by lazy {
@@ -44,6 +49,20 @@ class CreateOrderViewModel @Inject constructor(
 
     val addProductResponse: MutableLiveData<AddProductResponse> by lazy {
         MutableLiveData<AddProductResponse>()
+    }
+
+    fun incrementOrderItemQuantity(id: Int) {
+        val items = orderItems.value ?: mutableListOf()
+        val tempItems = items.map { if (it.id == id && it.quantity != null) { it.quantity = it.quantity!! + 1 }
+            it}.toMutableList()
+        orderItems.postValue(tempItems)
+    }
+
+    fun decrementOrderItemQuantity(id: Int) {
+        val items = orderItems.value ?: mutableListOf()
+        val tempItems = items.map { if (it.id == id && it.quantity != null) { it.quantity = it.quantity!! - 1 }
+            it}.toMutableList()
+        orderItems.postValue(tempItems)
     }
 
     fun addProduct(thumbnail: String?, sampleImage1: String?, sampleImage2: String?,

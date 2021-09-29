@@ -244,8 +244,8 @@
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@+id/btnAddProduct"
-                        tools:itemCount="5"
-                        tools:listitem="@layout/list_item_order" />
+                        tools:itemCount="2"
+                        tools:listitem="@layout/list_item_order_product" />
 
                     <TextView
                         android:id="@+id/textNoProductsFound"

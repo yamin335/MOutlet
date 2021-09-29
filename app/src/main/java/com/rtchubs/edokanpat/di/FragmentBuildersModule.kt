@@ -39,6 +39,7 @@ import com.rtchubs.edokanpat.ui.order.OrderListFragment
 import com.rtchubs.edokanpat.ui.order.OrderTrackHistoryFragment
 import com.rtchubs.edokanpat.ui.otp_signin.OtpSignInFragment
 import com.rtchubs.edokanpat.ui.pin_number.PinNumberFragment
+import com.rtchubs.edokanpat.ui.products.SelectProductFragment
 import com.rtchubs.edokanpat.ui.profile_signin.ProfileSignInFragment
 import com.rtchubs.edokanpat.ui.shops.ShopDetailsContactUsFragment
 import com.rtchubs.edokanpat.ui.shops.ShopDetailsFragment
@@ -229,4 +230,7 @@ abstract class FragmentBuildersModule {
 
     @ContributesAndroidInjector
     abstract fun contributeSelectCustomerFragment(): SelectCustomerFragment
+
+    @ContributesAndroidInjector
+    abstract fun contributeSelectProductFragment(): SelectProductFragment
 }
