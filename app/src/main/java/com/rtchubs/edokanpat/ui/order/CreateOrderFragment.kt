@@ -15,6 +15,7 @@ import com.rtchubs.edokanpat.ui.customers.SelectCustomerFragment
 import com.rtchubs.edokanpat.ui.products.SelectProductFragment
 import com.rtchubs.edokanpat.util.addNewItem
 import com.rtchubs.edokanpat.util.removeItem
+import com.rtchubs.edokanpat.util.toRounded
 
 class CreateOrderFragment : BaseFragment<CreateOrderFragmentBinding, CreateOrderViewModel>() {
     override val bindingVariable: Int
@@ -30,6 +31,8 @@ class CreateOrderFragment : BaseFragment<CreateOrderFragmentBinding, CreateOrder
     var taxType = ""
 
     var taxTypes = arrayOf("VAT/TAX Type", "VAT/TAX Inclusive", "VAT/TAX Exclusive")
+
+    var total = 0.0
 
     override fun onResume() {
         super.onResume()
@@ -151,6 +154,15 @@ class CreateOrderFragment : BaseFragment<CreateOrderFragmentBinding, CreateOrder
                 showHideDataView()
                 orderProductListAdapter.submitList(it)
                 orderProductListAdapter.notifyDataSetChanged()
+                total = 0.0
+                it.forEach { item ->
+                    val price = item.mrp ?: 0.0
+                    val quantity = item.quantity ?: 0
+                    total += price * quantity
+                }
+                total = total.toRounded(2)
+                viewDataBinding.totalPrice = total.toString()
+                viewDataBinding.linearTotal.visibility = View.VISIBLE
             }
         })
 
