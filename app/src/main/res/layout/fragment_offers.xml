@@ -6,7 +6,7 @@
     <data class="OffersFragmentBinding">
         <variable
             name="viewModel"
-            type="com.rtchubs.edokanpat.ui.offers.OffersViewModel" />
+            type="com.mallzhub.shop.ui.offers.OffersViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

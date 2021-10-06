@@ -5,7 +5,7 @@
     <data class="OrderListItemBinding">
         <variable
             name="item"
-            type="com.rtchubs.edokanpat.models.order.Order" />
+            type="com.mallzhub.shop.models.order.Order" />
     </data>
 
     <com.google.android.material.card.MaterialCardView

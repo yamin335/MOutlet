@@ -8,12 +8,12 @@
     
     <fragment
         android:id="@+id/viewPagerFragment"
-        android:name="com.rtchubs.edokanpat.ui.login.ViewPagerFragment"
+        android:name="com.mallzhub.shop.ui.login.ViewPagerFragment"
         tools:layout="@layout/fragment_view_pager"/>
 
     <fragment
         android:id="@+id/termsAndConditions"
-        android:name="com.rtchubs.edokanpat.ui.terms_and_conditions.TermsAndConditionsFragment"
+        android:name="com.mallzhub.shop.ui.terms_and_conditions.TermsAndConditionsFragment"
         tools:layout="@layout/fragment_terms_and_condition">
 
         <action
@@ -22,12 +22,12 @@
 
         <argument
             android:name="registrationHelper"
-            app:argType="com.rtchubs.edokanpat.models.registration.RegistrationHelperModel" />
+            app:argType="com.mallzhub.shop.models.registration.RegistrationHelperModel" />
     </fragment>
 
     <fragment
         android:id="@+id/signInFragment"
-        android:name="com.rtchubs.edokanpat.ui.login.SignInFragment"
+        android:name="com.mallzhub.shop.ui.login.SignInFragment"
         tools:layout="@layout/fragment_sign_in">
 
         <action
@@ -45,7 +45,7 @@
     </fragment>
     <fragment
         android:id="@+id/otpSignInFragment"
-        android:name="com.rtchubs.edokanpat.ui.otp_signin.OtpSignInFragment"
+        android:name="com.mallzhub.shop.ui.otp_signin.OtpSignInFragment"
         tools:layout="@layout/fragment_otp_sign_in">
         <action
             android:id="@+id/action_otpSignInFragment_to_pinNumberFragment"
@@ -58,11 +58,11 @@
             app:popUpToInclusive="false" />
         <argument
             android:name="registrationHelper"
-            app:argType="com.rtchubs.edokanpat.models.registration.RegistrationHelperModel" />
+            app:argType="com.mallzhub.shop.models.registration.RegistrationHelperModel" />
     </fragment>
     <fragment
         android:id="@+id/pinNumberFragment"
-        android:name="com.rtchubs.edokanpat.ui.pin_number.PinNumberFragment"
+        android:name="com.mallzhub.shop.ui.pin_number.PinNumberFragment"
         tools:layout="@layout/fragment_pin_number">
         <action
             android:id="@+id/action_pinNumberFragment_to_permissionsFragment"
@@ -73,11 +73,11 @@
             app:popExitAnim="@anim/slide_out_right" />
         <argument
             android:name="registrationHelper"
-            app:argType="com.rtchubs.edokanpat.models.registration.RegistrationHelperModel" />
+            app:argType="com.mallzhub.shop.models.registration.RegistrationHelperModel" />
     </fragment>
     <fragment
         android:id="@+id/profileSignInFragment"
-        android:name="com.rtchubs.edokanpat.ui.profile_signin.ProfileSignInFragment"
+        android:name="com.mallzhub.shop.ui.profile_signin.ProfileSignInFragment"
         tools:layout="@layout/fragment_profile_sign_in">
         <action
             android:id="@+id/action_profileSignInFragment_to_signInFragment"
@@ -91,14 +91,14 @@
             app:popUpToInclusive="true" />
         <argument
             android:name="NIDData"
-            app:argType="com.rtchubs.edokanpat.models.NIDDataModels" />
+            app:argType="com.mallzhub.shop.models.NIDDataModels" />
         <argument
             android:name="registrationHelper"
-            app:argType="com.rtchubs.edokanpat.models.registration.RegistrationHelperModel" />
+            app:argType="com.mallzhub.shop.models.registration.RegistrationHelperModel" />
     </fragment>
     <fragment
         android:id="@+id/permissionsFragment"
-        android:name="com.rtchubs.edokanpat.camerax.PermissionsFragment"
+        android:name="com.mallzhub.shop.camerax.PermissionsFragment"
         android:label="PermissionsFragment">
 
         <action
@@ -111,11 +111,11 @@
             app:popUpTo="@id/pinNumberFragment" />
         <argument
             android:name="registrationHelper"
-            app:argType="com.rtchubs.edokanpat.models.registration.RegistrationHelperModel" />
+            app:argType="com.mallzhub.shop.models.registration.RegistrationHelperModel" />
     </fragment>
     <fragment
         android:id="@+id/NIDScanCameraXFragment"
-        android:name="com.rtchubs.edokanpat.nid_scan.NIDScanCameraXFragment"
+        android:name="com.mallzhub.shop.nid_scan.NIDScanCameraXFragment"
         android:label="NIDScanCameraXFragment">
         <action
             android:id="@+id/action_NIDScanCameraXFragment_to_profileSignInFragment"
@@ -127,7 +127,7 @@
             app:popUpTo="@id/pinNumberFragment" />
         <argument
             android:name="registrationHelper"
-            app:argType="com.rtchubs.edokanpat.models.registration.RegistrationHelperModel" />
+            app:argType="com.mallzhub.shop.models.registration.RegistrationHelperModel" />
     </fragment>
 
 </navigation>

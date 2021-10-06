@@ -5,7 +5,7 @@
     <data class="CustomerListItemBinding">
         <variable
             name="item"
-            type="com.rtchubs.edokanpat.models.customers.Customer" />
+            type="com.mallzhub.shop.models.customers.Customer" />
     </data>
 
     <com.google.android.material.card.MaterialCardView

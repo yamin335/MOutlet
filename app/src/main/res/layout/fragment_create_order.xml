@@ -7,7 +7,7 @@
 
         <variable
             name="viewModel"
-            type="com.rtchubs.edokanpat.ui.order.CreateOrderViewModel" />
+            type="com.mallzhub.shop.ui.order.CreateOrderViewModel" />
 
         <variable
             name="totalPrice"

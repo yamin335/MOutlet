@@ -6,7 +6,7 @@
     <data class="AllProductsFragmentBinding">
         <variable
             name="viewModel"
-            type="com.rtchubs.edokanpat.ui.add_product.AllProductViewModel" />
+            type="com.mallzhub.shop.ui.add_product.AllProductViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

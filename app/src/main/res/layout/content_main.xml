@@ -9,7 +9,7 @@
             name="showBottomNav"
             type="Boolean" />
         <variable name="viewModel"
-            type="com.rtchubs.edokanpat.ui.MainActivityViewModel"/>
+            type="com.mallzhub.shop.ui.MainActivityViewModel"/>
     </data>
 
     <androidx.coordinatorlayout.widget.CoordinatorLayout

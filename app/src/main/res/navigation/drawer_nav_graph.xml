@@ -5,7 +5,7 @@
 
     <fragment
         android:id="@+id/infoFragment"
-        android:name="com.rtchubs.edokanpat.ui.info.InfoFragment"
+        android:name="com.mallzhub.shop.ui.info.InfoFragment"
         android:label="InfoFragment" />
 
 </navigation>

@@ -7,7 +7,7 @@
 
         <variable
             name="viewModel"
-            type="com.rtchubs.edokanpat.ui.order.OrderTrackHistoryViewModel" />
+            type="com.mallzhub.shop.ui.order.OrderTrackHistoryViewModel" />
     </data>
 
 

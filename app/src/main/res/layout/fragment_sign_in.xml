@@ -7,7 +7,7 @@
 
         <variable
             name="viewModel"
-            type="com.rtchubs.edokanpat.ui.login.SignInViewModel" />
+            type="com.mallzhub.shop.ui.login.SignInViewModel" />
     </data>
 
     <androidx.core.widget.NestedScrollView

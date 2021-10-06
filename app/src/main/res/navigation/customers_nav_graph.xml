@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/allCustomersFragment"
-        android:name="com.rtchubs.edokanpat.ui.customers.AllCustomersFragment"
+        android:name="com.mallzhub.shop.ui.customers.AllCustomersFragment"
         tools:layout="@layout/fragment_all_customers" >
         <action
             android:id="@+id/action_allCustomersFragment_to_addCustomerFragment"
@@ -19,7 +19,7 @@
     </fragment>
     <fragment
         android:id="@+id/addCustomerFragment"
-        android:name="com.rtchubs.edokanpat.ui.customers.AddCustomerFragment"
+        android:name="com.mallzhub.shop.ui.customers.AddCustomerFragment"
         android:label="Add New Customer"
         tools:layout="@layout/fragment_add_customer"/>
 </navigation>

@@ -6,7 +6,7 @@
 
         <variable
             name="viewModel"
-            type="com.rtchubs.edokanpat.ui.topup.TopUpAmountViewModel" />
+            type="com.mallzhub.shop.ui.topup.TopUpAmountViewModel" />
     </data>
 
     <RelativeLayout

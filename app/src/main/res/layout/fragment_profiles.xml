@@ -7,7 +7,7 @@
 
         <variable
             name="viewModel"
-            type="com.rtchubs.edokanpat.ui.profiles.ProfilesViewModel" />
+            type="com.mallzhub.shop.ui.profiles.ProfilesViewModel" />
     </data>
 
 
