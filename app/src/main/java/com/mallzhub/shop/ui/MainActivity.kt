@@ -19,6 +19,7 @@ import com.mallzhub.shop.R
 import com.mallzhub.shop.databinding.MainActivityBinding
 import com.mallzhub.shop.ui.home.Home2FragmentDirections
 import com.mallzhub.shop.util.hideKeyboard
+import com.mallzhub.shop.util.shouldCloseDrawerFromBackPress
 import dagger.android.support.DaggerAppCompatActivity
 import java.io.File
 import javax.inject.Inject

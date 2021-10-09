@@ -4,8 +4,14 @@
     xmlns:android="http://schemas.android.com/apk/res/android">
     <data class="OrderListItemBinding">
         <variable
-            name="item"
-            type="com.mallzhub.shop.models.order.Order" />
+            name="invoice"
+            type="String" />
+        <variable
+            name="date"
+            type="String" />
+        <variable
+            name="orderStatus"
+            type="String" />
     </data>
 
     <com.google.android.material.card.MaterialCardView
@@ -28,7 +34,7 @@
                 android:layout_height="wrap_content"
                 android:ellipsize="end"
                 android:maxLines="3"
-                android:text="@{item.invoiceId}"
+                android:text="@{invoice}"
                 android:textColor="#404040"
                 android:textSize="18sp"
                 app:layout_constrainedWidth="true"
@@ -43,7 +49,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="4dp"
-                android:text="@{item.dateTime}"
+                android:text="@{date}"
                 android:textColor="#999999"
                 tools:text="12-12-2021, 11:10PM"
                 app:layout_constraintBottom_toBottomOf="parent"
@@ -57,7 +63,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 tools:text="Processing"
-                android:text="@{item.status}"
+                android:text="@{orderStatus}"
                 android:paddingStart="8dp"
                 android:paddingEnd="8dp"
                 android:paddingTop="2dp"

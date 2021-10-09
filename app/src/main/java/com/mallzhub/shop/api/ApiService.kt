@@ -10,6 +10,7 @@ import com.mallzhub.shop.models.common.MyAccountListResponse
 import com.mallzhub.shop.models.customers.AddCustomerResponse
 import com.mallzhub.shop.models.customers.CustomerListResponse
 import com.mallzhub.shop.models.login.LoginResponse
+import com.mallzhub.shop.models.order.OrderListResponse
 import com.mallzhub.shop.models.payment_account_models.AddCardOrBankResponse
 import com.mallzhub.shop.models.payment_account_models.BankOrCardListResponse
 import com.mallzhub.shop.models.registration.InquiryResponse
@@ -128,5 +129,10 @@ interface ApiService {
 
     @POST(ApiEndPoint.ADD_PRODUCT)
     suspend fun addProduct(@Body partFormData: RequestBody): Response<AddProductResponse>
+
+    @GET(ApiEndPoint.ORDER_LIST)
+    suspend fun getOrderList(
+        @Query("page") page: Int?,
+        @Query("token") token: String?): Response<OrderListResponse>
 
 }

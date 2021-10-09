@@ -11,7 +11,7 @@ object AppConstants {
     const val registrationSuccessMessage = "Welcome! to QPay. Please login to continue."
     const val saveSuccessfulMessage = "Saved Successfully!"
 
-    const val orderProcessing = "Processing"
+    const val orderPending = "Pending"
     const val orderPicked = "Picked"
     const val orderShipped = "Shipped"
     const val orderDelivered = "Delivered"

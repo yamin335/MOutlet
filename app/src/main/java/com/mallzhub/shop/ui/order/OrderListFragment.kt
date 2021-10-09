@@ -2,19 +2,17 @@ package com.mallzhub.shop.ui.order
 
 import android.content.Context
 import android.os.Bundle
-import android.view.*
+import android.view.Menu
+import android.view.MenuInflater
+import android.view.View
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.Observer
 import com.mallzhub.shop.BR
 import com.mallzhub.shop.R
 import com.mallzhub.shop.databinding.OrderListFragmentBinding
-import com.mallzhub.shop.models.order.Order
+import com.mallzhub.shop.models.order.SalesData
 import com.mallzhub.shop.ui.NavDrawerHandlerCallback
 import com.mallzhub.shop.ui.common.BaseFragment
-import com.mallzhub.shop.util.AppConstants.orderCancelled
-import com.mallzhub.shop.util.AppConstants.orderDelivered
-import com.mallzhub.shop.util.AppConstants.orderPicked
-import com.mallzhub.shop.util.AppConstants.orderProcessing
-import com.mallzhub.shop.util.AppConstants.orderShipped
 
 class OrderListFragment : BaseFragment<OrderListFragmentBinding, OrderViewModel>() {
     override val bindingVariable: Int
@@ -56,13 +54,12 @@ class OrderListFragment : BaseFragment<OrderListFragmentBinding, OrderViewModel>
     override fun onResume() {
         super.onResume()
         if (orderList.isEmpty()) {
-            viewDataBinding.container.visibility = View.GONE
-            viewDataBinding.emptyView.visibility = View.VISIBLE
+            viewModel.getOrderList(1, preferencesHelper.getMerchant().email)
         } else {
-            viewDataBinding.container.visibility = View.VISIBLE
-            viewDataBinding.emptyView.visibility = View.GONE
             orderListAdapter.submitList(orderList)
         }
+
+        visibleGoneEmptyView()
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -73,26 +70,34 @@ class OrderListFragment : BaseFragment<OrderListFragmentBinding, OrderViewModel>
         }
 
         orderListAdapter = OrderListAdapter(appExecutors) {
-            OrderTrackHistoryFragment.title = it.invoiceId
+            OrderTrackHistoryFragment.title = it.OurReference ?: "Undefined Invoice"
             navigateTo(OrderListFragmentDirections.actionTransactionFragmentToOrderTrackHistoryFragment())
         }
 
         viewDataBinding.orderRecycler.adapter = orderListAdapter
 
-        orderList.add(Order(0, "#STF93847562", "12-09-2012, 10:23PM", orderProcessing))
-        orderList.add(Order(1, "#STF93847562", "12-09-2012, 10:23PM", orderPicked))
-        orderList.add(Order(2, "#STF93847562", "12-09-2012, 10:23PM", orderShipped))
-        orderList.add(Order(3, "#STF93847562", "12-09-2012, 10:23PM", orderDelivered))
-        orderList.add(Order(4, "#STF93847562", "12-09-2012, 10:23PM", orderCancelled))
-        orderList.add(Order(5, "#STF93847562", "12-09-2012, 10:23PM", orderProcessing))
-        orderList.add(Order(6, "#STF93847562", "12-09-2012, 10:23PM", orderPicked))
+        viewModel.orderItems.observe(viewLifecycleOwner, Observer {
+            orderList = it as ArrayList<SalesData>
+            orderListAdapter.submitList(orderList)
+            visibleGoneEmptyView()
+        })
 
         viewDataBinding.btnCreateOrder.setOnClickListener {
             navigateTo(OrderListFragmentDirections.actionOrderFragmentToCreateOrderFragment())
         }
     }
 
+    private fun visibleGoneEmptyView() {
+        if (orderList.isEmpty()) {
+            viewDataBinding.container.visibility = View.GONE
+            viewDataBinding.emptyView.visibility = View.VISIBLE
+        } else {
+            viewDataBinding.container.visibility = View.VISIBLE
+            viewDataBinding.emptyView.visibility = View.GONE
+        }
+    }
+
     companion object {
-        var orderList = ArrayList<Order>()
+        var orderList = ArrayList<SalesData>()
     }
 }

@@ -9,27 +9,27 @@ import androidx.recyclerview.widget.DiffUtil
 import com.mallzhub.shop.AppExecutors
 import com.mallzhub.shop.R
 import com.mallzhub.shop.databinding.OrderListItemBinding
-import com.mallzhub.shop.models.order.Order
+import com.mallzhub.shop.models.order.SalesData
 import com.mallzhub.shop.util.AppConstants.orderCancelled
 import com.mallzhub.shop.util.AppConstants.orderDelivered
+import com.mallzhub.shop.util.AppConstants.orderPending
 import com.mallzhub.shop.util.AppConstants.orderPicked
-import com.mallzhub.shop.util.AppConstants.orderProcessing
 import com.mallzhub.shop.util.AppConstants.orderShipped
 import com.mallzhub.shop.util.DataBoundListAdapter
 
 class OrderListAdapter(
     private val appExecutors: AppExecutors,
-    private val itemCallback: ((Order) -> Unit)? = null
-) : DataBoundListAdapter<Order, OrderListItemBinding>(
-    appExecutors = appExecutors, diffCallback = object : DiffUtil.ItemCallback<Order>() {
-        override fun areItemsTheSame(oldItem: Order, newItem: Order): Boolean {
+    private val itemCallback: ((SalesData) -> Unit)? = null
+) : DataBoundListAdapter<SalesData, OrderListItemBinding>(
+    appExecutors = appExecutors, diffCallback = object : DiffUtil.ItemCallback<SalesData>() {
+        override fun areItemsTheSame(oldItem: SalesData, newItem: SalesData): Boolean {
             return oldItem.id == newItem.id
         }
 
         @SuppressLint("DiffUtilEquals")
         override fun areContentsTheSame(
-            oldItem: Order,
-            newItem: Order
+            oldItem: SalesData,
+            newItem: SalesData
         ): Boolean {
             return oldItem == newItem
         }
@@ -46,14 +46,13 @@ class OrderListAdapter(
 
     override fun bind(binding: OrderListItemBinding, position: Int) {
         val item = getItem(position)
-        binding.item = item
+        binding.invoice = item.OurReference ?: "Undefined Invoice"
+        binding.date = item.date ?: "No date found"
+        binding.orderStatus = item.status ?: "Undefined"
+
         val context = binding.root.context
 
         when(item.status) {
-            orderProcessing -> {
-                binding.status.background = ContextCompat.getDrawable(context, R.drawable.status_order_processing)
-                binding.status.setTextColor(context.getColor(R.color.orderProcessing))
-            }
             orderPicked -> {
                 binding.status.background = ContextCompat.getDrawable(context, R.drawable.status_order_picked)
                 binding.status.setTextColor(context.getColor(R.color.orderPicked))
@@ -69,6 +68,10 @@ class OrderListAdapter(
             orderCancelled -> {
                 binding.status.background = ContextCompat.getDrawable(context, R.drawable.status_order_cancelled)
                 binding.status.setTextColor(context.getColor(R.color.orderCancelled))
+            }
+            else -> {
+                binding.status.background = ContextCompat.getDrawable(context, R.drawable.status_order_processing)
+                binding.status.setTextColor(context.getColor(R.color.orderProcessing))
             }
         }
 

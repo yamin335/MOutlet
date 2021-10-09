@@ -46,6 +46,7 @@ object ApiEndPoint {
     const val ADD_CUSTOMER = "/$INDEX/$API_REPO/customer"
     const val ADD_PRODUCT = "/$INDEX/$API_REPO/product"
     const val SALE = "/$API_REPO/sale"
+    const val ORDER_LIST = "/$API_REPO/sales/filter-by-date/undefined/undefined/false"
 }
 
 object ResponseCodes {
