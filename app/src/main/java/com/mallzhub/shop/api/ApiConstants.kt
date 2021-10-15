@@ -11,7 +11,7 @@ import com.mallzhub.shop.api.Api.DIRECTORY_PROFILE
 import com.mallzhub.shop.api.Api.INDEX
 
 object Api {
-    const val PROTOCOL = "https"
+    private const val PROTOCOL = "https"
     private const val API_ROOT = "backend.mobmalls.com"
     const val API_ROOT_URL = "$PROTOCOL://$API_ROOT"
     const val INDEX = "index.php"
