@@ -7,17 +7,25 @@ import com.mallzhub.shop.api.*
 import com.mallzhub.shop.models.Product
 import com.mallzhub.shop.models.add_product.AddProductResponse
 import com.mallzhub.shop.models.customers.Customer
+import com.mallzhub.shop.models.order.OrderStoreBody
+import com.mallzhub.shop.models.order.OrderStoreResponse
 import com.mallzhub.shop.repos.HomeRepository
+import com.mallzhub.shop.repos.OrderRepository
 import com.mallzhub.shop.ui.common.BaseViewModel
 import com.mallzhub.shop.util.AppConstants
 import kotlinx.coroutines.CoroutineExceptionHandler
 import kotlinx.coroutines.launch
+import java.security.SecureRandom
 import javax.inject.Inject
 
 class CreateOrderViewModel @Inject constructor(
     private val application: Application,
-    private val homeRepository: HomeRepository
+    private val orderRepository: OrderRepository
 ) : BaseViewModel(application) {
+
+    val invoiceNumber: MutableLiveData<String> by lazy {
+        MutableLiveData<String>()
+    }
 
     val selectedCustomer: MutableLiveData<Customer> by lazy {
         MutableLiveData<Customer>()
@@ -27,27 +35,8 @@ class CreateOrderViewModel @Inject constructor(
         MutableLiveData<MutableList<Product>>()
     }
 
-    val name: MutableLiveData<String> by lazy {
-        MutableLiveData<String>()
-    }
-    val buyingPrice: MutableLiveData<String> by lazy {
-        MutableLiveData<String>()
-    }
-    val sellingPrice: MutableLiveData<String> by lazy {
-        MutableLiveData<String>()
-    }
-    val mrp: MutableLiveData<String> by lazy {
-        MutableLiveData<String>()
-    }
-    val expiredDate: MutableLiveData<String> by lazy {
-        MutableLiveData<String>()
-    }
-    val description: MutableLiveData<String> by lazy {
-        MutableLiveData<String>()
-    }
-
-    val addProductResponse: MutableLiveData<AddProductResponse> by lazy {
-        MutableLiveData<AddProductResponse>()
+    val orderPlaceResponse: MutableLiveData<OrderStoreResponse> by lazy {
+        MutableLiveData<OrderStoreResponse>()
     }
 
     fun incrementOrderItemQuantity(id: Int) {
@@ -64,9 +53,7 @@ class CreateOrderViewModel @Inject constructor(
         orderItems.postValue(tempItems)
     }
 
-    fun addProduct(thumbnail: String?, sampleImage1: String?, sampleImage2: String?,
-                   sampleImage3: String?, sampleImage4: String?, sampleImage5: String?,
-                   categoryId: Int, merchantId: Int, token: String?) {
+    fun placeOrder(orderStoreBody: OrderStoreBody) {
         if (checkNetworkStatus()) {
             val handler = CoroutineExceptionHandler { _, exception ->
                 exception.printStackTrace()
@@ -76,13 +63,10 @@ class CreateOrderViewModel @Inject constructor(
 
             apiCallStatus.postValue(ApiCallStatus.LOADING)
             viewModelScope.launch(handler) {
-                when (val apiResponse = ApiResponse.create(homeRepository.addProduct(thumbnail, sampleImage1,
-                    sampleImage2, sampleImage3, sampleImage4, sampleImage5, name.value, "",
-                    description.value, buyingPrice.value, sellingPrice.value, mrp.value, expiredDate.value,
-                    categoryId, merchantId, token))) {
+                when (val apiResponse = ApiResponse.create(orderRepository.placeOrder(orderStoreBody))) {
                     is ApiSuccessResponse -> {
                         apiCallStatus.postValue(ApiCallStatus.SUCCESS)
-                        addProductResponse.postValue(apiResponse.body)
+                        orderPlaceResponse.postValue(apiResponse.body)
                     }
                     is ApiEmptyResponse -> {
                         apiCallStatus.postValue(ApiCallStatus.EMPTY)
@@ -93,6 +77,12 @@ class CreateOrderViewModel @Inject constructor(
                 }
             }
         }
+    }
+
+    fun generateInvoiceID() {
+        val random1 = "${1 + SecureRandom().nextInt(9999999)}"
+        val random2 = "${1 + SecureRandom().nextInt(999999)}"
+        invoiceNumber.postValue("IV-${random1}${random2}")
     }
 
 }

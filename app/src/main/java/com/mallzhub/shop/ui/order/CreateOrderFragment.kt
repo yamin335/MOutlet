@@ -10,12 +10,18 @@ import com.mallzhub.shop.BR
 import com.mallzhub.shop.R
 import com.mallzhub.shop.api.ApiCallStatus
 import com.mallzhub.shop.databinding.CreateOrderFragmentBinding
+import com.mallzhub.shop.models.order.OrderStoreBody
+import com.mallzhub.shop.models.order.OrderStoreProduct
 import com.mallzhub.shop.ui.common.BaseFragment
 import com.mallzhub.shop.ui.customers.SelectCustomerFragment
 import com.mallzhub.shop.ui.products.SelectProductFragment
 import com.mallzhub.shop.util.addNewItem
 import com.mallzhub.shop.util.removeItem
+import com.mallzhub.shop.util.showWarningToast
 import com.mallzhub.shop.util.toRounded
+import java.text.SimpleDateFormat
+import java.util.*
+import kotlin.collections.ArrayList
 
 class CreateOrderFragment : BaseFragment<CreateOrderFragmentBinding, CreateOrderViewModel>() {
     override val bindingVariable: Int
@@ -29,6 +35,8 @@ class CreateOrderFragment : BaseFragment<CreateOrderFragmentBinding, CreateOrder
     lateinit var orderProductListAdapter: OrderProductListAdapter
 
     var taxType = ""
+
+    var taxTypeValues = arrayOf("", "inclusive", "exclusive")
 
     var taxTypes = arrayOf("VAT/TAX Type", "VAT/TAX Inclusive", "VAT/TAX Exclusive")
 
@@ -66,6 +74,7 @@ class CreateOrderFragment : BaseFragment<CreateOrderFragmentBinding, CreateOrder
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setHasOptionsMenu(true)
+        viewModel.generateInvoiceID()
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -109,11 +118,7 @@ class CreateOrderFragment : BaseFragment<CreateOrderFragmentBinding, CreateOrder
                 position: Int,
                 id: Long
             ) {
-                taxType = if (position != 0) {
-                    taxTypes[position]
-                } else {
-                    ""
-                }
+                taxType = taxTypeValues[position]
             }
 
             override fun onNothingSelected(parent: AdapterView<*>?) {
@@ -129,9 +134,9 @@ class CreateOrderFragment : BaseFragment<CreateOrderFragmentBinding, CreateOrder
             }
         }
 
-        viewModel.addProductResponse.observe(viewLifecycleOwner, androidx.lifecycle.Observer { response ->
+        viewModel.orderPlaceResponse.observe(viewLifecycleOwner, androidx.lifecycle.Observer { response ->
             response?.let {
-                if (it.data != null) navController.popBackStack()
+                if (it.data?.sale != null) navController.popBackStack()
             }
         })
 
@@ -165,6 +170,36 @@ class CreateOrderFragment : BaseFragment<CreateOrderFragmentBinding, CreateOrder
                 viewDataBinding.linearTotal.visibility = View.VISIBLE
             }
         })
+
+        viewDataBinding.btnSubmitOrder.setOnClickListener {
+            if (viewModel.selectedCustomer.value == null) {
+                showWarningToast(requireContext(), "Please select customer")
+                return@setOnClickListener
+            }
+
+            if (viewModel.orderItems.value.isNullOrEmpty()) {
+                showWarningToast(requireContext(), "Please select product")
+                return@setOnClickListener
+            }
+
+            val productList = ArrayList<OrderStoreProduct>()
+            viewModel.orderItems.value?.forEach { item ->
+                val quantity = item.quantity ?: 1
+                val mrp = item.mrp?.toInt() ?: 0
+                productList.add(OrderStoreProduct(item.id, item.description, "qty",
+                    quantity, item.mrp?.toInt(), 0, "0",
+                    0, "0", mrp * quantity, ""))
+            }
+
+            val today = SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH).format(
+                Date()
+            )
+
+            viewModel.placeOrder(OrderStoreBody(viewModel.selectedCustomer.value?.id, preferencesHelper.merchantId,
+                "", viewModel.invoiceNumber.value, today, taxType, "", total.toInt(),
+                0, 0, total.toInt(), 0, total.toInt(), productList))
+
+        }
 
     }
 

@@ -53,13 +53,9 @@ class OrderListFragment : BaseFragment<OrderListFragmentBinding, OrderViewModel>
 
     override fun onResume() {
         super.onResume()
-        if (orderList.isEmpty()) {
-            viewModel.getOrderList(1, preferencesHelper.getMerchant().email)
-        } else {
-            orderListAdapter.submitList(orderList)
-        }
-
+        orderListAdapter.submitList(orderList)
         visibleGoneEmptyView()
+        viewModel.getOrderList(1, preferencesHelper.getMerchant().email)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
