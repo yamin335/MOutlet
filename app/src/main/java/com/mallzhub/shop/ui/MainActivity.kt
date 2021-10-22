@@ -107,7 +107,7 @@ class MainActivity : DaggerAppCompatActivity(), LogoutHandlerCallback, NavDrawer
             R.navigation.customers_nav_graph,
             R.navigation.products_nav_graph,
             R.navigation.offers_nav_graph,
-            R.navigation.transaction_nav_graph,
+            R.navigation.order_nav_graph,
             R.navigation.more_nav_graph
         )
 

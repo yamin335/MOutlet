@@ -66,8 +66,7 @@ class OrderListFragment : BaseFragment<OrderListFragmentBinding, OrderViewModel>
         }
 
         orderListAdapter = OrderListAdapter(appExecutors) {
-            OrderTrackHistoryFragment.title = it.OurReference ?: "Undefined Invoice"
-            navigateTo(OrderListFragmentDirections.actionTransactionFragmentToOrderTrackHistoryFragment())
+            navigateTo(OrderListFragmentDirections.actionTransactionFragmentToOrderTrackHistoryFragment(it))
         }
 
         viewDataBinding.orderRecycler.adapter = orderListAdapter

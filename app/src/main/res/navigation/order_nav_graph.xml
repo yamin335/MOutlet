@@ -2,7 +2,7 @@
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/transaction_nav"
+    android:id="@+id/order_nav"
     app:startDestination="@id/orderFragment">
 
     <fragment
@@ -30,7 +30,11 @@
     <fragment
         android:id="@+id/orderTrackHistoryFragment"
         android:name="com.mallzhub.shop.ui.order.OrderTrackHistoryFragment"
-        tools:layout="@layout/fragment_order_track_history"/>
+        tools:layout="@layout/fragment_order_track_history">
+        <argument
+            android:name="order"
+            app:argType="com.mallzhub.shop.models.order.SalesData" />
+    </fragment>
     <fragment
         android:id="@+id/createOrderFragment"
         android:name="com.mallzhub.shop.ui.order.CreateOrderFragment"
