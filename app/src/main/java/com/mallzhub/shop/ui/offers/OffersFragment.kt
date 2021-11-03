@@ -59,6 +59,10 @@ class OffersFragment : BaseFragment<OffersFragmentBinding, OffersViewModel>() {
         viewDataBinding.appLogo.setOnClickListener {
             drawerListener?.toggleNavDrawer()
         }
+
+        viewDataBinding.addOffer.setOnClickListener {
+            navigateTo(OffersFragmentDirections.actionOffersFragmentToCreateOfferFragment())
+        }
     }
 
     private fun showHideDataView() {

@@ -38,6 +38,7 @@ import com.mallzhub.shop.ui.login.ViewPagerViewModel
 import com.mallzhub.shop.ui.more.MoreViewModel
 import com.mallzhub.shop.ui.myAccount.MyAccountViewModel
 import com.mallzhub.shop.ui.myDevices.MyDevicesViewModel
+import com.mallzhub.shop.ui.offers.CreateOfferViewModel
 import com.mallzhub.shop.ui.offers.OffersViewModel
 import com.mallzhub.shop.ui.order.CreateOrderViewModel
 import com.mallzhub.shop.ui.order.OrderTrackHistoryViewModel
@@ -368,4 +369,9 @@ abstract class ViewModelModule {
     @IntoMap
     @ViewModelKey(SelectProductViewModel::class)
     abstract fun bindSelectProductViewModel(viewModel: SelectProductViewModel): ViewModel
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(CreateOfferViewModel::class)
+    abstract fun bindCreateOfferViewModel(viewModel: CreateOfferViewModel): ViewModel
 }

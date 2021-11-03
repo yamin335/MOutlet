@@ -33,6 +33,7 @@ import com.mallzhub.shop.ui.login.ViewPagerFragment
 import com.mallzhub.shop.ui.more.MoreFragment
 import com.mallzhub.shop.ui.myAccount.MyAccountsFragment
 import com.mallzhub.shop.ui.myDevices.MyDevicesFragment
+import com.mallzhub.shop.ui.offers.CreateOfferFragment
 import com.mallzhub.shop.ui.offers.OffersFragment
 import com.mallzhub.shop.ui.order.CreateOrderFragment
 import com.mallzhub.shop.ui.order.OrderListFragment
@@ -233,4 +234,7 @@ abstract class FragmentBuildersModule {
 
     @ContributesAndroidInjector
     abstract fun contributeSelectProductFragment(): SelectProductFragment
+
+    @ContributesAndroidInjector
+    abstract fun contributeCreateOfferFragment(): CreateOfferFragment
 }

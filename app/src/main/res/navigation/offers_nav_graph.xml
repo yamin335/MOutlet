@@ -8,5 +8,26 @@
     <fragment
         android:id="@+id/offersFragment"
         android:name="com.mallzhub.shop.ui.offers.OffersFragment"
-        tools:layout="@layout/fragment_offers" />
+        tools:layout="@layout/fragment_offers" >
+        <action
+            android:id="@+id/action_offersFragment_to_createOfferFragment"
+            app:destination="@id/createOfferFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"/>
+    </fragment>
+    <include app:graph="@navigation/select_product_nav_graph" />
+    <fragment
+        android:id="@+id/createOfferFragment"
+        android:name="com.mallzhub.shop.ui.offers.CreateOfferFragment"
+        android:label="New Offer" >
+        <action
+            android:id="@+id/action_createOfferFragment_to_select_product_nav_graph"
+            app:destination="@id/select_product_nav_graph"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"/>
+    </fragment>
 </navigation>
