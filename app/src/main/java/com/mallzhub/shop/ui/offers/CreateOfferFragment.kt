@@ -34,7 +34,7 @@ class CreateOfferFragment : BaseFragment<CreateOfferFragmentBinding, CreateOffer
         viewModelFactory
     }
 
-    lateinit var offerProductListAdapter: OrderProductListAdapter
+    lateinit var offerProductListAdapter: OfferProductListAdapter
 
     var taxType = ""
 
@@ -49,9 +49,7 @@ class CreateOfferFragment : BaseFragment<CreateOfferFragmentBinding, CreateOffer
 
         SelectProductFragment.selectedProduct?.let {
             val list = viewModel.offerItems.value ?: mutableListOf()
-            if (list.contains(it)) {
-                viewModel.incrementOfferItemQuantity(it.id)
-            } else {
+            if (!list.contains(it)) {
                 it.quantity = 1
                 viewModel.offerItems.addNewItem(it)
             }
@@ -73,19 +71,7 @@ class CreateOfferFragment : BaseFragment<CreateOfferFragmentBinding, CreateOffer
         super.onViewCreated(view, savedInstanceState)
         registerToolbar(viewDataBinding.toolbar)
 
-        offerProductListAdapter = OrderProductListAdapter (
-            appExecutors,
-            object : OrderProductListAdapter.CartItemActionCallback {
-                override fun incrementCartItemQuantity(id: Int) {
-                    viewModel.incrementOfferItemQuantity(id)
-                }
-
-                override fun decrementCartItemQuantity(id: Int) {
-                    viewModel.decrementOfferItemQuantity(id)
-                }
-
-            }
-        ) { item ->
+        offerProductListAdapter = OfferProductListAdapter (appExecutors) { item ->
             viewModel.offerItems.removeItem(item)
         }
 
@@ -141,15 +127,6 @@ class CreateOfferFragment : BaseFragment<CreateOfferFragmentBinding, CreateOffer
                 showHideDataView()
                 offerProductListAdapter.submitList(it)
                 offerProductListAdapter.notifyDataSetChanged()
-                total = 0.0
-                it.forEach { item ->
-                    val price = item.mrp ?: 0.0
-                    val quantity = item.quantity ?: 0
-                    total += price * quantity
-                }
-                total = total.toRounded(2)
-                viewDataBinding.totalPrice = total.toString()
-                viewDataBinding.linearTotal.visibility = View.VISIBLE
             }
         })
 

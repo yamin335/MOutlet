@@ -39,20 +39,6 @@ class CreateOfferViewModel @Inject constructor(
         MutableLiveData<OrderStoreResponse>()
     }
 
-    fun incrementOfferItemQuantity(id: Int) {
-        val items = offerItems.value ?: mutableListOf()
-        val tempItems = items.map { if (it.id == id && it.quantity != null) { it.quantity = it.quantity!! + 1 }
-            it}.toMutableList()
-        offerItems.postValue(tempItems)
-    }
-
-    fun decrementOfferItemQuantity(id: Int) {
-        val items = offerItems.value ?: mutableListOf()
-        val tempItems = items.map { if (it.id == id && it.quantity != null) { it.quantity = it.quantity!! - 1 }
-            it}.toMutableList()
-        offerItems.postValue(tempItems)
-    }
-
     fun placeOrder(orderStoreBody: OrderStoreBody) {
         if (checkNetworkStatus()) {
             val handler = CoroutineExceptionHandler { _, exception ->

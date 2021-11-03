@@ -12,6 +12,7 @@
         <entry key="app/src/main/res/layout/fragment_order_list.xml" value="0.22395833333333334" />
         <entry key="app/src/main/res/layout/fragment_order_track_history.xml" value="0.36041666666666666" />
         <entry key="app/src/main/res/layout/fragment_product_list.xml" value="0.36041666666666666" />
+        <entry key="app/src/main/res/layout/list_item_offer_product.xml" value="0.36041666666666666" />
         <entry key="app/src/main/res/layout/list_item_order_details_product.xml" value="0.36041666666666666" />
         <entry key="app/src/main/res/layout/list_item_order_product.xml" value="0.36041666666666666" />
         <entry key="app/src/main/res/menu/bottom_app_menu.xml" value="0.36041666666666666" />
