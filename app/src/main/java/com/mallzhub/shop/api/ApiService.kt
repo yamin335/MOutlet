@@ -2,9 +2,7 @@ package com.mallzhub.shop.api
 
 import com.google.gson.JsonObject
 import com.mallzhub.shop.api.Api.ContentType
-import com.mallzhub.shop.models.AllMerchantResponse
-import com.mallzhub.shop.models.AllProductResponse
-import com.mallzhub.shop.models.AllShoppingMallResponse
+import com.mallzhub.shop.models.*
 import com.mallzhub.shop.models.add_product.AddProductResponse
 import com.mallzhub.shop.models.common.MyAccountListResponse
 import com.mallzhub.shop.models.customers.AddCustomerResponse
@@ -141,5 +139,19 @@ interface ApiService {
     suspend fun placeOrder(
         @Body jsonObject: JsonObject
     ): Response<OrderStoreResponse>
+
+    @GET(ApiEndPoint.OFFER_LIST)
+    suspend fun getOfferList(): Response<OfferProductListResponse>
+
+    @GET(ApiEndPoint.PRODUCT_DETAILS)
+    suspend fun getProductDetails(
+        @Path("id") type: Int?
+    ): Response<ProductDetailsResponse>
+
+    @Headers(ContentType)
+    @POST(ApiEndPoint.ADD_OFFER)
+    suspend fun addNewOffer(
+        @Body jsonObject: JsonObject
+    ): Response<OfferAddResponse>
 
 }

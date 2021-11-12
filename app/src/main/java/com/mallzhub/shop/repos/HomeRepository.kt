@@ -5,6 +5,7 @@ import com.mallzhub.shop.api.ApiService
 import com.mallzhub.shop.models.AllMerchantResponse
 import com.mallzhub.shop.models.AllProductResponse
 import com.mallzhub.shop.models.AllShoppingMallResponse
+import com.mallzhub.shop.models.ProductDetailsResponse
 import com.mallzhub.shop.models.add_product.AddProductResponse
 import com.mallzhub.shop.models.customers.AddCustomerResponse
 import com.mallzhub.shop.models.customers.CustomerListResponse
@@ -169,6 +170,12 @@ class HomeRepository @Inject constructor(private val apiService: ApiService) {
 
         return withContext(Dispatchers.IO) {
             apiService.addProduct(requestBody)
+        }
+    }
+
+    suspend fun getProductDetailsRepo(id: Int?): Response<ProductDetailsResponse> {
+        return withContext(Dispatchers.IO) {
+            apiService.getProductDetails(id)
         }
     }
 }

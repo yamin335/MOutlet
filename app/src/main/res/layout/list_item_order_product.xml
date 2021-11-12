@@ -186,7 +186,7 @@
                     android:paddingTop="2dp"
                     android:paddingEnd="16dp"
                     android:paddingBottom="2dp"
-                    android:text="@{item.quantity.toString()}"
+                    android:text="@{item.available_qty.toString()}"
                     android:textColor="#404040"
                     android:textSize="12sp"
                     tools:text="5" />

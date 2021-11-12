@@ -41,14 +41,14 @@ class CreateOrderViewModel @Inject constructor(
 
     fun incrementOrderItemQuantity(id: Int) {
         val items = orderItems.value ?: mutableListOf()
-        val tempItems = items.map { if (it.id == id && it.quantity != null) { it.quantity = it.quantity!! + 1 }
+        val tempItems = items.map { if (it.id == id && it.available_qty != null) { it.available_qty = it.available_qty!! + 1 }
             it}.toMutableList()
         orderItems.postValue(tempItems)
     }
 
     fun decrementOrderItemQuantity(id: Int) {
         val items = orderItems.value ?: mutableListOf()
-        val tempItems = items.map { if (it.id == id && it.quantity != null) { it.quantity = it.quantity!! - 1 }
+        val tempItems = items.map { if (it.id == id && it.available_qty != null) { it.available_qty = it.available_qty!! - 1 }
             it}.toMutableList()
         orderItems.postValue(tempItems)
     }

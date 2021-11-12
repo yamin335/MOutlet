@@ -1,5 +1,6 @@
 package com.mallzhub.shop.ui.home
 
+import android.graphics.Paint
 import android.graphics.drawable.Drawable
 import android.os.Bundle
 import android.view.*
@@ -54,10 +55,32 @@ class ProductDetailsFragment :
         registerToolbar(viewDataBinding.toolbar)
 
         val product = args.product
+        val discount = args.discount
+
+        if (discount > 0) {
+            viewDataBinding.discount = discount.toString()
+            viewDataBinding.linearOfferPercent.visibility = View.VISIBLE
+            viewDataBinding.productPrice.apply {
+                paintFlags = paintFlags or Paint.STRIKE_THRU_TEXT_FLAG
+            }
+            viewDataBinding.productDiscountedPrice.visibility = View.VISIBLE
+        } else {
+            if ((viewDataBinding.productPrice.paintFlags and Paint.STRIKE_THRU_TEXT_FLAG) > 0) {
+                viewDataBinding.productPrice.apply {
+                    paintFlags = paintFlags and Paint.STRIKE_THRU_TEXT_FLAG.inv()
+                }
+            }
+
+            viewDataBinding.linearOfferPercent.visibility = View.GONE
+            viewDataBinding.productDiscountedPrice.visibility = View.GONE
+        }
 
         viewDataBinding.toolbar.title = product.name
         viewDataBinding.name = product.name
-        viewDataBinding.price = "$${product.mrp}"
+        val price = product.mrp ?: 0.0
+        val discountAmount = (price * discount)/100
+        viewDataBinding.price = "${getString(R.string.sign_taka)}${price}"
+        viewDataBinding.discountedPrice = "${getString(R.string.sign_taka)}${price - discountAmount}"
 
         viewModel.toastWarning.observe(viewLifecycleOwner, Observer {
             it?.let { message ->
@@ -81,7 +104,8 @@ class ProductDetailsFragment :
 
         viewDataBinding.rvSampleImage.adapter = pdImageSampleAdapter
 
-        pdImageSampleAdapter.submitList(listOf(product.thumbnail, product.thumbnail, product.thumbnail, product.thumbnail, product.thumbnail))
+        pdImageSampleAdapter.submitList(listOf(product.product_image1, product.product_image2,
+            product.product_image3, product.product_image4, product.product_image5))
 
         viewDataBinding.imageUrl = product.thumbnail
         viewDataBinding.imageRequestListener = object: RequestListener<Drawable> {
@@ -116,54 +140,6 @@ class ProductDetailsFragment :
         viewDataBinding.rvSizeChooser.adapter = pdSizeChooserAdapter
 
         pdSizeChooserAdapter.submitList(listOf("XS", "S", "M", "L", "XL", "XXL", "3XL"))
-
-        viewDataBinding.quantity.text = quantity.toString()
-
-        viewDataBinding.decrementQuantity.setOnClickListener {
-            if (quantity > 1) --quantity
-            viewDataBinding.quantity.text = quantity.toString()
-        }
-
-        viewDataBinding.incrementQuantity.setOnClickListener {
-            ++quantity
-            viewDataBinding.quantity.text = quantity.toString()
-        }
-
-        viewDataBinding.addToCart.setOnClickListener {
-            if (alreadyAddedToCart) {
-                showWarningToast(requireContext(), "Already added to cart!")
-            } else {
-                viewModel.addToCart(
-                    OrderProduct(product.id, product.name, product.barcode,
-                        product.description, product.buying_price?.toInt(), product.selling_price?.toInt(),
-                        product.mrp?.toInt(), product.expired_date, product.thumbnail,
-                        product.product_image1, product.product_image2,
-                        product.product_image3, product.product_image4,
-                        product.product_image5, product.category_id, product.merchant_id,
-                        product.created_at, product.updated_at,
-                        ShopDetailsProductListFragment.orderMerchant, product.category), quantity)
-            }
-        }
-
-        viewDataBinding.addToFavorite.setOnClickListener {
-            if (alreadyAddedToFavorite) {
-                showWarningToast(requireContext(), "Already added to favorite!")
-            } else {
-                viewModel.addToFavorite(product)
-            }
-        }
-
-//        viewModel.doesItemExistsInCart(product).observe(viewLifecycleOwner, Observer {
-//            it?.let { value ->
-//                alreadyAddedToCart = value
-//            }
-//        })
-//
-//        viewModel.doesItemExistsInFavorite(product).observe(viewLifecycleOwner, Observer {
-//            it?.let { value ->
-//                alreadyAddedToFavorite = value
-//            }
-//        })
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
@@ -194,10 +170,6 @@ class ProductDetailsFragment :
         when(item.itemId) {
             android.R.id.home -> {
                 navController.navigateUp()
-            }
-
-            R.id.menu_cart -> {
-                navController.navigate(ProductDetailsFragmentDirections.actionProductDetailsFragmentToCartFragment())
             }
         }
 

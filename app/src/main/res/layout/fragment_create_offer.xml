@@ -117,7 +117,7 @@
                             android:minWidth="80dp"
                             android:background="@color/transparent"
                             android:imeOptions="actionNext"
-                            android:text="@={viewModel.offerAmount}"
+                            android:text="@={viewModel.offerPercent}"
                             android:inputType="numberDecimal"
                             android:paddingStart="16dp"
                             android:paddingTop="10dp"
@@ -241,7 +241,7 @@
                 </LinearLayout>
 
                 <com.google.android.material.button.MaterialButton
-                    android:id="@+id/btnSubmitOrder"
+                    android:id="@+id/btnSubmitOffer"
                     style="@style/Widget.MaterialComponents.Button.UnelevatedButton"
                     android:layout_width="match_parent"
                     android:layout_height="50dp"
@@ -249,8 +249,11 @@
                     android:layout_marginTop="20dp"
                     android:layout_marginEnd="16dp"
                     android:layout_marginBottom="64dp"
-                    android:text="Submit Order"
-                    android:textColor="@android:color/white"
+                    android:text="Submit Offer"
+                    android:backgroundTint="@color/button_enable_disable_colors"
+                    android:textAllCaps="false"
+                    android:textColor="@color/button_text_enable_disable_colors"
+                    android:enabled="false"
                     android:textSize="16sp"
                     app:backgroundTint="#E5525D"
                     app:cornerRadius="8dp"

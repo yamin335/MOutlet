@@ -6,12 +6,14 @@ import android.view.Menu
 import android.view.MenuInflater
 import android.view.View
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.Observer
 import com.mallzhub.shop.BR
 import com.mallzhub.shop.R
 import com.mallzhub.shop.databinding.OffersFragmentBinding
 import com.mallzhub.shop.models.Product
 import com.mallzhub.shop.ui.NavDrawerHandlerCallback
 import com.mallzhub.shop.ui.common.BaseFragment
+import okhttp3.internal.userAgent
 
 class OffersFragment : BaseFragment<OffersFragmentBinding, OffersViewModel>() {
     override val bindingVariable: Int
@@ -23,6 +25,8 @@ class OffersFragment : BaseFragment<OffersFragmentBinding, OffersViewModel>() {
     }
 
     private var drawerListener: NavDrawerHandlerCallback? = null
+
+    private lateinit var offersListAdapter: OffersListAdapter
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
@@ -50,7 +54,7 @@ class OffersFragment : BaseFragment<OffersFragmentBinding, OffersViewModel>() {
 
     override fun onResume() {
         super.onResume()
-        //viewModel.getProductList(preferencesHelper.merchantId.toString())
+        viewModel.getAllOfferList()
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -63,19 +67,27 @@ class OffersFragment : BaseFragment<OffersFragmentBinding, OffersViewModel>() {
         viewDataBinding.addOffer.setOnClickListener {
             navigateTo(OffersFragmentDirections.actionOffersFragmentToCreateOfferFragment())
         }
-    }
 
-    private fun showHideDataView() {
-        if (allProductsList.isEmpty()) {
-            viewDataBinding.container.visibility = View.GONE
-            viewDataBinding.emptyView.visibility = View.VISIBLE
-        } else {
-            viewDataBinding.container.visibility = View.VISIBLE
-            viewDataBinding.emptyView.visibility = View.GONE
+        viewModel.offerProductList.observe(viewLifecycleOwner, Observer { list ->
+            if (list.isEmpty()) {
+                viewDataBinding.offerProductsRecycler.visibility = View.GONE
+                viewDataBinding.emptyView.visibility = View.VISIBLE
+            } else {
+                viewDataBinding.offerProductsRecycler.visibility = View.VISIBLE
+                viewDataBinding.emptyView.visibility = View.GONE
+
+                val merchantWiseProducts = list.filter { it.merchant_id == preferencesHelper.merchantId }
+
+                offersListAdapter.submitList(merchantWiseProducts)
+            }
+        })
+
+        offersListAdapter = OffersListAdapter(appExecutors) {
+            viewModel.getProductDetails(it.product_id).observe(viewLifecycleOwner, Observer { product ->
+                navigateTo(OffersFragmentDirections.actionOffersFragmentToProductDetailsNavGraph(product, it.discount_percent ?: 0))
+            })
         }
-    }
 
-    companion object {
-        var allProductsList: List<Product> = ArrayList()
+        viewDataBinding.offerProductsRecycler.adapter = offersListAdapter
     }
 }

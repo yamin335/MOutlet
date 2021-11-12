@@ -16,6 +16,21 @@
             app:exitAnim="@anim/slide_out_left"
             app:popEnterAnim="@anim/slide_in_left"
             app:popExitAnim="@anim/slide_out_right"/>
+        <action
+            android:id="@+id/action_offersFragment_to_product_details_nav_graph"
+            app:destination="@id/product_details_nav_graph"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right">
+            <argument
+                android:name="product"
+                app:argType="com.mallzhub.shop.models.Product" />
+            <argument
+                android:name="discount"
+                app:argType="integer"
+                android:defaultValue="0" />
+        </action>
     </fragment>
     <include app:graph="@navigation/select_product_nav_graph" />
     <fragment
@@ -30,4 +45,5 @@
             app:popEnterAnim="@anim/slide_in_left"
             app:popExitAnim="@anim/slide_out_right"/>
     </fragment>
+    <include app:graph="@navigation/product_details_nav_graph" />
 </navigation>

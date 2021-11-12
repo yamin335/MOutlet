@@ -2,16 +2,15 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
-    <data class="OfferProductListItemBinding">
+    <data class="OfferListItemBinding">
         <import type="com.bumptech.glide.request.RequestListener"/>
         <import type="android.graphics.drawable.Drawable"/>
         <variable
-            name="item"
-            type="com.mallzhub.shop.models.Product" />
-        <variable
-            name="imageUrl"
+            name="offer"
             type="String" />
-
+        <variable
+            name="item"
+            type="com.mallzhub.shop.models.OfferProductListResponseData" />
         <variable
             name="imageRequestListener"
             type="com.bumptech.glide.request.RequestListener&lt;Drawable>" />
@@ -20,25 +19,26 @@
     <com.google.android.material.card.MaterialCardView
         android:layout_height="wrap_content"
         android:layout_width="match_parent"
-        android:layout_marginStart="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
         app:cardBackgroundColor="@color/white"
         app:cardCornerRadius="5dp"
         app:cardElevation="0dp"
-        app:contentPadding="8dp">
+        app:contentPadding="10dp">
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
             <ImageView
                 android:id="@+id/thumbnail"
-                android:layout_width="70dp"
-                android:layout_height="70dp"
+                android:layout_width="80dp"
+                android:layout_height="wrap_content"
+                android:maxHeight="80dp"
                 android:adjustViewBounds="true"
-                android:scaleType="centerCrop"
+                android:scaleType="fitCenter"
                 app:imageRequestListener="@{imageRequestListener}"
-                app:imageUrl="@{imageUrl}"
+                app:imageUrl="@{item.product_thumbnail}"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
@@ -49,13 +49,13 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
-                android:layout_marginEnd="8dp"
+                android:layout_marginEnd="4dp"
                 android:ellipsize="end"
                 android:maxLines="3"
-                android:text="@{item.name}"
+                android:text="@{item.product_title}"
                 android:textColor="#404040"
                 app:layout_constrainedWidth="true"
-                app:layout_constraintEnd_toStartOf="@+id/remove"
+                app:layout_constraintEnd_toStartOf="@+id/linearOfferPercent"
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toEndOf="@+id/thumbnail"
                 app:layout_constraintTop_toTopOf="parent"
@@ -65,13 +65,14 @@
                 android:id="@+id/linear"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                app:layout_constrainedWidth="true"
-                android:layout_marginEnd="8dp"
                 android:orientation="horizontal"
-                app:layout_constraintEnd_toStartOf="@+id/remove"
+                app:layout_constrainedWidth="true"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/linearOfferPercent"
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="@+id/name"
-                app:layout_constraintTop_toBottomOf="@+id/linear1">
+                app:layout_constraintTop_toBottomOf="@+id/linear1"
+                app:layout_constraintVertical_bias="0.0">
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -81,20 +82,30 @@
                     android:textSize="12sp" />
 
                 <TextView
+                    android:id="@+id/mrp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:text="120.00"
+                    android:textColor="@color/toast_error"
+                    android:textSize="12sp"
+                    tools:text="120.00" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
                     android:text="@string/sign_taka"
-                    android:textColor="#404040"
+                    android:textColor="@color/toast_success"
                     android:textSize="12sp"
                     android:textStyle="bold" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@{item.mrp.toString()}"
-                    android:textColor="#404040"
+                    android:text="@{item.discount_percent.toString()}"
+                    android:textColor="@color/toast_success"
                     android:textSize="12sp"
-                    tools:text="12000.00" />
+                    tools:text="100.00" />
 
             </LinearLayout>
 
@@ -102,11 +113,10 @@
                 android:id="@+id/linear1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                app:layout_constrainedWidth="true"
-                android:layout_marginEnd="8dp"
                 android:orientation="horizontal"
+                app:layout_constrainedWidth="true"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toStartOf="@+id/remove"
+                app:layout_constraintEnd_toStartOf="@+id/linearOfferPercent"
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="@+id/linear"
                 app:layout_constraintTop_toBottomOf="@+id/name"
@@ -123,24 +133,56 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@{item.category.name}"
+                    android:text="T-Shirt"
                     android:textColor="#404040"
                     android:textSize="12sp"
                     tools:text="T-Shirt" />
 
             </LinearLayout>
 
-            <ImageView
-                android:id="@+id/remove"
+            <LinearLayout
+                android:id="@+id/linearOfferPercent"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constrainedWidth="true"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:srcCompat="@drawable/ic_clear_black_24dp"
-                android:background="?attr/selectableItemBackground"
-                android:padding="4dp"
-                app:tint="#808080" />
+                app:layout_constraintTop_toTopOf="parent">
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@{item.discount_percent.toString()}"
+                        android:textColor="@color/accent"
+                        android:textSize="24sp"
+                        tools:text="10" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="%"
+                        android:textColor="@color/accent"
+                        android:textSize="24sp"
+                        android:textStyle="bold" />
+                </LinearLayout>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Discount"
+                    android:layout_gravity="center_horizontal"
+                    android:gravity="center"
+                    android:textColor="@color/accent"
+                    android:textSize="10sp"/>
+            </LinearLayout>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </com.google.android.material.card.MaterialCardView>

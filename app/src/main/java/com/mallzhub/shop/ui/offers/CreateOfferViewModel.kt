@@ -4,12 +4,15 @@ import android.app.Application
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.mallzhub.shop.api.*
+import com.mallzhub.shop.models.OfferAddResponse
+import com.mallzhub.shop.models.OfferStoreBody
 import com.mallzhub.shop.models.Product
 import com.mallzhub.shop.models.add_product.AddProductResponse
 import com.mallzhub.shop.models.customers.Customer
 import com.mallzhub.shop.models.order.OrderStoreBody
 import com.mallzhub.shop.models.order.OrderStoreResponse
 import com.mallzhub.shop.repos.HomeRepository
+import com.mallzhub.shop.repos.OfferRepository
 import com.mallzhub.shop.repos.OrderRepository
 import com.mallzhub.shop.ui.common.BaseViewModel
 import com.mallzhub.shop.util.AppConstants
@@ -20,14 +23,14 @@ import javax.inject.Inject
 
 class CreateOfferViewModel @Inject constructor(
     private val application: Application,
-    private val orderRepository: OrderRepository
+    private val offerRepository: OfferRepository
 ) : BaseViewModel(application) {
 
     val offerNote: MutableLiveData<String> by lazy {
         MutableLiveData<String>()
     }
 
-    val offerAmount: MutableLiveData<String> by lazy {
+    val offerPercent: MutableLiveData<String> by lazy {
         MutableLiveData<String>()
     }
 
@@ -35,11 +38,11 @@ class CreateOfferViewModel @Inject constructor(
         MutableLiveData<MutableList<Product>>()
     }
 
-    val orderPlaceResponse: MutableLiveData<OrderStoreResponse> by lazy {
-        MutableLiveData<OrderStoreResponse>()
+    val newOfferResponse: MutableLiveData<OfferAddResponse> by lazy {
+        MutableLiveData<OfferAddResponse>()
     }
 
-    fun placeOrder(orderStoreBody: OrderStoreBody) {
+    fun addNewOffer(offerStoreBody: OfferStoreBody) {
         if (checkNetworkStatus()) {
             val handler = CoroutineExceptionHandler { _, exception ->
                 exception.printStackTrace()
@@ -49,10 +52,10 @@ class CreateOfferViewModel @Inject constructor(
 
             apiCallStatus.postValue(ApiCallStatus.LOADING)
             viewModelScope.launch(handler) {
-                when (val apiResponse = ApiResponse.create(orderRepository.placeOrder(orderStoreBody))) {
+                when (val apiResponse = ApiResponse.create(offerRepository.addNewOffer(offerStoreBody))) {
                     is ApiSuccessResponse -> {
                         apiCallStatus.postValue(ApiCallStatus.SUCCESS)
-                        orderPlaceResponse.postValue(apiResponse.body)
+                        newOfferResponse.postValue(apiResponse.body)
                     }
                     is ApiEmptyResponse -> {
                         apiCallStatus.postValue(ApiCallStatus.EMPTY)

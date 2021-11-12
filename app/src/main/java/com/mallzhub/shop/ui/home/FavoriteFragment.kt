@@ -57,7 +57,7 @@ class FavoriteFragment : BaseFragment<FavoriteFragmentBinding, FavoriteViewModel
         }
 
         viewDataBinding.cartMenu.setOnClickListener {
-            navController.navigate(FavoriteFragmentDirections.actionFavoriteFragmentToCartFragment2())
+            //navController.navigate(FavoriteFragmentDirections.actionFavoriteFragmentToCartFragment2())
         }
 
         viewModel.cartItemCount.observe(viewLifecycleOwner, Observer {
@@ -80,7 +80,7 @@ class FavoriteFragment : BaseFragment<FavoriteFragmentBinding, FavoriteViewModel
                 }
             }
         ) { item ->
-            navController.navigate(FavoriteFragmentDirections.actionFavoriteFragmentToProductDetailsFragment2(item))
+            //navController.navigate(FavoriteFragmentDirections.actionFavoriteFragmentToProductDetailsFragment2(item))
         }
 
         viewDataBinding.rvFavoriteList.adapter = favoriteListAdapter

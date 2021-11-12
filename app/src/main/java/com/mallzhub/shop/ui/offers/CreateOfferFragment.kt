@@ -11,16 +11,14 @@ import com.mallzhub.shop.R
 import com.mallzhub.shop.api.ApiCallStatus
 import com.mallzhub.shop.databinding.CreateOfferFragmentBinding
 import com.mallzhub.shop.databinding.CreateOrderFragmentBinding
+import com.mallzhub.shop.models.OfferStoreBody
 import com.mallzhub.shop.models.order.OrderStoreBody
 import com.mallzhub.shop.models.order.OrderStoreProduct
 import com.mallzhub.shop.ui.common.BaseFragment
 import com.mallzhub.shop.ui.customers.SelectCustomerFragment
 import com.mallzhub.shop.ui.order.OrderProductListAdapter
 import com.mallzhub.shop.ui.products.SelectProductFragment
-import com.mallzhub.shop.util.addNewItem
-import com.mallzhub.shop.util.removeItem
-import com.mallzhub.shop.util.showWarningToast
-import com.mallzhub.shop.util.toRounded
+import com.mallzhub.shop.util.*
 import java.text.SimpleDateFormat
 import java.util.*
 import kotlin.collections.ArrayList
@@ -50,7 +48,7 @@ class CreateOfferFragment : BaseFragment<CreateOfferFragmentBinding, CreateOffer
         SelectProductFragment.selectedProduct?.let {
             val list = viewModel.offerItems.value ?: mutableListOf()
             if (!list.contains(it)) {
-                it.quantity = 1
+                it.available_qty = 1
                 viewModel.offerItems.addNewItem(it)
             }
             SelectProductFragment.selectedProduct = null
@@ -106,14 +104,17 @@ class CreateOfferFragment : BaseFragment<CreateOfferFragmentBinding, CreateOffer
             }
         }
 
-        viewModel.orderPlaceResponse.observe(viewLifecycleOwner, androidx.lifecycle.Observer { response ->
+        viewModel.newOfferResponse.observe(viewLifecycleOwner, androidx.lifecycle.Observer { response ->
             response?.let {
-                if (it.data?.sale != null) navController.popBackStack()
+                if (it.data != null) {
+                    showSuccessToast(requireContext(), "Offer successfully added!")
+                    navController.popBackStack()
+                }
             }
         })
 
         viewModel.apiCallStatus.observe(viewLifecycleOwner, androidx.lifecycle.Observer {
-            viewDataBinding.btnSubmitOrder.isEnabled = it != ApiCallStatus.LOADING
+            viewDataBinding.btnSubmitOffer.isEnabled = it != ApiCallStatus.LOADING
             viewDataBinding.btnAddProduct.isEnabled = it != ApiCallStatus.LOADING
         })
 
@@ -124,14 +125,31 @@ class CreateOfferFragment : BaseFragment<CreateOfferFragmentBinding, CreateOffer
 
         viewModel.offerItems.observe(viewLifecycleOwner, androidx.lifecycle.Observer { orderItems ->
             orderItems?.let {
+                val amountString = viewModel.offerPercent.value ?: "0"
+                val amount = amountString.toInt()
+                viewDataBinding.btnSubmitOffer.isEnabled = it.isNotEmpty() && viewModel.apiCallStatus.value != ApiCallStatus.LOADING && amount > 0
                 showHideDataView()
                 offerProductListAdapter.submitList(it)
                 offerProductListAdapter.notifyDataSetChanged()
             }
         })
 
-        viewDataBinding.btnSubmitOrder.setOnClickListener {
-            navController.popBackStack()
+        viewModel.offerPercent.observe(viewLifecycleOwner, androidx.lifecycle.Observer {
+            val amountString = it ?: "0"
+            val amount = amountString.toInt()
+            viewDataBinding.btnSubmitOffer.isEnabled = !viewModel.offerItems.value.isNullOrEmpty() &&
+                    viewModel.apiCallStatus.value != ApiCallStatus.LOADING && amount > 0
+        })
+
+        viewDataBinding.btnSubmitOffer.setOnClickListener {
+            val items = viewModel.offerItems.value ?: ArrayList()
+            val ids = ArrayList<Int>()
+            for (item in items) {
+                ids.add(item.id)
+            }
+            val offerStoreBody = OfferStoreBody(viewModel.offerNote.value, viewModel.offerPercent.value,
+                null, null, ids, preferencesHelper.getMerchant().email)
+            viewModel.addNewOffer(offerStoreBody)
 //            if (viewModel.selectedCustomer.value == null) {
 //                showWarningToast(requireContext(), "Please select customer")
 //                return@setOnClickListener

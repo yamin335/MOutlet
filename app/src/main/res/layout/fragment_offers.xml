@@ -68,7 +68,7 @@
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintVertical_bias="0.0"
                 tools:itemCount="5"
-                tools:listitem="@layout/list_item_add_product" />
+                tools:listitem="@layout/list_item_offer" />
 
             <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
                 android:id="@+id/addOffer"

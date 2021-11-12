@@ -13,7 +13,6 @@ import com.bumptech.glide.request.target.Target
 import com.mallzhub.shop.AppExecutors
 import com.mallzhub.shop.R
 import com.mallzhub.shop.databinding.OfferProductListItemBinding
-import com.mallzhub.shop.databinding.OrderProductListItemBinding
 import com.mallzhub.shop.models.Product
 import com.mallzhub.shop.util.DataBoundListAdapter
 

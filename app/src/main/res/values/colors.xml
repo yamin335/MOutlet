@@ -26,7 +26,7 @@
     <color name="primary">@color/themeColor</color>
     <color name="primaryDark">@color/themeColor</color>
     <color name="primary_light">@color/themeColorLight</color>
-    <color name="accent">@color/themeButtonColor</color>
+    <color name="accent">#E91E63</color>
 
     <color name="icActive">#FFFFFFFF</color>
     <color name="icFocused">#DDFFFFFF</color>

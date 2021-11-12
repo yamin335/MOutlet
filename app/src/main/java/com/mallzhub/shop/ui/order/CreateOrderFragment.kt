@@ -55,7 +55,7 @@ class CreateOrderFragment : BaseFragment<CreateOrderFragmentBinding, CreateOrder
             if (list.contains(it)) {
                 viewModel.incrementOrderItemQuantity(it.id)
             } else {
-                it.quantity = 1
+                it.available_qty = 1
                 viewModel.orderItems.addNewItem(it)
             }
             SelectProductFragment.selectedProduct = null
@@ -162,7 +162,7 @@ class CreateOrderFragment : BaseFragment<CreateOrderFragmentBinding, CreateOrder
                 total = 0.0
                 it.forEach { item ->
                     val price = item.mrp ?: 0.0
-                    val quantity = item.quantity ?: 0
+                    val quantity = item.available_qty ?: 0
                     total += price * quantity
                 }
                 total = total.toRounded(2)
@@ -184,7 +184,7 @@ class CreateOrderFragment : BaseFragment<CreateOrderFragmentBinding, CreateOrder
 
             val productList = ArrayList<OrderStoreProduct>()
             viewModel.orderItems.value?.forEach { item ->
-                val quantity = item.quantity ?: 1
+                val quantity = item.available_qty ?: 1
                 val mrp = item.mrp?.toInt() ?: 0
                 productList.add(OrderStoreProduct(item.id, item.description, "qty",
                     quantity, item.mrp?.toInt(), 0, "0",
