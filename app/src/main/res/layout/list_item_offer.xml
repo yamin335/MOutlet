@@ -10,7 +10,7 @@
             type="String" />
         <variable
             name="item"
-            type="com.mallzhub.shop.models.OfferProductListResponseData" />
+            type="com.mallzhub.shop.models.OfferItem" />
         <variable
             name="imageRequestListener"
             type="com.bumptech.glide.request.RequestListener&lt;Drawable>" />

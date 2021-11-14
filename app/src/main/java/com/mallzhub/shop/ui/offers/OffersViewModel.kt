@@ -7,11 +7,8 @@ import androidx.lifecycle.liveData
 import androidx.lifecycle.viewModelScope
 import com.mallzhub.shop.api.*
 import com.mallzhub.shop.local_db.dao.CartDao
-import com.mallzhub.shop.models.AllProductResponse
-import com.mallzhub.shop.models.OfferProductListResponseData
+import com.mallzhub.shop.models.OfferItem
 import com.mallzhub.shop.models.Product
-import com.mallzhub.shop.models.order.OrderStoreBody
-import com.mallzhub.shop.models.order.OrderStoreResponse
 import com.mallzhub.shop.repos.HomeRepository
 import com.mallzhub.shop.repos.OfferRepository
 import com.mallzhub.shop.ui.common.BaseViewModel
@@ -33,8 +30,8 @@ class OffersViewModel @Inject constructor(
         }
     }
 
-    val offerProductList: MutableLiveData<List<OfferProductListResponseData>> by lazy {
-        MutableLiveData<List<OfferProductListResponseData>>()
+    val offerProductList: MutableLiveData<List<OfferItem>> by lazy {
+        MutableLiveData<List<OfferItem>>()
     }
 
     fun getProductDetails(id: Int?): LiveData<Product> {
@@ -65,7 +62,7 @@ class OffersViewModel @Inject constructor(
         return productDetails
     }
 
-    fun getAllOfferList() {
+    fun getAllOfferList(page: Int?, token: String?) {
         if (checkNetworkStatus()) {
             val handler = CoroutineExceptionHandler { _, exception ->
                 exception.printStackTrace()
@@ -75,10 +72,10 @@ class OffersViewModel @Inject constructor(
 
             apiCallStatus.postValue(ApiCallStatus.LOADING)
             viewModelScope.launch(handler) {
-                when (val apiResponse = ApiResponse.create(offerRepository.getOfferList())) {
+                when (val apiResponse = ApiResponse.create(offerRepository.getOfferList(page, token))) {
                     is ApiSuccessResponse -> {
                         apiCallStatus.postValue(ApiCallStatus.SUCCESS)
-                        offerProductList.postValue(apiResponse.body.data)
+                        offerProductList.postValue(apiResponse.body.data?.data)
                     }
                     is ApiEmptyResponse -> {
                         apiCallStatus.postValue(ApiCallStatus.EMPTY)

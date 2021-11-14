@@ -14,22 +14,22 @@ import com.bumptech.glide.request.target.Target
 import com.mallzhub.shop.AppExecutors
 import com.mallzhub.shop.R
 import com.mallzhub.shop.databinding.OfferListItemBinding
-import com.mallzhub.shop.models.OfferProductListResponseData
+import com.mallzhub.shop.models.OfferItem
 import com.mallzhub.shop.util.DataBoundListAdapter
 
 class OffersListAdapter(
     private val appExecutors: AppExecutors,
-    private val itemSelectionCallback: ((OfferProductListResponseData) -> Unit)
-) : DataBoundListAdapter<OfferProductListResponseData, OfferListItemBinding>(
-    appExecutors = appExecutors, diffCallback = object : DiffUtil.ItemCallback<OfferProductListResponseData>() {
-        override fun areItemsTheSame(oldItem: OfferProductListResponseData, newItem: OfferProductListResponseData): Boolean {
+    private val itemSelectionCallback: ((OfferItem) -> Unit)
+) : DataBoundListAdapter<OfferItem, OfferListItemBinding>(
+    appExecutors = appExecutors, diffCallback = object : DiffUtil.ItemCallback<OfferItem>() {
+        override fun areItemsTheSame(oldItem: OfferItem, newItem: OfferItem): Boolean {
             return oldItem.id == newItem.id
         }
 
         @SuppressLint("DiffUtilEquals")
         override fun areContentsTheSame(
-            oldItem: OfferProductListResponseData,
-            newItem: OfferProductListResponseData
+            oldItem: OfferItem,
+            newItem: OfferItem
         ): Boolean {
             return oldItem == newItem
         }

@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.*
 import androidx.fragment.app.viewModels
 import com.mallzhub.shop.BR
+import com.mallzhub.shop.BuildConfig
 import com.mallzhub.shop.R
 import com.mallzhub.shop.databinding.MoreFragmentBinding
 import com.mallzhub.shop.ui.LogoutHandlerCallback
@@ -48,6 +49,8 @@ class MoreFragment : BaseFragment<MoreFragmentBinding, MoreViewModel>() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        viewDataBinding.version.text = "Version ${BuildConfig.VERSION_NAME}"
 
         viewDataBinding.btnSignOut.setOnClickListener {
             SplashFragment.fromLogout = true

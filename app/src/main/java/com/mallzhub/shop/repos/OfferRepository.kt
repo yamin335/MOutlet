@@ -11,14 +11,15 @@ import com.mallzhub.shop.models.order.OrderStoreResponse
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import retrofit2.Response
+import retrofit2.http.Query
 import javax.inject.Inject
 import javax.inject.Singleton
 
 @Singleton
 class OfferRepository @Inject constructor(private val apiService: ApiService) {
-    suspend fun getOfferList(): Response<OfferProductListResponse> {
+    suspend fun getOfferList(page: Int?, token: String?): Response<OfferProductListResponse> {
         return withContext(Dispatchers.IO) {
-            apiService.getOfferList()
+            apiService.getOfferList(page, token)
         }
     }
 

@@ -54,7 +54,7 @@ class OffersFragment : BaseFragment<OffersFragmentBinding, OffersViewModel>() {
 
     override fun onResume() {
         super.onResume()
-        viewModel.getAllOfferList()
+        viewModel.getAllOfferList(1, preferencesHelper.getMerchant().token)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

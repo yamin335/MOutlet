@@ -140,8 +140,10 @@ interface ApiService {
         @Body jsonObject: JsonObject
     ): Response<OrderStoreResponse>
 
-    @GET(ApiEndPoint.OFFER_LIST)
-    suspend fun getOfferList(): Response<OfferProductListResponse>
+    @POST(ApiEndPoint.OFFER_LIST)
+    suspend fun getOfferList(
+        @Query("page") page: Int?,
+        @Query("token") token: String?): Response<OfferProductListResponse>
 
     @GET(ApiEndPoint.PRODUCT_DETAILS)
     suspend fun getProductDetails(

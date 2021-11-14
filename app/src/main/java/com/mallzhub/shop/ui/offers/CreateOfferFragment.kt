@@ -148,7 +148,7 @@ class CreateOfferFragment : BaseFragment<CreateOfferFragmentBinding, CreateOffer
                 ids.add(item.id)
             }
             val offerStoreBody = OfferStoreBody(viewModel.offerNote.value, viewModel.offerPercent.value,
-                null, null, ids, preferencesHelper.getMerchant().email)
+                null, null, ids, preferencesHelper.getMerchant().email, preferencesHelper.merchantId)
             viewModel.addNewOffer(offerStoreBody)
 //            if (viewModel.selectedCustomer.value == null) {
 //                showWarningToast(requireContext(), "Please select customer")
