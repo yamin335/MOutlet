@@ -54,6 +54,7 @@ import com.mallzhub.shop.ui.topup.TopUpAmountViewModel
 import com.mallzhub.shop.ui.topup.TopUpBankCardViewModel
 import com.mallzhub.shop.ui.topup.TopUpMobileViewModel
 import com.mallzhub.shop.ui.topup.TopUpPinViewModel
+import com.mallzhub.shop.ui.transactions.TransactionDetailsViewModel
 import com.mallzhub.shop.ui.transactions.TransactionsViewModel
 import dagger.Binds
 import dagger.Module
@@ -374,4 +375,9 @@ abstract class ViewModelModule {
     @IntoMap
     @ViewModelKey(CreateOfferViewModel::class)
     abstract fun bindCreateOfferViewModel(viewModel: CreateOfferViewModel): ViewModel
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(TransactionDetailsViewModel::class)
+    abstract fun bindTransactionDetailsViewModel(viewModel: TransactionDetailsViewModel): ViewModel
 }
