@@ -45,6 +45,13 @@
             app:exitAnim="@anim/slide_out_left"
             app:popEnterAnim="@anim/slide_in_left"
             app:popExitAnim="@anim/slide_out_right"/>
+        <action
+            android:id="@+id/action_moreFragment_to_giftPointHistoryFragment"
+            app:destination="@id/giftPointHistoryFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"/>
     </fragment>
 
     <include app:graph="@navigation/drawer_nav_graph" />
@@ -89,5 +96,27 @@
         <argument
             android:name="order"
             app:argType="com.mallzhub.shop.models.order.SalesData" />
+    </fragment>
+    <fragment
+        android:id="@+id/giftPointHistoryFragment"
+        android:name="com.mallzhub.shop.ui.gift_point.GiftPointHistoryFragment"
+        android:label="Gift Point History"
+        tools:layout="@layout/fragment_gift_point_history">
+        <action
+            android:id="@+id/action_giftPointHistoryFragment_to_giftPointHistoryDetailsFragment"
+            app:destination="@id/giftPointHistoryDetailsFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"/>
+    </fragment>
+    <fragment
+        android:id="@+id/giftPointHistoryDetailsFragment"
+        android:name="com.mallzhub.shop.ui.gift_point.GiftPointHistoryDetailsFragment"
+        android:label="Rewards Details"
+        tools:layout="@layout/fragment_gift_point_history_details">
+        <argument
+            android:name="reward"
+            app:argType="com.mallzhub.shop.models.GiftPointRewards" />
     </fragment>
 </navigation>

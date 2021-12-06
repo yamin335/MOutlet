@@ -156,4 +156,11 @@ interface ApiService {
         @Body jsonObject: JsonObject
     ): Response<OfferAddResponse>
 
+    @Headers(ContentType)
+    @POST(ApiEndPoint.GIFT_POINT_HISTORY)
+    suspend fun getGiftPointsHistory(
+        @Query("page") page: Int?,
+        @Body jsonObject: JsonObject
+    ): Response<GiftPointHistoryResponse>
+
 }

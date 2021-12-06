@@ -13,6 +13,8 @@ import com.mallzhub.shop.ui.customers.AddCustomerFragment
 import com.mallzhub.shop.ui.customers.AllCustomersFragment
 import com.mallzhub.shop.ui.customers.SelectCustomerFragment
 import com.mallzhub.shop.ui.exams.ExamsFragment
+import com.mallzhub.shop.ui.gift_point.GiftPointHistoryDetailsFragment
+import com.mallzhub.shop.ui.gift_point.GiftPointHistoryFragment
 import com.mallzhub.shop.ui.home.*
 import com.mallzhub.shop.ui.how_works.HowWorksFragment
 import com.mallzhub.shop.ui.info.InfoFragment
@@ -241,4 +243,10 @@ abstract class FragmentBuildersModule {
 
     @ContributesAndroidInjector
     abstract fun contributeTransactionDetailsFragment(): TransactionDetailsFragment
+
+    @ContributesAndroidInjector
+    abstract fun contributeGiftPointHistoryFragment(): GiftPointHistoryFragment
+
+    @ContributesAndroidInjector
+    abstract fun contributeGiftPointHistoryDetailsFragment(): GiftPointHistoryDetailsFragment
 }
