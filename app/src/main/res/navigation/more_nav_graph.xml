@@ -52,6 +52,20 @@
             app:exitAnim="@anim/slide_out_left"
             app:popEnterAnim="@anim/slide_in_left"
             app:popExitAnim="@anim/slide_out_right"/>
+        <action
+            android:id="@+id/action_moreFragment_to_offers_nav"
+            app:destination="@id/offers_nav"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"/>
+        <action
+            android:id="@+id/action_moreFragment_to_order_nav"
+            app:destination="@id/order_nav"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"/>
     </fragment>
 
     <include app:graph="@navigation/drawer_nav_graph" />
@@ -119,4 +133,6 @@
             android:name="reward"
             app:argType="com.mallzhub.shop.models.GiftPointRewards" />
     </fragment>
+    <include app:graph="@navigation/offers_nav_graph" />
+    <include app:graph="@navigation/order_nav_graph" />
 </navigation>

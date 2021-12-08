@@ -1,19 +1,13 @@
 package com.mallzhub.shop.ui.offers
 
-import android.content.Context
 import android.os.Bundle
-import android.view.Menu
-import android.view.MenuInflater
 import android.view.View
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import com.mallzhub.shop.BR
 import com.mallzhub.shop.R
 import com.mallzhub.shop.databinding.OffersFragmentBinding
-import com.mallzhub.shop.models.Product
-import com.mallzhub.shop.ui.NavDrawerHandlerCallback
 import com.mallzhub.shop.ui.common.BaseFragment
-import okhttp3.internal.userAgent
 
 class OffersFragment : BaseFragment<OffersFragmentBinding, OffersViewModel>() {
     override val bindingVariable: Int
@@ -24,33 +18,7 @@ class OffersFragment : BaseFragment<OffersFragmentBinding, OffersViewModel>() {
         viewModelFactory
     }
 
-    private var drawerListener: NavDrawerHandlerCallback? = null
-
     private lateinit var offersListAdapter: OffersListAdapter
-
-    override fun onAttach(context: Context) {
-        super.onAttach(context)
-        if (context is NavDrawerHandlerCallback) {
-            drawerListener = context
-        } else {
-            throw RuntimeException("$context must implement LoginHandlerCallback")
-        }
-    }
-
-    override fun onDetach() {
-        super.onDetach()
-        drawerListener = null
-    }
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setHasOptionsMenu(true)
-    }
-
-    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
-        inflater.inflate(R.menu.toolbar_menu, menu)
-        super.onCreateOptionsMenu(menu, inflater)
-    }
 
     override fun onResume() {
         super.onResume()
@@ -60,9 +28,7 @@ class OffersFragment : BaseFragment<OffersFragmentBinding, OffersViewModel>() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        viewDataBinding.appLogo.setOnClickListener {
-            drawerListener?.toggleNavDrawer()
-        }
+        registerToolbar(viewDataBinding.toolbar)
 
         viewDataBinding.addOffer.setOnClickListener {
             navigateTo(OffersFragmentDirections.actionOffersFragmentToCreateOfferFragment())

@@ -13,15 +13,15 @@
         app:showAsAction="always"
         android:icon="@drawable/ic_outline_feed_24"/>
     <item
-        android:id="@+id/offers_nav"
-        android:title="Offers"
+        android:id="@+id/wallet_nav"
+        android:title="Wallet"
         app:showAsAction="always"
-        android:icon="@drawable/ic_outline_local_offer_24"
+        android:icon="@drawable/ic_outline_account_balance_wallet_24"
         />
     <item
-        android:id="@+id/order_nav"
-        android:title="Orders"
-        android:icon="@drawable/ic_baseline_turned_in_not_24"
+        android:id="@+id/mpos_nav"
+        android:title="mPOS"
+        android:icon="@drawable/ic_outline_qr_code_scanner_24"
         app:showAsAction="always" />
     <item
         android:id="@+id/more_nav"

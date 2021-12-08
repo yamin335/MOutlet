@@ -33,6 +33,7 @@ import com.mallzhub.shop.ui.video_play.LoadWebViewFragment
 import com.mallzhub.shop.ui.video_play.VideoPlayFragment
 import com.mallzhub.shop.ui.login.ViewPagerFragment
 import com.mallzhub.shop.ui.more.MoreFragment
+import com.mallzhub.shop.ui.mpos.MPOSFragment
 import com.mallzhub.shop.ui.myAccount.MyAccountsFragment
 import com.mallzhub.shop.ui.myDevices.MyDevicesFragment
 import com.mallzhub.shop.ui.offers.CreateOfferFragment
@@ -53,6 +54,7 @@ import com.mallzhub.shop.ui.topup.TopUpMobileFragment
 import com.mallzhub.shop.ui.topup.TopUpPinFragment
 import com.mallzhub.shop.ui.transactions.TransactionDetailsFragment
 import com.mallzhub.shop.ui.transactions.TransactionsFragment
+import com.mallzhub.shop.ui.wallet.WalletFragment
 import dagger.Module
 import dagger.android.ContributesAndroidInjector
 
@@ -249,4 +251,10 @@ abstract class FragmentBuildersModule {
 
     @ContributesAndroidInjector
     abstract fun contributeGiftPointHistoryDetailsFragment(): GiftPointHistoryDetailsFragment
+
+    @ContributesAndroidInjector
+    abstract fun contributeMPOSFragment(): MPOSFragment
+
+    @ContributesAndroidInjector
+    abstract fun contributeWalletFragment(): WalletFragment
 }

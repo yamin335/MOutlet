@@ -25,32 +25,6 @@ class OrderListFragment : BaseFragment<OrderListFragmentBinding, OrderViewModel>
 
     lateinit var orderListAdapter: OrderListAdapter
 
-    private var drawerListener: NavDrawerHandlerCallback? = null
-
-    override fun onAttach(context: Context) {
-        super.onAttach(context)
-        if (context is NavDrawerHandlerCallback) {
-            drawerListener = context
-        } else {
-            throw RuntimeException("$context must implement LoginHandlerCallback")
-        }
-    }
-
-    override fun onDetach() {
-        super.onDetach()
-        drawerListener = null
-    }
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setHasOptionsMenu(true)
-    }
-
-    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
-        inflater.inflate(R.menu.toolbar_menu, menu)
-        super.onCreateOptionsMenu(menu, inflater)
-    }
-
     override fun onResume() {
         super.onResume()
         orderListAdapter.submitList(orderList)
@@ -61,9 +35,7 @@ class OrderListFragment : BaseFragment<OrderListFragmentBinding, OrderViewModel>
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        viewDataBinding.appLogo.setOnClickListener {
-            drawerListener?.toggleNavDrawer()
-        }
+        registerToolbar(viewDataBinding.toolbar)
 
         orderListAdapter = OrderListAdapter(appExecutors) {
             navigateTo(OrderListFragmentDirections.actionTransactionFragmentToOrderTrackHistoryFragment(it))
@@ -84,10 +56,10 @@ class OrderListFragment : BaseFragment<OrderListFragmentBinding, OrderViewModel>
 
     private fun visibleGoneEmptyView() {
         if (orderList.isEmpty()) {
-            viewDataBinding.container.visibility = View.GONE
+            viewDataBinding.orderRecycler.visibility = View.GONE
             viewDataBinding.emptyView.visibility = View.VISIBLE
         } else {
-            viewDataBinding.container.visibility = View.VISIBLE
+            viewDataBinding.orderRecycler.visibility = View.VISIBLE
             viewDataBinding.emptyView.visibility = View.GONE
         }
     }

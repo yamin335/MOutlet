@@ -74,6 +74,14 @@ class MoreFragment : BaseFragment<MoreFragmentBinding, MoreViewModel>() {
             navigateTo(MoreFragmentDirections.actionMoreFragmentToProfilesFragment())
         }
 
+        viewDataBinding.menuOffers.setOnClickListener {
+            navigateTo(MoreFragmentDirections.actionMoreFragmentToOffersNav())
+        }
+
+        viewDataBinding.menuOrders.setOnClickListener {
+            navigateTo(MoreFragmentDirections.actionMoreFragmentToOrderNav())
+        }
+
         viewDataBinding.menuTransactions.setOnClickListener {
             navigateTo(MoreFragmentDirections.actionMoreFragmentToTransactionsFragment())
         }

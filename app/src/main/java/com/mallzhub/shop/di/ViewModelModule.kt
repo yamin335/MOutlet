@@ -38,6 +38,7 @@ import com.mallzhub.shop.ui.video_play.LoadWebViewViewModel
 import com.mallzhub.shop.ui.video_play.VideoPlayViewModel
 import com.mallzhub.shop.ui.login.ViewPagerViewModel
 import com.mallzhub.shop.ui.more.MoreViewModel
+import com.mallzhub.shop.ui.mpos.MPOSViewModel
 import com.mallzhub.shop.ui.myAccount.MyAccountViewModel
 import com.mallzhub.shop.ui.myDevices.MyDevicesViewModel
 import com.mallzhub.shop.ui.offers.CreateOfferViewModel
@@ -58,6 +59,7 @@ import com.mallzhub.shop.ui.topup.TopUpMobileViewModel
 import com.mallzhub.shop.ui.topup.TopUpPinViewModel
 import com.mallzhub.shop.ui.transactions.TransactionDetailsViewModel
 import com.mallzhub.shop.ui.transactions.TransactionsViewModel
+import com.mallzhub.shop.ui.wallet.WalletViewModel
 import dagger.Binds
 import dagger.Module
 import dagger.multibindings.IntoMap
@@ -392,4 +394,14 @@ abstract class ViewModelModule {
     @IntoMap
     @ViewModelKey(GiftPointHistoryDetailsViewModel::class)
     abstract fun bindGiftPointHistoryDetailsViewModel(viewModel: GiftPointHistoryDetailsViewModel): ViewModel
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(MPOSViewModel::class)
+    abstract fun bindMPOSViewModel(viewModel: MPOSViewModel): ViewModel
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(WalletViewModel::class)
+    abstract fun bindWalletViewModel(viewModel: WalletViewModel): ViewModel
 }
