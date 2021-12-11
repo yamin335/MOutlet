@@ -20,6 +20,8 @@ import com.mallzhub.shop.ui.customers.SelectCustomerViewModel
 import com.mallzhub.shop.ui.exams.ExamsViewModel
 import com.mallzhub.shop.ui.gift_point.GiftPointHistoryDetailsViewModel
 import com.mallzhub.shop.ui.gift_point.GiftPointHistoryViewModel
+import com.mallzhub.shop.ui.gift_point.GiftPointRequestListDetailsViewModel
+import com.mallzhub.shop.ui.gift_point.GiftPointRequestListViewModel
 import com.mallzhub.shop.ui.home.*
 import com.mallzhub.shop.ui.how_works.HowWorksViewModel
 import com.mallzhub.shop.ui.info.InfoViewModel
@@ -38,6 +40,7 @@ import com.mallzhub.shop.ui.video_play.LoadWebViewViewModel
 import com.mallzhub.shop.ui.video_play.VideoPlayViewModel
 import com.mallzhub.shop.ui.login.ViewPagerViewModel
 import com.mallzhub.shop.ui.more.MoreViewModel
+import com.mallzhub.shop.ui.mpos.CreateMPOSOrderViewModel
 import com.mallzhub.shop.ui.mpos.MPOSViewModel
 import com.mallzhub.shop.ui.myAccount.MyAccountViewModel
 import com.mallzhub.shop.ui.myDevices.MyDevicesViewModel
@@ -387,13 +390,13 @@ abstract class ViewModelModule {
 
     @Binds
     @IntoMap
-    @ViewModelKey(GiftPointHistoryViewModel::class)
-    abstract fun bindGiftPointHistoryViewModel(viewModel: GiftPointHistoryViewModel): ViewModel
+    @ViewModelKey(GiftPointRequestListViewModel::class)
+    abstract fun bindGiftPointRequestListViewModel(viewModel: GiftPointRequestListViewModel): ViewModel
 
     @Binds
     @IntoMap
-    @ViewModelKey(GiftPointHistoryDetailsViewModel::class)
-    abstract fun bindGiftPointHistoryDetailsViewModel(viewModel: GiftPointHistoryDetailsViewModel): ViewModel
+    @ViewModelKey(GiftPointRequestListDetailsViewModel::class)
+    abstract fun bindGiftPointRequestListDetailsViewModel(viewModel: GiftPointRequestListDetailsViewModel): ViewModel
 
     @Binds
     @IntoMap
@@ -404,4 +407,19 @@ abstract class ViewModelModule {
     @IntoMap
     @ViewModelKey(WalletViewModel::class)
     abstract fun bindWalletViewModel(viewModel: WalletViewModel): ViewModel
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(GiftPointHistoryViewModel::class)
+    abstract fun bindGiftPointHistoryViewModel(viewModel: GiftPointHistoryViewModel): ViewModel
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(GiftPointHistoryDetailsViewModel::class)
+    abstract fun bindGiftPointHistoryDetailsViewModel(viewModel: GiftPointHistoryDetailsViewModel): ViewModel
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(CreateMPOSOrderViewModel::class)
+    abstract fun bindCreateMPOSOrderViewModel(viewModel: CreateMPOSOrderViewModel): ViewModel
 }

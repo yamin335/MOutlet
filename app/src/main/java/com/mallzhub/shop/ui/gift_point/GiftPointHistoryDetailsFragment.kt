@@ -8,8 +8,7 @@ import androidx.navigation.fragment.navArgs
 import com.mallzhub.shop.BR
 import com.mallzhub.shop.R
 import com.mallzhub.shop.databinding.GiftPointHistoryDetailsFragmentBinding
-import com.mallzhub.shop.databinding.GiftPointHistoryFragmentBinding
-import com.mallzhub.shop.models.GiftPointRewards
+import com.mallzhub.shop.models.GiftPointsHistoryDetailsRewards
 import com.mallzhub.shop.ui.common.BaseFragment
 
 class GiftPointHistoryDetailsFragment : BaseFragment<GiftPointHistoryDetailsFragmentBinding, GiftPointHistoryDetailsViewModel>() {
@@ -21,15 +20,63 @@ class GiftPointHistoryDetailsFragment : BaseFragment<GiftPointHistoryDetailsFrag
         viewModelFactory
     }
 
-    val args: GiftPointHistoryDetailsFragmentArgs by navArgs()
+    lateinit var pointHistoryListAdapter: GiftPointsHistoryDetailsListAdapter
+
+    private val args: GiftPointHistoryDetailsFragmentArgs by navArgs()
+
+    override fun onResume() {
+        super.onResume()
+        viewModel.getGiftPointsHistoryDetails(8, args.merchantId)
+        visibleGoneEmptyView()
+    }
+
+//    override fun onCreate(savedInstanceState: Bundle?) {
+//        super.onCreate(savedInstanceState)
+//        setHasOptionsMenu(true)
+//    }
+//
+//    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+//        when(item.itemId) {
+//            android.R.id.home -> {
+//                navController.navigateUp()
+//            }
+//        }
+//        return true
+//    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         registerToolbar(viewDataBinding.toolbar)
 
-        viewDataBinding.name = args.reward.name
-        viewDataBinding.mobile = args.reward.phone
-        viewDataBinding.giftPoint = args.reward.reward?.toString() ?: "0"
-        viewDataBinding.remarks = args.reward.remarks
+        viewDataBinding.toolbar.title = args.title
+
+        pointHistoryListAdapter = GiftPointsHistoryDetailsListAdapter(appExecutors) {
+            //navigateTo(TransactionsFragmentDirections.actionTransactionsFragmentToTransactionDetailsFragment(it))
+        }
+
+        viewDataBinding.historyRecycler.adapter = pointHistoryListAdapter
+
+        viewModel.giftPointsHistoryDetailsResponse.observe(viewLifecycleOwner, Observer { response ->
+            response?.let {
+                giftPointHistoryList = it.rewards as ArrayList<GiftPointsHistoryDetailsRewards>
+                viewDataBinding.totalPoints = response.total_reward?.toString() ?: "0"
+                pointHistoryListAdapter.submitList(giftPointHistoryList)
+                visibleGoneEmptyView()
+            }
+        })
+    }
+
+    private fun visibleGoneEmptyView() {
+        if (giftPointHistoryList.isEmpty()) {
+            viewDataBinding.container.visibility = View.GONE
+            viewDataBinding.emptyView.visibility = View.VISIBLE
+        } else {
+            viewDataBinding.container.visibility = View.VISIBLE
+            viewDataBinding.emptyView.visibility = View.GONE
+        }
+    }
+
+    companion object {
+        var giftPointHistoryList = ArrayList<GiftPointsHistoryDetailsRewards>()
     }
 }

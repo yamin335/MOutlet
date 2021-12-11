@@ -4,7 +4,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android">
     <data class="GiftPointHistoryListItemBinding">
         <variable
-            name="customerName"
+            name="shopName"
             type="String" />
         <variable
             name="giftPoint"
@@ -30,7 +30,7 @@
                 android:layout_height="wrap_content"
                 android:ellipsize="end"
                 android:maxLines="3"
-                android:text="@{customerName}"
+                android:text="@{shopName}"
                 android:textColor="#404040"
                 android:textSize="18sp"
                 app:layout_constrainedWidth="true"

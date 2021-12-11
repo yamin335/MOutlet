@@ -1,24 +1,31 @@
 package com.mallzhub.shop.ui.order
 
+import android.Manifest
+import android.app.Activity
+import android.content.Intent
+import android.location.LocationManager
 import android.os.Bundle
 import android.view.MenuItem
 import android.view.View
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
+import androidx.activity.result.ActivityResultLauncher
+import androidx.activity.result.contract.ActivityResultContracts
+import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.viewModels
 import com.mallzhub.shop.BR
+import com.mallzhub.shop.BuildConfig
 import com.mallzhub.shop.R
 import com.mallzhub.shop.api.ApiCallStatus
 import com.mallzhub.shop.databinding.CreateOrderFragmentBinding
 import com.mallzhub.shop.models.order.OrderStoreBody
 import com.mallzhub.shop.models.order.OrderStoreProduct
+import com.mallzhub.shop.ui.barcode_reader.LiveBarcodeScanningActivity
 import com.mallzhub.shop.ui.common.BaseFragment
+import com.mallzhub.shop.ui.common.CommonAlertDialog
 import com.mallzhub.shop.ui.customers.SelectCustomerFragment
 import com.mallzhub.shop.ui.products.SelectProductFragment
-import com.mallzhub.shop.util.addNewItem
-import com.mallzhub.shop.util.removeItem
-import com.mallzhub.shop.util.showWarningToast
-import com.mallzhub.shop.util.toRounded
+import com.mallzhub.shop.util.*
 import java.text.SimpleDateFormat
 import java.util.*
 import kotlin.collections.ArrayList
@@ -200,7 +207,6 @@ class CreateOrderFragment : BaseFragment<CreateOrderFragmentBinding, CreateOrder
                 0, 0, total.toInt(), 0, total.toInt(), productList))
 
         }
-
     }
 
     private fun showHideDataView() {

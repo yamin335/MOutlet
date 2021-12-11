@@ -9,5 +9,27 @@
         android:id="@+id/MPOSFragment"
         android:name="com.mallzhub.shop.ui.mpos.MPOSFragment"
         android:label="MPOSFragment"
-        tools:layout="@layout/fragment_mpos"/>
+        tools:layout="@layout/fragment_mpos">
+        <action
+            android:id="@+id/action_MPOSFragment_to_createMPOSOrderFragment"
+            app:destination="@id/createMPOSOrderFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"/>
+    </fragment>
+    <fragment
+        android:id="@+id/createMPOSOrderFragment"
+        android:name="com.mallzhub.shop.ui.mpos.CreateMPOSOrderFragment"
+        android:label="New Order"
+        tools:layout="@layout/fragment_create_mpos_order">
+        <action
+            android:id="@+id/action_createMPOSOrderFragment_to_select_customer_nav_graph"
+            app:destination="@id/select_customer_nav_graph"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"/>
+    </fragment>
+    <include app:graph="@navigation/select_customer_nav_graph" />
 </navigation>

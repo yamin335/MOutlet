@@ -134,9 +134,9 @@ class WalletFragment : BaseFragment<WalletFragmentBinding, WalletViewModel>() {
 //            }
 //        }
 //
-//        viewDataBinding.btnShow.setOnClickListener {
-//            navigateTo(WalletFragmentDirections.actionWalletFragmentToGiftPointHistoryFragment())
-//        }
+        viewDataBinding.btnShow.setOnClickListener {
+            navigateTo(WalletFragmentDirections.actionWalletFragmentToGiftPointRequestListFragment())
+        }
 
         viewDataBinding.cardTopUp.setOnClickListener {
             navController.navigate(WalletFragmentDirections.actionWalletFragmentToTopUpMobileFragment(

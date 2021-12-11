@@ -15,6 +15,8 @@ import com.mallzhub.shop.ui.customers.SelectCustomerFragment
 import com.mallzhub.shop.ui.exams.ExamsFragment
 import com.mallzhub.shop.ui.gift_point.GiftPointHistoryDetailsFragment
 import com.mallzhub.shop.ui.gift_point.GiftPointHistoryFragment
+import com.mallzhub.shop.ui.gift_point.GiftPointRequestListDetailsFragment
+import com.mallzhub.shop.ui.gift_point.GiftPointRequestListFragment
 import com.mallzhub.shop.ui.home.*
 import com.mallzhub.shop.ui.how_works.HowWorksFragment
 import com.mallzhub.shop.ui.info.InfoFragment
@@ -33,6 +35,8 @@ import com.mallzhub.shop.ui.video_play.LoadWebViewFragment
 import com.mallzhub.shop.ui.video_play.VideoPlayFragment
 import com.mallzhub.shop.ui.login.ViewPagerFragment
 import com.mallzhub.shop.ui.more.MoreFragment
+import com.mallzhub.shop.ui.mpos.CreateMPOSOrderFragment
+import com.mallzhub.shop.ui.mpos.CreateMPOSOrderViewModel
 import com.mallzhub.shop.ui.mpos.MPOSFragment
 import com.mallzhub.shop.ui.myAccount.MyAccountsFragment
 import com.mallzhub.shop.ui.myDevices.MyDevicesFragment
@@ -247,14 +251,23 @@ abstract class FragmentBuildersModule {
     abstract fun contributeTransactionDetailsFragment(): TransactionDetailsFragment
 
     @ContributesAndroidInjector
-    abstract fun contributeGiftPointHistoryFragment(): GiftPointHistoryFragment
+    abstract fun contributeGiftPointRequestListFragment(): GiftPointRequestListFragment
 
     @ContributesAndroidInjector
-    abstract fun contributeGiftPointHistoryDetailsFragment(): GiftPointHistoryDetailsFragment
+    abstract fun contributeGiftPointRequestListDetailsFragment(): GiftPointRequestListDetailsFragment
 
     @ContributesAndroidInjector
     abstract fun contributeMPOSFragment(): MPOSFragment
 
     @ContributesAndroidInjector
     abstract fun contributeWalletFragment(): WalletFragment
+
+    @ContributesAndroidInjector
+    abstract fun contributeGiftPointHistoryFragment(): GiftPointHistoryFragment
+
+    @ContributesAndroidInjector
+    abstract fun contributeGiftPointHistoryDetailsFragment(): GiftPointHistoryDetailsFragment
+
+    @ContributesAndroidInjector
+    abstract fun contributeCreateMPOSOrderFragment(): CreateMPOSOrderFragment
 }

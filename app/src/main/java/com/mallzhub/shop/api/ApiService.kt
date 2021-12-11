@@ -157,10 +157,24 @@ interface ApiService {
     ): Response<OfferAddResponse>
 
     @Headers(ContentType)
-    @POST(ApiEndPoint.GIFT_POINT_HISTORY)
-    suspend fun getGiftPointsHistory(
+    @POST(ApiEndPoint.GIFT_POINT_REQUESTS)
+    suspend fun getGiftPointRequestList(
         @Query("page") page: Int?,
         @Body jsonObject: JsonObject
-    ): Response<GiftPointHistoryResponse>
+    ): Response<GiftPointRequestListResponse>
+
+    @Headers(ContentType)
+    @POST(ApiEndPoint.GIFT_POINT_HISTORY)
+    suspend fun getGiftPointHistory(
+        @Query("page") page: Int?,
+        @Body jsonObject: JsonObject
+    ): Response<ShopWiseGiftPointResponse>
+
+    @Headers(ContentType)
+    @POST(ApiEndPoint.GIFT_POINT_HISTORY)
+    suspend fun getGiftPointHistoryDetails(
+        @Query("page") page: Int?,
+        @Body jsonObject: JsonObject
+    ): Response<GiftPointsHistoryDetailsResponse>
 
 }

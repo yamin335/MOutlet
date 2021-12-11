@@ -4,7 +4,7 @@ import android.app.Application
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.mallzhub.shop.api.*
-import com.mallzhub.shop.models.GiftPointRewards
+import com.mallzhub.shop.models.ShopWiseGiftPointRewards
 import com.mallzhub.shop.repos.GiftPointRepository
 import com.mallzhub.shop.ui.common.BaseViewModel
 import com.mallzhub.shop.util.AppConstants
@@ -17,11 +17,11 @@ class GiftPointHistoryViewModel @Inject constructor(
     private val giftPointRepository: GiftPointRepository
 ) : BaseViewModel(application) {
 
-    val giftPointsHistoryList: MutableLiveData<List<GiftPointRewards>> by lazy {
-        MutableLiveData<List<GiftPointRewards>>()
+    val giftPointsHistoryList: MutableLiveData<List<ShopWiseGiftPointRewards>> by lazy {
+        MutableLiveData<List<ShopWiseGiftPointRewards>>()
     }
 
-    fun getGiftPointsHistory(merchantId: Int) {
+    fun getShopWiseGiftPoints(customerId: Int) {
         if (checkNetworkStatus()) {
             val handler = CoroutineExceptionHandler { _, exception ->
                 exception.printStackTrace()
@@ -31,7 +31,7 @@ class GiftPointHistoryViewModel @Inject constructor(
 
             apiCallStatus.postValue(ApiCallStatus.LOADING)
             viewModelScope.launch(handler) {
-                when (val apiResponse = ApiResponse.create(giftPointRepository.getGiftPointsHistory(merchantId))) {
+                when (val apiResponse = ApiResponse.create(giftPointRepository.getGiftPointHistory(customerId))) {
                     is ApiSuccessResponse -> {
                         apiCallStatus.postValue(ApiCallStatus.SUCCESS)
                         giftPointsHistoryList.postValue(apiResponse.body.data?.rewards)

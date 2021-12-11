@@ -8,22 +8,22 @@ import androidx.recyclerview.widget.DiffUtil
 import com.mallzhub.shop.AppExecutors
 import com.mallzhub.shop.R
 import com.mallzhub.shop.databinding.GiftPointHistoryListItemBinding
-import com.mallzhub.shop.models.GiftPointRewards
+import com.mallzhub.shop.models.ShopWiseGiftPointRewards
 import com.mallzhub.shop.util.DataBoundListAdapter
 
 class GiftPointsListAdapter(
     private val appExecutors: AppExecutors,
-    private val itemCallback: ((GiftPointRewards) -> Unit)? = null
-) : DataBoundListAdapter<GiftPointRewards, GiftPointHistoryListItemBinding>(
-    appExecutors = appExecutors, diffCallback = object : DiffUtil.ItemCallback<GiftPointRewards>() {
-        override fun areItemsTheSame(oldItem: GiftPointRewards, newItem: GiftPointRewards): Boolean {
+    private val itemCallback: ((ShopWiseGiftPointRewards) -> Unit)? = null
+) : DataBoundListAdapter<ShopWiseGiftPointRewards, GiftPointHistoryListItemBinding>(
+    appExecutors = appExecutors, diffCallback = object : DiffUtil.ItemCallback<ShopWiseGiftPointRewards>() {
+        override fun areItemsTheSame(oldItem: ShopWiseGiftPointRewards, newItem: ShopWiseGiftPointRewards): Boolean {
             return oldItem.id == newItem.id
         }
 
         @SuppressLint("DiffUtilEquals")
         override fun areContentsTheSame(
-            oldItem: GiftPointRewards,
-            newItem: GiftPointRewards
+            oldItem: ShopWiseGiftPointRewards,
+            newItem: ShopWiseGiftPointRewards
         ): Boolean {
             return oldItem == newItem
         }
@@ -40,8 +40,8 @@ class GiftPointsListAdapter(
 
     override fun bind(binding: GiftPointHistoryListItemBinding, position: Int) {
         val item = getItem(position)
-        binding.customerName = item.name ?: "Unknown Customer"
-        binding.giftPoint = item.reward?.toString() ?: "0"
+        binding.shopName = item.shop_name ?: "Unknown Shop"
+        binding.giftPoint = item.total_rewards?.toString() ?: "0"
 
         binding.root.setOnClickListener {
             itemCallback?.invoke(item)

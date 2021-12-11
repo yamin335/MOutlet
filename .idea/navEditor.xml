@@ -1289,8 +1289,8 @@
                       <LayoutPositions>
                         <option name="myPosition">
                           <Point>
-                            <option name="x" value="774" />
-                            <option name="y" value="-345" />
+                            <option name="x" value="431" />
+                            <option name="y" value="-813" />
                           </Point>
                         </option>
                       </LayoutPositions>
@@ -1301,8 +1301,8 @@
                       <LayoutPositions>
                         <option name="myPosition">
                           <Point>
-                            <option name="x" value="557" />
-                            <option name="y" value="-342" />
+                            <option name="x" value="214" />
+                            <option name="y" value="-810" />
                           </Point>
                         </option>
                         <option name="myPositions">
@@ -1328,17 +1328,22 @@
                         </option>
                         <option name="myPositions">
                           <map>
-                            <entry key="action_moreFragment_to_giftPointHistoryFragment">
-                              <value>
-                                <LayoutPositions />
-                              </value>
-                            </entry>
                             <entry key="action_moreFragment_to_myAccountsFragment">
                               <value>
                                 <LayoutPositions />
                               </value>
                             </entry>
                             <entry key="action_moreFragment_to_myDevicesFragment">
+                              <value>
+                                <LayoutPositions />
+                              </value>
+                            </entry>
+                            <entry key="action_moreFragment_to_offers_nav">
+                              <value>
+                                <LayoutPositions />
+                              </value>
+                            </entry>
+                            <entry key="action_moreFragment_to_order_nav">
                               <value>
                                 <LayoutPositions />
                               </value>
@@ -1483,8 +1488,41 @@
                       <LayoutPositions>
                         <option name="myPosition">
                           <Point>
-                            <option name="x" value="40" />
-                            <option name="y" value="40" />
+                            <option name="x" value="-35" />
+                            <option name="y" value="-7" />
+                          </Point>
+                        </option>
+                        <option name="myPositions">
+                          <map>
+                            <entry key="action_MPOSFragment_to_createMPOSOrderFragment">
+                              <value>
+                                <LayoutPositions />
+                              </value>
+                            </entry>
+                          </map>
+                        </option>
+                      </LayoutPositions>
+                    </value>
+                  </entry>
+                  <entry key="createMPOSOrderFragment">
+                    <value>
+                      <LayoutPositions>
+                        <option name="myPosition">
+                          <Point>
+                            <option name="x" value="190" />
+                            <option name="y" value="-7" />
+                          </Point>
+                        </option>
+                      </LayoutPositions>
+                    </value>
+                  </entry>
+                  <entry key="select_customer_nav_graph">
+                    <value>
+                      <LayoutPositions>
+                        <option name="myPosition">
+                          <Point>
+                            <option name="x" value="314" />
+                            <option name="y" value="-103" />
                           </Point>
                         </option>
                       </LayoutPositions>
@@ -2169,6 +2207,39 @@
                       </LayoutPositions>
                     </value>
                   </entry>
+                  <entry key="giftPointRequestListDetailsFragment">
+                    <value>
+                      <LayoutPositions>
+                        <option name="myPosition">
+                          <Point>
+                            <option name="x" value="1251" />
+                            <option name="y" value="-461" />
+                          </Point>
+                        </option>
+                      </LayoutPositions>
+                    </value>
+                  </entry>
+                  <entry key="giftPointRequestListFragment">
+                    <value>
+                      <LayoutPositions>
+                        <option name="myPosition">
+                          <Point>
+                            <option name="x" value="1034" />
+                            <option name="y" value="-464" />
+                          </Point>
+                        </option>
+                        <option name="myPositions">
+                          <map>
+                            <entry key="action_giftPointRequestListFragment_to_giftPointRequestListDetailsFragment">
+                              <value>
+                                <LayoutPositions />
+                              </value>
+                            </entry>
+                          </map>
+                        </option>
+                      </LayoutPositions>
+                    </value>
+                  </entry>
                   <entry key="topUpAmountFragment">
                     <value>
                       <LayoutPositions>
@@ -2269,7 +2340,7 @@
                                 <LayoutPositions />
                               </value>
                             </entry>
-                            <entry key="action_walletFragment_to_giftPointHistoryFragment">
+                            <entry key="action_walletFragment_to_giftPointRequestListFragment">
                               <value>
                                 <LayoutPositions />
                               </value>

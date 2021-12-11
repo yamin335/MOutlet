@@ -37,7 +37,7 @@
                 android:layout_below="@id/toolbar"
                 android:layout_marginTop="16dp"
                 android:adjustViewBounds="true"
-                android:src="@drawable/malls_hub_logo" />
+                android:src="@drawable/mallvers_logo" />
 
             <ProgressBar
                 style="?android:attr/progressBarStyleHorizontal"

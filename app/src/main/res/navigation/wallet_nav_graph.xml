@@ -26,8 +26,8 @@
             app:popEnterAnim="@anim/slide_in_left"
             app:popExitAnim="@anim/slide_out_right"/>
         <action
-            android:id="@+id/action_walletFragment_to_giftPointHistoryFragment"
-            app:destination="@id/giftPointHistoryFragment"
+            android:id="@+id/action_walletFragment_to_giftPointRequestListFragment"
+            app:destination="@id/giftPointRequestListFragment"
             app:enterAnim="@anim/slide_in_right"
             app:exitAnim="@anim/slide_out_left"
             app:popEnterAnim="@anim/slide_in_left"
@@ -158,5 +158,28 @@
             app:exitAnim="@anim/slide_out_left"
             app:popEnterAnim="@anim/slide_in_left"
             app:popExitAnim="@anim/slide_out_right"/>
+    </fragment>
+
+    <fragment
+        android:id="@+id/giftPointRequestListFragment"
+        android:name="com.mallzhub.shop.ui.gift_point.GiftPointRequestListFragment"
+        android:label="Gift Point Requests"
+        tools:layout="@layout/fragment_gift_point_request_list">
+        <action
+            android:id="@+id/action_giftPointRequestListFragment_to_giftPointRequestListDetailsFragment"
+            app:destination="@id/giftPointRequestListDetailsFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"/>
+    </fragment>
+    <fragment
+        android:id="@+id/giftPointRequestListDetailsFragment"
+        android:name="com.mallzhub.shop.ui.gift_point.GiftPointRequestListDetailsFragment"
+        android:label="Request Details"
+        tools:layout="@layout/fragment_gift_point_request_list_details">
+        <argument
+            android:name="reward"
+            app:argType="com.mallzhub.shop.models.GiftPointRequest" />
     </fragment>
 </navigation>

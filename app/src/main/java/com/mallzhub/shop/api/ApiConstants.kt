@@ -52,6 +52,7 @@ object ApiEndPoint {
     const val OFFER_LIST = "/$API_REPO/getshopoffers"
     const val PRODUCT_DETAILS = "/$API_REPO/$DIRECTORY_COMMON/{id}/product"
     const val ADD_OFFER = "/$API_REPO/newshopoffer"
+    const val GIFT_POINT_REQUESTS = "/$API_REPO/get/customer/merchant/reward"
     const val GIFT_POINT_HISTORY = "/$API_REPO/get/customer/merchant/reward"
 }
 
