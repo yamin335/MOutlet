@@ -1504,6 +1504,18 @@
                       </LayoutPositions>
                     </value>
                   </entry>
+                  <entry key="MPOSOrderDetailsFragment">
+                    <value>
+                      <LayoutPositions>
+                        <option name="myPosition">
+                          <Point>
+                            <option name="x" value="-4" />
+                            <option name="y" value="-388" />
+                          </Point>
+                        </option>
+                      </LayoutPositions>
+                    </value>
+                  </entry>
                   <entry key="createMPOSOrderFragment">
                     <value>
                       <LayoutPositions>
@@ -1512,6 +1524,15 @@
                             <option name="x" value="190" />
                             <option name="y" value="-7" />
                           </Point>
+                        </option>
+                        <option name="myPositions">
+                          <map>
+                            <entry key="action_createMPOSOrderFragment_to_select_customer_nav_graph">
+                              <value>
+                                <LayoutPositions />
+                              </value>
+                            </entry>
+                          </map>
                         </option>
                       </LayoutPositions>
                     </value>

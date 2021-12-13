@@ -4,10 +4,13 @@ import android.app.Application
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.mallzhub.shop.api.*
+import com.mallzhub.shop.models.MPOSOrderProduct
+import com.mallzhub.shop.models.MPOSOrderProductsRequestBody
 import com.mallzhub.shop.models.Product
 import com.mallzhub.shop.models.add_product.AddProductResponse
 import com.mallzhub.shop.models.customers.Customer
 import com.mallzhub.shop.models.order.OrderStoreBody
+import com.mallzhub.shop.models.order.OrderStoreProduct
 import com.mallzhub.shop.models.order.OrderStoreResponse
 import com.mallzhub.shop.repos.HomeRepository
 import com.mallzhub.shop.repos.OrderRepository
@@ -31,26 +34,16 @@ class CreateMPOSOrderViewModel @Inject constructor(
         MutableLiveData<Customer>()
     }
 
-    val orderItems: MutableLiveData<MutableList<Product>> by lazy {
-        MutableLiveData<MutableList<Product>>()
+    val orderItems: MutableLiveData<MutableList<MPOSOrderProduct>> by lazy {
+        MutableLiveData<MutableList<MPOSOrderProduct>>()
+    }
+
+    val orderProducts: MutableLiveData<List<MPOSOrderProduct>> by lazy {
+        MutableLiveData<List<MPOSOrderProduct>>()
     }
 
     val orderPlaceResponse: MutableLiveData<OrderStoreResponse> by lazy {
         MutableLiveData<OrderStoreResponse>()
-    }
-
-    fun incrementOrderItemQuantity(id: Int) {
-        val items = orderItems.value ?: mutableListOf()
-        val tempItems = items.map { if (it.id == id && it.available_qty != null) { it.available_qty = it.available_qty!! + 1 }
-            it}.toMutableList()
-        orderItems.postValue(tempItems)
-    }
-
-    fun decrementOrderItemQuantity(id: Int) {
-        val items = orderItems.value ?: mutableListOf()
-        val tempItems = items.map { if (it.id == id && it.available_qty != null) { it.available_qty = it.available_qty!! - 1 }
-            it}.toMutableList()
-        orderItems.postValue(tempItems)
     }
 
     fun placeOrder(orderStoreBody: OrderStoreBody) {
@@ -67,6 +60,32 @@ class CreateMPOSOrderViewModel @Inject constructor(
                     is ApiSuccessResponse -> {
                         apiCallStatus.postValue(ApiCallStatus.SUCCESS)
                         orderPlaceResponse.postValue(apiResponse.body)
+                    }
+                    is ApiEmptyResponse -> {
+                        apiCallStatus.postValue(ApiCallStatus.EMPTY)
+                    }
+                    is ApiErrorResponse -> {
+                        apiCallStatus.postValue(ApiCallStatus.ERROR)
+                    }
+                }
+            }
+        }
+    }
+
+    fun getProductsByBarcodes(requestBody: MPOSOrderProductsRequestBody) {
+        if (checkNetworkStatus()) {
+            val handler = CoroutineExceptionHandler { _, exception ->
+                exception.printStackTrace()
+                apiCallStatus.postValue(ApiCallStatus.ERROR)
+                toastError.postValue(AppConstants.serverConnectionErrorMessage)
+            }
+
+            apiCallStatus.postValue(ApiCallStatus.LOADING)
+            viewModelScope.launch(handler) {
+                when (val apiResponse = ApiResponse.create(orderRepository.getProductsByBarcodes(requestBody))) {
+                    is ApiSuccessResponse -> {
+                        apiCallStatus.postValue(ApiCallStatus.SUCCESS)
+                        orderProducts.postValue(apiResponse.body)
                     }
                     is ApiEmptyResponse -> {
                         apiCallStatus.postValue(ApiCallStatus.EMPTY)

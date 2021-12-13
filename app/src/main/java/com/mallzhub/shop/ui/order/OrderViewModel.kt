@@ -46,5 +46,4 @@ class OrderViewModel @Inject constructor(
             }
         }
     }
-
 }

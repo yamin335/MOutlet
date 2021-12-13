@@ -51,12 +51,9 @@ class AllCustomersFragment : BaseFragment<AllCustomersFragmentBinding, AllCustom
 
     override fun onResume() {
         super.onResume()
-        if (allCustomers.isEmpty()) {
-            viewModel.getCustomers(merchant.email ?: "")
-        } else {
-            allCustomersListAdapter.submitDataList(allCustomers)
-            showHideDataView()
-        }
+        allCustomersListAdapter.submitDataList(allCustomers)
+        viewModel.getCustomers(merchant.email ?: "")
+        showHideDataView()
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

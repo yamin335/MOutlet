@@ -24,12 +24,8 @@ class TransactionsFragment : BaseFragment<TransactionsFragmentBinding, Transacti
 
     override fun onResume() {
         super.onResume()
-        if (orderList.isEmpty()) {
-            viewModel.getOrderList(1, preferencesHelper.getMerchant().email)
-        } else {
-            transactionsListAdapter.submitList(orderList)
-        }
-
+        transactionsListAdapter.submitList(orderList)
+        viewModel.getOrderList(1, preferencesHelper.getMerchant().email)
         visibleGoneEmptyView()
     }
 

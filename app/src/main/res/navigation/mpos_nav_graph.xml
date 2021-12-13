@@ -17,6 +17,13 @@
             app:exitAnim="@anim/slide_out_left"
             app:popEnterAnim="@anim/slide_in_left"
             app:popExitAnim="@anim/slide_out_right"/>
+        <action
+            android:id="@+id/action_MPOSFragment_to_MPOSOrderDetailsFragment"
+            app:destination="@id/MPOSOrderDetailsFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"/>
     </fragment>
     <fragment
         android:id="@+id/createMPOSOrderFragment"
@@ -32,4 +39,13 @@
             app:popExitAnim="@anim/slide_out_right"/>
     </fragment>
     <include app:graph="@navigation/select_customer_nav_graph" />
+    <fragment
+        android:id="@+id/MPOSOrderDetailsFragment"
+        android:name="com.mallzhub.shop.ui.mpos.MPOSOrderDetailsFragment"
+        android:label="Order Details"
+        tools:layout="@layout/fragment_mpos_order_details">
+        <argument
+            android:name="order"
+            app:argType="com.mallzhub.shop.models.order.SalesData" />
+    </fragment>
 </navigation>

@@ -18,6 +18,8 @@ import com.mallzhub.shop.R
 import com.mallzhub.shop.api.ApiCallStatus
 import com.mallzhub.shop.databinding.CreateMPOSOrderFragmentBinding
 import com.mallzhub.shop.databinding.CreateOrderFragmentBinding
+import com.mallzhub.shop.models.MPOSOrderProductsRequestBody
+import com.mallzhub.shop.models.Product
 import com.mallzhub.shop.models.order.OrderStoreBody
 import com.mallzhub.shop.models.order.OrderStoreProduct
 import com.mallzhub.shop.ui.barcode_reader.LiveBarcodeScanningActivity
@@ -27,6 +29,7 @@ import com.mallzhub.shop.ui.customers.SelectCustomerFragment
 import com.mallzhub.shop.ui.order.OrderProductListAdapter
 import com.mallzhub.shop.ui.products.SelectProductFragment
 import com.mallzhub.shop.util.*
+import java.lang.Exception
 import java.text.SimpleDateFormat
 import java.util.*
 import kotlin.collections.ArrayList
@@ -40,7 +43,7 @@ class CreateMPOSOrderFragment : BaseFragment<CreateMPOSOrderFragmentBinding, Cre
         viewModelFactory
     }
 
-    lateinit var orderProductListAdapter: OrderProductListAdapter
+    lateinit var orderProductListAdapter: MPOSOrderProductListAdapter
 
 
     lateinit var permissionRequestLauncher: ActivityResultLauncher<Array<String>>
@@ -97,23 +100,20 @@ class CreateMPOSOrderFragment : BaseFragment<CreateMPOSOrderFragmentBinding, Cre
         super.onViewCreated(view, savedInstanceState)
         registerToolbar(viewDataBinding.toolbar)
 
-        orderProductListAdapter = OrderProductListAdapter (
-            appExecutors,
-            object : OrderProductListAdapter.CartItemActionCallback {
-                override fun incrementCartItemQuantity(id: Int) {
-                    viewModel.incrementOrderItemQuantity(id)
-                }
-
-                override fun decrementCartItemQuantity(id: Int) {
-                    viewModel.decrementOrderItemQuantity(id)
-                }
-
-            }
-        ) { item ->
+        orderProductListAdapter = MPOSOrderProductListAdapter (appExecutors) { item ->
             viewModel.orderItems.removeItem(item)
         }
 
         viewDataBinding.productRecycler.adapter = orderProductListAdapter
+
+        viewModel.orderProducts.observe(viewLifecycleOwner, androidx.lifecycle.Observer { products ->
+            products?.let { orderProducts ->
+                orderProducts.forEach { item ->
+                    viewModel.orderItems.addNewItem(item)
+                }
+                viewModel.orderProducts.postValue(null)
+            }
+        })
 
         viewModel.selectedCustomer.observe(viewLifecycleOwner, androidx.lifecycle.Observer { customer ->
             customer?.let {
@@ -172,9 +172,8 @@ class CreateMPOSOrderFragment : BaseFragment<CreateMPOSOrderFragmentBinding, Cre
                 orderProductListAdapter.notifyDataSetChanged()
                 total = 0.0
                 it.forEach { item ->
-                    val price = item.mrp ?: 0.0
-                    val quantity = item.available_qty ?: 0
-                    total += price * quantity
+                    val price = item.product_detail?.selling_price ?: 0
+                    total += price
                 }
                 total = total.toRounded(2)
                 viewDataBinding.totalPrice = total.toString()
@@ -195,11 +194,10 @@ class CreateMPOSOrderFragment : BaseFragment<CreateMPOSOrderFragmentBinding, Cre
 
             val productList = ArrayList<OrderStoreProduct>()
             viewModel.orderItems.value?.forEach { item ->
-                val quantity = item.available_qty ?: 1
-                val mrp = item.mrp?.toInt() ?: 0
-                productList.add(OrderStoreProduct(item.id, item.description, "qty",
-                    quantity, item.mrp?.toInt(), 0, "0",
-                    0, "0", mrp * quantity, ""))
+                val mrp = item.product_detail?.selling_price ?: 0
+                productList.add(OrderStoreProduct(item.id, item.product?.description, "qty",
+                    1, mrp, 0, "0",
+                    0, "0", mrp, ""))
             }
 
             val today = SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH).format(
@@ -251,7 +249,17 @@ class CreateMPOSOrderFragment : BaseFragment<CreateMPOSOrderFragmentBinding, Cre
                 if (qrCodeData.isNotBlank()) {
                     val dataArray = qrCodeData.split(",")
                     if (dataArray.isNotEmpty()) {
-                        showSuccessToast(requireContext(), qrCodeData)
+                        val codes = ArrayList<Long>()
+                        for(data in dataArray) {
+                            try {
+                                val code = data.toLong()
+                                codes.add(code)
+                            } catch (e: Exception) {
+                                e.printStackTrace()
+                                showErrorToast(requireContext(), "Invalid Barcode Found!")
+                            }
+                        }
+                        viewModel.getProductsByBarcodes(MPOSOrderProductsRequestBody(codes))
                     } else {
                         showErrorToast(requireContext(), "No product added!")
                     }

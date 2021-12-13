@@ -177,4 +177,10 @@ interface ApiService {
         @Body jsonObject: JsonObject
     ): Response<GiftPointsHistoryDetailsResponse>
 
+    @Headers(ContentType)
+    @POST(ApiEndPoint.BARCODE_PRODUCTS)
+    suspend fun getProductsByBarcodes(
+        @Body jsonObject: JsonObject
+    ): Response<List<MPOSOrderProduct>>
+
 }

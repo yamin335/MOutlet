@@ -41,6 +41,7 @@ import com.mallzhub.shop.ui.video_play.VideoPlayViewModel
 import com.mallzhub.shop.ui.login.ViewPagerViewModel
 import com.mallzhub.shop.ui.more.MoreViewModel
 import com.mallzhub.shop.ui.mpos.CreateMPOSOrderViewModel
+import com.mallzhub.shop.ui.mpos.MPOSOrderDetailsViewModel
 import com.mallzhub.shop.ui.mpos.MPOSViewModel
 import com.mallzhub.shop.ui.myAccount.MyAccountViewModel
 import com.mallzhub.shop.ui.myDevices.MyDevicesViewModel
@@ -422,4 +423,9 @@ abstract class ViewModelModule {
     @IntoMap
     @ViewModelKey(CreateMPOSOrderViewModel::class)
     abstract fun bindCreateMPOSOrderViewModel(viewModel: CreateMPOSOrderViewModel): ViewModel
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(MPOSOrderDetailsViewModel::class)
+    abstract fun bindMPOSOrderDetailsViewModel(viewModel: MPOSOrderDetailsViewModel): ViewModel
 }

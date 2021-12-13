@@ -3,10 +3,11 @@ package com.mallzhub.shop.ui.mpos
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.Observer
 import com.mallzhub.shop.BR
 import com.mallzhub.shop.R
 import com.mallzhub.shop.databinding.MPOSFragmentBinding
-import com.mallzhub.shop.models.MPOSOrder
+import com.mallzhub.shop.models.order.SalesData
 import com.mallzhub.shop.ui.common.BaseFragment
 
 class MPOSFragment : BaseFragment<MPOSFragmentBinding, MPOSViewModel>() {
@@ -22,25 +23,25 @@ class MPOSFragment : BaseFragment<MPOSFragmentBinding, MPOSViewModel>() {
 
     override fun onResume() {
         super.onResume()
-
-        if (orderList.isEmpty()) {
-            getOrderList()
-            mposOrderListAdapter.submitList(orderList)
-        } else {
-            mposOrderListAdapter.submitList(orderList)
-        }
-
+        mposOrderListAdapter.submitList(orderList)
         showHideDataView()
+        viewModel.getOrderList(1, preferencesHelper.getMerchant().email)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
         mposOrderListAdapter = MPOSOrderListAdapter(appExecutors) {
-
+            navigateTo(MPOSFragmentDirections.actionMPOSFragmentToMPOSOrderDetailsFragment(it))
         }
 
         viewDataBinding.orderListRecycler.adapter = mposOrderListAdapter
+
+        viewModel.orderItems.observe(viewLifecycleOwner, Observer {
+            orderList = it as ArrayList<SalesData>
+            mposOrderListAdapter.submitList(orderList)
+            showHideDataView()
+        })
 
         viewDataBinding.btnBarcodeScanner.setOnClickListener {
             navigateTo(MPOSFragmentDirections.actionMPOSFragmentToCreateMPOSOrderFragment())
@@ -57,15 +58,7 @@ class MPOSFragment : BaseFragment<MPOSFragmentBinding, MPOSViewModel>() {
         }
     }
 
-    private fun getOrderList() {
-        var i = 1
-        while (i < 6) {
-            orderList.add(MPOSOrder(i, "#${i}6727493$i", "10 June, 2021", "${i*100+i*2}"))
-            i++
-        }
-    }
-
     companion object {
-        var orderList: ArrayList<MPOSOrder> = ArrayList()
+        var orderList: ArrayList<SalesData> = ArrayList()
     }
 }

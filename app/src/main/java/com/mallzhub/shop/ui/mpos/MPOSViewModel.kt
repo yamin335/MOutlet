@@ -5,7 +5,9 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.mallzhub.shop.api.*
 import com.mallzhub.shop.models.AllProductResponse
+import com.mallzhub.shop.models.order.SalesData
 import com.mallzhub.shop.repos.HomeRepository
+import com.mallzhub.shop.repos.OrderRepository
 import com.mallzhub.shop.ui.common.BaseViewModel
 import com.mallzhub.shop.util.AppConstants
 import kotlinx.coroutines.CoroutineExceptionHandler
@@ -14,14 +16,14 @@ import javax.inject.Inject
 
 class MPOSViewModel @Inject constructor(
     private val application: Application,
-    private val repository: HomeRepository
+    private val orderRepository: OrderRepository
 ) : BaseViewModel(application) {
 
-    val productListResponse: MutableLiveData<AllProductResponse> by lazy {
-        MutableLiveData<AllProductResponse>()
+    val orderItems: MutableLiveData<List<SalesData>> by lazy {
+        MutableLiveData<List<SalesData>>()
     }
 
-    fun getProductList(merchantID: String) {
+    fun getOrderList(page: Int?, token: String?) {
         if (checkNetworkStatus()) {
             val handler = CoroutineExceptionHandler { _, exception ->
                 exception.printStackTrace()
@@ -31,10 +33,10 @@ class MPOSViewModel @Inject constructor(
 
             apiCallStatus.postValue(ApiCallStatus.LOADING)
             viewModelScope.launch(handler) {
-                when (val apiResponse = ApiResponse.create(repository.getAllProductsRepo(id = merchantID))) {
+                when (val apiResponse = ApiResponse.create(orderRepository.getOrderList(page, token))) {
                     is ApiSuccessResponse -> {
                         apiCallStatus.postValue(ApiCallStatus.SUCCESS)
-                        productListResponse.postValue(apiResponse.body)
+                        orderItems.postValue(apiResponse.body.data?.sales?.data)
                     }
                     is ApiEmptyResponse -> {
                         apiCallStatus.postValue(ApiCallStatus.EMPTY)
@@ -46,5 +48,4 @@ class MPOSViewModel @Inject constructor(
             }
         }
     }
-
 }

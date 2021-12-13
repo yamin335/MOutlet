@@ -4,6 +4,8 @@ import com.google.gson.Gson
 import com.google.gson.JsonObject
 import com.google.gson.JsonParser
 import com.mallzhub.shop.api.ApiService
+import com.mallzhub.shop.models.MPOSOrderProduct
+import com.mallzhub.shop.models.MPOSOrderProductsRequestBody
 import com.mallzhub.shop.models.login.LoginResponse
 import com.mallzhub.shop.models.order.OrderListResponse
 import com.mallzhub.shop.models.order.OrderStoreBody
@@ -27,6 +29,14 @@ class OrderRepository @Inject constructor(private val apiService: ApiService) {
         val jsonObject = JsonParser().parse(jsonString).asJsonObject
         return withContext(Dispatchers.IO) {
             apiService.placeOrder(jsonObject)
+        }
+    }
+
+    suspend fun getProductsByBarcodes(requestBody: MPOSOrderProductsRequestBody?): Response<List<MPOSOrderProduct>> {
+        val jsonString = Gson().toJson(requestBody)
+        val jsonObject = JsonParser().parse(jsonString).asJsonObject
+        return withContext(Dispatchers.IO) {
+            apiService.getProductsByBarcodes(jsonObject)
         }
     }
 }

@@ -38,6 +38,7 @@ import com.mallzhub.shop.ui.more.MoreFragment
 import com.mallzhub.shop.ui.mpos.CreateMPOSOrderFragment
 import com.mallzhub.shop.ui.mpos.CreateMPOSOrderViewModel
 import com.mallzhub.shop.ui.mpos.MPOSFragment
+import com.mallzhub.shop.ui.mpos.MPOSOrderDetailsFragment
 import com.mallzhub.shop.ui.myAccount.MyAccountsFragment
 import com.mallzhub.shop.ui.myDevices.MyDevicesFragment
 import com.mallzhub.shop.ui.offers.CreateOfferFragment
@@ -270,4 +271,7 @@ abstract class FragmentBuildersModule {
 
     @ContributesAndroidInjector
     abstract fun contributeCreateMPOSOrderFragment(): CreateMPOSOrderFragment
+
+    @ContributesAndroidInjector
+    abstract fun contributeMPOSOrderDetailsFragment(): MPOSOrderDetailsFragment
 }

@@ -28,10 +28,18 @@ data class Product(
     val category_id: Int?,
     val merchant_id: Int?,
     var available_qty: Int? = 1,
+    var orderQuantity: Int? = 1,
     val created_at: String?,
     val updated_at: String?,
     val category: ProductCategory?): Serializable
 
 data class Attribute(val id: Int?, val product_category_id: Int?, val merchant_id: Int?,
-                     val attribute_id: Int?, val attribute_name: String?,
+                     val attribute_id: Int?, val attribute_name: String?, val stock_barcode_id: Int?,
                      val attrribute_value: String?, val created_at: String?, val updated_at: String?): Serializable
+
+data class ProductDetails(val id: Int?, val product_id: Int?, val name: String?,
+                          val qty: Int?, val mrp: Int?, val buying_price: Int?,
+                          val selling_price: Int?, val lot: String?, val branch_id: Any?,
+                          val warehouse_id: Any?, val expire_date: String?,
+                          val created_at: String?, val updated_at: String?,
+                          val merchant_id: Int?, val is_opening_stock: Int?)

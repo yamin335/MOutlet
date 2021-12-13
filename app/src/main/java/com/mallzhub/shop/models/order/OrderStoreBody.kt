@@ -9,7 +9,7 @@ data class OrderStoreBody(val customer_id: Int?, val merchant_id: Int?,
                           val amount_due: Int?, val list: List<OrderStoreProduct>?)
 
 data class OrderStoreProduct(val product_id: Int?, val description: String?,
-                          val unitType: String?, val unitValue: Int?,
+                          val unitType: String?, var unitValue: Int? = 1,
                           val unitPrice: Int?, val taxType: Int?,
                           val taxTypeValue: String?, val discount: Int?,
                           val discountAmount: String?, val amount: Int?,
