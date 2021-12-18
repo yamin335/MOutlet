@@ -64,7 +64,7 @@ class AllProductsFragment : BaseFragment<AllProductsFragmentBinding, AllProductV
         allProductListAdapter = AllProductListAdapter(
             appExecutors
         ) { item ->
-            //navController.navigate(FavoriteFragmentDirections.actionFavoriteFragmentToProductDetailsFragment2(item))
+            navigateTo(AllProductsFragmentDirections.actionAllProductsFragmentToAddProductFragment(product = item, isEdit = true))
         }
 
         viewDataBinding.allProductsRecycler.adapter = allProductListAdapter

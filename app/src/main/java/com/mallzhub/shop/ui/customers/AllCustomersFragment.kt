@@ -51,7 +51,7 @@ class AllCustomersFragment : BaseFragment<AllCustomersFragmentBinding, AllCustom
 
     override fun onResume() {
         super.onResume()
-        allCustomersListAdapter.submitDataList(allCustomers)
+        //allCustomersListAdapter.submitDataList(allCustomers)
         viewModel.getCustomers(merchant.email ?: "")
         showHideDataView()
     }

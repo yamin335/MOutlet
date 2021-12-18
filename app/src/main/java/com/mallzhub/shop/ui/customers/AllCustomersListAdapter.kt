@@ -55,8 +55,8 @@ class AllCustomersListAdapter(
 
     fun submitDataList(dataList: List<Customer>) {
         this.dataList = dataList as ArrayList<Customer>
-        this.filteredDataList = dataList
-        submitList(dataList)
+        this.filteredDataList = this.dataList
+        submitList(this.filteredDataList)
     }
 
     override fun getItemCount(): Int {

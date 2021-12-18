@@ -20,12 +20,17 @@ import androidx.appcompat.app.AlertDialog
 import androidx.core.content.ContextCompat
 import androidx.core.content.FileProvider
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.navArgs
 import com.bumptech.glide.Glide
+import com.bumptech.glide.request.target.CustomTarget
+import com.bumptech.glide.request.transition.Transition
+import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.mallzhub.shop.BR
 import com.mallzhub.shop.BuildConfig
 import com.mallzhub.shop.R
 import com.mallzhub.shop.api.ApiCallStatus
 import com.mallzhub.shop.databinding.AddProductFragmentBinding
+import com.mallzhub.shop.models.Product
 import com.mallzhub.shop.ui.common.BaseFragment
 import com.mallzhub.shop.util.BitmapUtilss
 import com.mallzhub.shop.util.PermissionUtils.isCameraAndGalleryPermissionGranted
@@ -61,6 +66,11 @@ class AddProductFragment : BaseFragment<AddProductFragmentBinding, AddProductVie
 
     lateinit var sampleImageAdapter: SampleImageListAdapter
 
+    var product: Product? = null
+
+    val args: AddProductFragmentArgs by navArgs()
+    var isEditMode = false
+
     var productCategory = ""
 
     var productCategories = arrayOf("Product Category", "Shirt", "Pant", "Skirt", "Shoes", "Hats")
@@ -78,6 +88,8 @@ class AddProductFragment : BaseFragment<AddProductFragmentBinding, AddProductVie
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         registerToolbar(viewDataBinding.toolbar)
+
+        isEditMode = args.isEdit
 
         sampleImageAdapter = SampleImageListAdapter {
             imageForPosition = it
@@ -205,6 +217,110 @@ class AddProductFragment : BaseFragment<AddProductFragmentBinding, AddProductVie
         viewModel.apiCallStatus.observe(viewLifecycleOwner, androidx.lifecycle.Observer {
             viewDataBinding.btnAddProduct.isEnabled = it != ApiCallStatus.LOADING
         })
+
+        if (isEditMode) {
+            product = args.product
+            val item = product ?: return
+
+            Glide.with(this)
+                .asBitmap()
+                .load(item.thumbnail)
+                .into(object : CustomTarget<Bitmap>() {
+                    override fun onResourceReady(
+                        resource: Bitmap,
+                        transition: Transition<in Bitmap>?
+                    ) {
+                        featureImage = resource
+                        viewDataBinding.featureImage.setImageBitmap(featureImage)
+                        checkImages()
+                    }
+
+                    override fun onLoadCleared(placeholder: Drawable?) {
+                    }
+                })
+
+            Glide.with(this)
+                .asBitmap()
+                .load(item.product_image1)
+                .into(object : CustomTarget<Bitmap>() {
+                    override fun onResourceReady(
+                        resource: Bitmap,
+                        transition: Transition<in Bitmap>?
+                    ) {
+                        sampleImageAdapter.setImage(resource, 0)
+                    }
+
+                    override fun onLoadCleared(placeholder: Drawable?) {
+                    }
+                })
+
+            Glide.with(this)
+                .asBitmap()
+                .load(item.product_image2)
+                .into(object : CustomTarget<Bitmap>() {
+                    override fun onResourceReady(
+                        resource: Bitmap,
+                        transition: Transition<in Bitmap>?
+                    ) {
+                        sampleImageAdapter.setImage(resource, 1)
+                    }
+
+                    override fun onLoadCleared(placeholder: Drawable?) {
+                    }
+                })
+
+            Glide.with(this)
+                .asBitmap()
+                .load(item.product_image3)
+                .into(object : CustomTarget<Bitmap>() {
+                    override fun onResourceReady(
+                        resource: Bitmap,
+                        transition: Transition<in Bitmap>?
+                    ) {
+                        sampleImageAdapter.setImage(resource, 2)
+                    }
+
+                    override fun onLoadCleared(placeholder: Drawable?) {
+                    }
+                })
+
+            Glide.with(this)
+                .asBitmap()
+                .load(item.product_image4)
+                .into(object : CustomTarget<Bitmap>() {
+                    override fun onResourceReady(
+                        resource: Bitmap,
+                        transition: Transition<in Bitmap>?
+                    ) {
+                        sampleImageAdapter.setImage(resource, 3)
+                    }
+
+                    override fun onLoadCleared(placeholder: Drawable?) {
+                    }
+                })
+
+            Glide.with(this)
+                .asBitmap()
+                .load(item.product_image5)
+                .into(object : CustomTarget<Bitmap>() {
+                    override fun onResourceReady(
+                        resource: Bitmap,
+                        transition: Transition<in Bitmap>?
+                    ) {
+                        sampleImageAdapter.setImage(resource, 4)
+                    }
+
+                    override fun onLoadCleared(placeholder: Drawable?) {
+                    }
+                })
+
+            viewModel.name.postValue(item.name)
+            viewModel.buyingPrice.postValue(item.buying_price?.toString())
+            viewModel.sellingPrice.postValue(item.selling_price?.toString())
+            viewModel.mrp.postValue(item.mrp?.toString())
+            viewModel.expiredDate.postValue(item.expired_date)
+            viewModel.description.postValue(item.description)
+        }
 
         viewDataBinding.btnAddProduct.setOnClickListener {
             val sampleImages = sampleImageAdapter.getImageList()
