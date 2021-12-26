@@ -66,6 +66,13 @@
             app:exitAnim="@anim/slide_out_left"
             app:popEnterAnim="@anim/slide_in_left"
             app:popExitAnim="@anim/slide_out_right"/>
+        <action
+            android:id="@+id/action_moreFragment_to_stockProductsFragment"
+            app:destination="@id/stockProductsFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"/>
     </fragment>
 
     <include app:graph="@navigation/drawer_nav_graph" />
@@ -141,4 +148,59 @@
 
     <include app:graph="@navigation/offers_nav_graph" />
     <include app:graph="@navigation/order_nav_graph" />
+    <fragment
+        android:id="@+id/stockProductsFragment"
+        android:name="com.mallzhub.shop.ui.stock_product.StockProductsFragment"
+        android:label="Stock Products"
+        tools:layout="@layout/fragment_stock_products">
+        <action
+            android:id="@+id/action_stockProductsFragment_to_stockProductsDetailsFragment"
+            app:destination="@id/stockProductsDetailsFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"/>
+        <action
+            android:id="@+id/action_stockProductsFragment_to_receiveProductFragment"
+            app:destination="@id/receiveProductFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"/>
+    </fragment>
+    <fragment
+        android:id="@+id/stockProductsDetailsFragment"
+        android:name="com.mallzhub.shop.ui.stock_product.StockProductsDetailsFragment"
+        android:label="Stock Details"
+        tools:layout="@layout/fragment_stock_products_details">
+        <argument
+            android:name="title"
+            app:argType="string" />
+        <argument
+            android:name="productDetailId"
+            app:argType="integer" />
+    </fragment>
+    <include app:graph="@navigation/select_product_nav_graph" />
+    <fragment
+        android:id="@+id/receiveProductFragment"
+        android:name="com.mallzhub.shop.ui.stock_product.ReceiveProductFragment"
+        android:label="Receive Product"
+        tools:layout="@layout/fragment_receive_product">
+        <argument
+            android:name="product"
+            app:argType="com.mallzhub.shop.models.Product"
+            app:nullable="true"
+            android:defaultValue="@null" />
+        <argument
+            android:name="isEdit"
+            android:defaultValue="false"
+            app:argType="boolean" />
+        <action
+            android:id="@+id/action_receiveProductFragment_to_select_product_nav_graph"
+            app:destination="@id/select_product_nav_graph"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"/>
+    </fragment>
 </navigation>

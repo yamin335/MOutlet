@@ -56,6 +56,9 @@ import com.mallzhub.shop.ui.products.SelectProductViewModel
 import com.mallzhub.shop.ui.profile_signin.ProfileSignInViewModel
 import com.mallzhub.shop.ui.shops.ShopDetailsContactUsViewModel
 import com.mallzhub.shop.ui.shops.ShopDetailsViewModel
+import com.mallzhub.shop.ui.stock_product.ReceiveProductViewModel
+import com.mallzhub.shop.ui.stock_product.StockProductDetailsViewModel
+import com.mallzhub.shop.ui.stock_product.StockProductsViewModel
 import com.mallzhub.shop.ui.terms_and_conditions.TermsViewModel
 import com.mallzhub.shop.ui.topup.TopUpAmountViewModel
 import com.mallzhub.shop.ui.topup.TopUpBankCardViewModel
@@ -428,4 +431,19 @@ abstract class ViewModelModule {
     @IntoMap
     @ViewModelKey(MPOSOrderDetailsViewModel::class)
     abstract fun bindMPOSOrderDetailsViewModel(viewModel: MPOSOrderDetailsViewModel): ViewModel
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(StockProductsViewModel::class)
+    abstract fun bindStockProductsViewModel(viewModel: StockProductsViewModel): ViewModel
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(StockProductDetailsViewModel::class)
+    abstract fun bindStockProductDetailsViewModel(viewModel: StockProductDetailsViewModel): ViewModel
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(ReceiveProductViewModel::class)
+    abstract fun bindReceiveProductViewModel(viewModel: ReceiveProductViewModel): ViewModel
 }

@@ -94,6 +94,10 @@ class MoreFragment : BaseFragment<MoreFragmentBinding, MoreViewModel>() {
             navigateTo(MoreFragmentDirections.actionMoreFragmentToGiftPointHistoryFragment())
         }
 
+        viewDataBinding.menuProductStock.setOnClickListener {
+            navigateTo(MoreFragmentDirections.actionMoreFragmentToStockProductsFragment())
+        }
+
     }
 
 }

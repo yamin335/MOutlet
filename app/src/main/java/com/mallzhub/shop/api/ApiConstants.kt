@@ -55,6 +55,9 @@ object ApiEndPoint {
     const val GIFT_POINT_REQUESTS = "/$API_REPO/get/customer/merchant/reward"
     const val GIFT_POINT_HISTORY = "/$API_REPO/get/customer/merchant/reward"
     const val BARCODE_PRODUCTS = "/$API_REPO/product/barcodes"
+
+    const val STOCK_PRODUCTS = "/$API_REPO/product-ledger/bypage"
+    const val STOCK_PRODUCTS_DETAILS = "/$API_REPO/show/barcode/attributes/bydetails"
 }
 
 object ResponseCodes {

@@ -12,6 +12,8 @@ import com.mallzhub.shop.models.order.OrderListResponse
 import com.mallzhub.shop.models.order.OrderStoreResponse
 import com.mallzhub.shop.models.payment_account_models.AddCardOrBankResponse
 import com.mallzhub.shop.models.payment_account_models.BankOrCardListResponse
+import com.mallzhub.shop.models.product_stock.StockProductsDetails
+import com.mallzhub.shop.models.product_stock.StockProductsResponse
 import com.mallzhub.shop.models.registration.InquiryResponse
 import com.mallzhub.shop.models.registration.DefaultResponse
 import okhttp3.MultipartBody
@@ -183,4 +185,17 @@ interface ApiService {
         @Body jsonObject: JsonObject
     ): Response<List<MPOSOrderProduct>>
 
+    @Headers(ContentType)
+    @POST(ApiEndPoint.STOCK_PRODUCTS)
+    suspend fun getStockProduct(
+        @Query("page") page: String?,
+        @Body jsonObject: JsonObject
+    ): Response<StockProductsResponse>
+
+    @Headers(ContentType)
+    @POST(ApiEndPoint.STOCK_PRODUCTS_DETAILS)
+    suspend fun getStockProductDetails(
+        @Query("page") page: String?,
+        @Body jsonObject: JsonObject
+    ): Response<List<StockProductsDetails>>
 }

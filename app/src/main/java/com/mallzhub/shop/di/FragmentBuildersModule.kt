@@ -53,6 +53,9 @@ import com.mallzhub.shop.ui.profile_signin.ProfileSignInFragment
 import com.mallzhub.shop.ui.shops.ShopDetailsContactUsFragment
 import com.mallzhub.shop.ui.shops.ShopDetailsFragment
 import com.mallzhub.shop.ui.shops.ShopDetailsProductListFragment
+import com.mallzhub.shop.ui.stock_product.ReceiveProductFragment
+import com.mallzhub.shop.ui.stock_product.StockProductsDetailsFragment
+import com.mallzhub.shop.ui.stock_product.StockProductsFragment
 import com.mallzhub.shop.ui.topup.TopUpAmountFragment
 import com.mallzhub.shop.ui.topup.TopUpBankCardFragment
 import com.mallzhub.shop.ui.topup.TopUpMobileFragment
@@ -274,4 +277,13 @@ abstract class FragmentBuildersModule {
 
     @ContributesAndroidInjector
     abstract fun contributeMPOSOrderDetailsFragment(): MPOSOrderDetailsFragment
+
+    @ContributesAndroidInjector
+    abstract fun contributeStockProductsFragment(): StockProductsFragment
+
+    @ContributesAndroidInjector
+    abstract fun contributeStockProductsDetailsFragment(): StockProductsDetailsFragment
+
+    @ContributesAndroidInjector
+    abstract fun contributeReceiveProductFragment(): ReceiveProductFragment
 }
