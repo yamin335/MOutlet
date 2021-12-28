@@ -1,5 +1,6 @@
 package com.mallzhub.shop.api
 
+import com.google.gson.JsonArray
 import com.google.gson.JsonObject
 import com.mallzhub.shop.api.Api.ContentType
 import com.mallzhub.shop.models.*
@@ -12,6 +13,8 @@ import com.mallzhub.shop.models.order.OrderListResponse
 import com.mallzhub.shop.models.order.OrderStoreResponse
 import com.mallzhub.shop.models.payment_account_models.AddCardOrBankResponse
 import com.mallzhub.shop.models.payment_account_models.BankOrCardListResponse
+import com.mallzhub.shop.models.product_stock.ReceiveProductImageUploadResponse
+import com.mallzhub.shop.models.product_stock.ReceiveProductResponse
 import com.mallzhub.shop.models.product_stock.StockProductsDetails
 import com.mallzhub.shop.models.product_stock.StockProductsResponse
 import com.mallzhub.shop.models.registration.InquiryResponse
@@ -28,7 +31,10 @@ interface ApiService {
 
     @Multipart
     @POST(ApiEndPoint.INQUIRE)
-    suspend fun inquire(@Part("PhoneNumber") mobileNumber: RequestBody, @Part("DeviceId") deviceId: RequestBody): Response<InquiryResponse>
+    suspend fun inquire(
+        @Part("PhoneNumber") mobileNumber: RequestBody,
+        @Part("DeviceId") deviceId: RequestBody
+    ): Response<InquiryResponse>
 
     @Multipart
     @POST(ApiEndPoint.REQUESTOTP)
@@ -198,4 +204,13 @@ interface ApiService {
         @Query("page") page: String?,
         @Body jsonObject: JsonObject
     ): Response<List<StockProductsDetails>>
+
+    @POST(ApiEndPoint.RECEIVE_PRODUCT_IMAGE_UPLOAD)
+    suspend fun uploadReceiveProductImages(@Body partFormData: RequestBody): Response<ReceiveProductImageUploadResponse>
+
+    @Headers(ContentType)
+    @POST(ApiEndPoint.RECEIVE_PRODUCT)
+    suspend fun storeReceivedProduct(
+        @Body jsonArray: JsonArray
+    ): Response<ReceiveProductResponse>
 }

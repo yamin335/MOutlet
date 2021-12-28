@@ -2,9 +2,12 @@ package com.mallzhub.shop.local_db.db
 
 import androidx.room.TypeConverter
 import com.google.gson.Gson
+import com.google.gson.reflect.TypeToken
+import com.mallzhub.shop.models.Attribute
 import com.mallzhub.shop.models.OrderProduct
 import com.mallzhub.shop.models.Product
 import com.mallzhub.shop.models.ProductCategory
+import java.lang.reflect.Type
 
 class RoomDataConverter {
     private val gson by lazy {
@@ -39,6 +42,17 @@ class RoomDataConverter {
     @TypeConverter
     fun orderProductToJsonString(product: OrderProduct): String {
         return gson.toJson(product)
+    }
+
+    @TypeConverter
+    fun jsonStringToAttribute(value: String): List<Attribute> {
+        val listType: Type = object : TypeToken<List<Attribute>?>() {}.type
+        return gson.fromJson(value, listType)
+    }
+
+    @TypeConverter
+    fun attributeListToJsonString(attributeList: List<Attribute>): String {
+        return gson.toJson(attributeList)
     }
 
 //    @TypeConverter

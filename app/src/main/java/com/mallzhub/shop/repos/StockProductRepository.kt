@@ -1,15 +1,24 @@
 package com.mallzhub.shop.repos
 
+import com.google.gson.Gson
+import com.google.gson.JsonArray
 import com.google.gson.JsonObject
+import com.google.gson.JsonParser
 import com.mallzhub.shop.api.ApiService
 import com.mallzhub.shop.models.GiftPointRequestListResponse
 import com.mallzhub.shop.models.GiftPointsHistoryDetailsResponse
 import com.mallzhub.shop.models.ShopWiseGiftPointResponse
-import com.mallzhub.shop.models.product_stock.StockProductsDetails
-import com.mallzhub.shop.models.product_stock.StockProductsResponse
+import com.mallzhub.shop.models.add_product.AddProductResponse
+import com.mallzhub.shop.models.order.OrderStoreBody
+import com.mallzhub.shop.models.order.OrderStoreResponse
+import com.mallzhub.shop.models.product_stock.*
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
+import okhttp3.MediaType.Companion.toMediaTypeOrNull
+import okhttp3.MultipartBody
+import okhttp3.RequestBody.Companion.asRequestBody
 import retrofit2.Response
+import java.io.File
 import javax.inject.Inject
 import javax.inject.Singleton
 
@@ -31,6 +40,38 @@ class StockProductRepository @Inject constructor(private val apiService: ApiServ
         }
         return withContext(Dispatchers.IO) {
             apiService.getStockProductDetails("all", jsonObject)
+        }
+    }
+
+    suspend fun uploadReceiveProductImages(user_token: String?, save_modal: String?, return_var: String?,
+                                           type: String?, imagePaths: ArrayList<String>): Response<ReceiveProductImageUploadResponse> {
+
+        val requestBody = MultipartBody.Builder().setType(MultipartBody.FORM).apply {
+            addFormDataPart("user_token", user_token ?: "")
+            addFormDataPart("save_modal", save_modal ?: "")
+            addFormDataPart("return_var", return_var ?: "")
+            addFormDataPart("type", type ?: "")
+
+            imagePaths.forEachIndexed { index, imagePath ->
+                val imageFile = File(imagePath)
+                val fileRequestBody = imageFile.asRequestBody("multipart/form-data".toMediaTypeOrNull())
+                addFormDataPart("filename[$index]", imageFile.name, fileRequestBody)
+            }
+        }.build()
+
+        return withContext(Dispatchers.IO) {
+            apiService.uploadReceiveProductImages(requestBody)
+        }
+    }
+
+    suspend fun storeReceivedProduct(receiveProductStoreBody: ReceiveProductStoreBody): Response<ReceiveProductResponse> {
+        val jsonString = Gson().toJson(receiveProductStoreBody)
+        val jsonObject = JsonParser().parse(jsonString).asJsonObject
+        val jsonArray = JsonArray().apply {
+            add(jsonObject)
+        }
+        return withContext(Dispatchers.IO) {
+            apiService.storeReceivedProduct(jsonArray)
         }
     }
 }

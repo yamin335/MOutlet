@@ -226,37 +226,6 @@
                         android:layout_marginTop="16dp"
                         android:layout_marginEnd="16dp"
                         android:orientation="vertical"
-                        app:layout_constraintTop_toBottomOf="@+id/cardSpinnerCategory">
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="Product Name"
-                            android:textColor="#555555"
-                            android:textSize="12sp" />
-
-                        <EditText
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="8dp"
-                            android:background="@drawable/rounded_bg_common_edittext_gray"
-                            android:hint="name"
-                            android:imeOptions="actionNext"
-                            android:inputType="text"
-                            android:paddingStart="16dp"
-                            android:paddingTop="10dp"
-                            android:paddingEnd="8dp"
-                            android:paddingBottom="10dp"
-                            android:text="@={viewModel.name}" />
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="16dp"
-                        android:layout_marginTop="16dp"
-                        android:layout_marginEnd="16dp"
-                        android:orientation="vertical"
                         app:layout_constraintTop_toBottomOf="@+id/llName">
 
                         <TextView
@@ -318,38 +287,6 @@
                         android:layout_marginStart="16dp"
                         android:layout_marginTop="16dp"
                         android:layout_marginEnd="16dp"
-                        android:orientation="vertical"
-                        app:layout_constraintTop_toBottomOf="@+id/llName">
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="MRP"
-                            android:textColor="#555555"
-                            android:textSize="12sp" />
-
-                        <EditText
-                            android:id="@+id/price"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="8dp"
-                            android:background="@drawable/rounded_bg_common_edittext_gray"
-                            android:hint="mrp"
-                            android:imeOptions="actionNext"
-                            android:inputType="numberDecimal"
-                            android:paddingStart="16dp"
-                            android:paddingTop="10dp"
-                            android:paddingEnd="8dp"
-                            android:paddingBottom="10dp"
-                            android:text="@={viewModel.mrp}" />
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="16dp"
-                        android:layout_marginTop="16dp"
-                        android:layout_marginEnd="16dp"
                         android:layout_marginBottom="16dp"
                         android:orientation="vertical"
                         app:layout_constraintBottom_toTopOf="@+id/btnAddProduct"
@@ -380,14 +317,14 @@
                     </LinearLayout>
 
                     <com.google.android.material.button.MaterialButton
-                        android:id="@+id/btnAddProduct"
+                        android:id="@+id/btnReceiveProduct"
                         style="@style/Widget.MaterialComponents.Button.UnelevatedButton"
                         android:layout_width="match_parent"
                         android:layout_height="50dp"
                         android:layout_marginStart="16dp"
                         android:layout_marginEnd="16dp"
                         android:layout_marginBottom="64dp"
-                        android:text="Add Product"
+                        android:text="Receive Product"
                         android:textColor="@android:color/white"
                         android:textSize="16sp"
                         app:backgroundTint="#E5525D"

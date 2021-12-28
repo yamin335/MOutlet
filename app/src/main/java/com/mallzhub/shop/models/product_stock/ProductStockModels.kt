@@ -38,3 +38,45 @@ data class StockProductsDetails(val id: Int?, val product_id: Int?, val product_
                           val receive_date: String?, val barcode: String?, val created_at: String?, 
                           val updated_at: String?, val image: String?, val selling_price: Int?,
                           val buying_price: Int?, val attributes: List<Attribute>?)
+
+data class ReceiveProductImageUploadResponse(val code: Int?, val data: ReceiveProductImageUploadResponseData?,
+                                             val files: List<Any>?, val path: String?)
+
+data class ReceiveProductImageUploadResponseData(val filelists: List<String>?)
+
+// result generated from /json
+
+data class ReceiveProductResponse(val code: Int?, val status: String?, val message: String?, val data: ReceiveProductResponseData?,
+                val barcode: Long?, val detail: ReceiveProductDetailData?, val pd: ReceiveProductPd?)
+
+data class ReceiveProductResponseData(val id: Int?, val product_id: Int?, val name: String?, val qty: Int?,
+                val mrp: Int?, val buying_price: String?, val selling_price: String?,
+                val lot: String?, val branch_id: Int?, val warehouse_id: Any?,
+                val expire_date: String?, val created_at: String?, val updated_at: String?,
+                val merchant_id: Int?, val is_opening_stock: Int?)
+
+data class ReceiveProductDetailData(val id: Int?, val purchase_id: Int?, val product_id: Int?,
+                  val description: String?, val linkTo: Any?, val unitType: String?,
+                  val qty: Int?, val total_received: Int?, val return_qty: Int?,
+                  val unit_price: Int?, val sub_total: Int?, val taxType: String?,
+                  val taxTypeValue: Int?, val discountType: String?, val discountTypeValue: Int?,
+                  val type: Any?, val created_at: String?, val updated_at: String?, val merchant_id: Int?)
+
+data class ReceiveProductPd(val id: Int?, val merchant_id: Int?, val vendor_id: Int?, val salesman_id: Any?,
+              val branch_id: Int?, val date: String?, val YourReference: String?, val OurReference: String?,
+              val status: String?, val amount_are: Any?, val customer_note: Any?, val cart_total: Int?,
+              val discount_amount: Any?, val discount: Any?, val discount_type: String?, val file_name: String?,
+              val tax: Int?, val tax_amount: Any?, val vat: Int?, val vat_amount: Any?,
+              val tax_type_total: Double?, val discount_total: Double?, val grand_total: Double?,
+              val paid_amount: Int?, val due_amount: Int?, val created_at: String?,
+              val updated_at: String?, val received_status: Int?)
+
+data class ReceiveProductStoreBody(val id: Int?, val purchase_id: Int?, var product_id: Int?,
+                                   var description: String?, val linkTo: Any?, var unitType: String?,
+                                   var qty: Int?, var total_received: Int?, val return_qty: Int?,
+                                   var unit_price: Int?, var sub_total: Int?, val taxType: String?,
+                                   val taxTypeValue: Int?, val discountType: String?, val discountTypeValue: Int?,
+                                   val type: Any?, val created_at: String?, val updated_at: String?,
+                                   var merchant_id: Int?, var product: Product?, var buying_price: String?,
+                                   var selling_price: String?, val expire_date: String?, val receive: Int?,
+                                   var attributes: List<Attribute>?, var images: String?)

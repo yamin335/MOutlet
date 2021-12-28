@@ -1,12 +1,17 @@
 package com.mallzhub.shop.ui.stock_product
 
 import android.app.Application
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.mallzhub.shop.api.*
 import com.mallzhub.shop.models.Product
+import com.mallzhub.shop.models.ProductDetailsResponse
 import com.mallzhub.shop.models.add_product.AddProductResponse
+import com.mallzhub.shop.models.product_stock.ReceiveProductResponse
+import com.mallzhub.shop.models.product_stock.ReceiveProductStoreBody
 import com.mallzhub.shop.repos.HomeRepository
+import com.mallzhub.shop.repos.StockProductRepository
 import com.mallzhub.shop.ui.common.BaseViewModel
 import com.mallzhub.shop.util.AppConstants
 import kotlinx.coroutines.CoroutineExceptionHandler
@@ -15,23 +20,17 @@ import javax.inject.Inject
 
 class ReceiveProductViewModel @Inject constructor(
     private val application: Application,
+    private val stockProductRepository: StockProductRepository,
     private val homeRepository: HomeRepository
 ) : BaseViewModel(application) {
 
     val selectedProduct: MutableLiveData<MutableList<Product>> by lazy {
         MutableLiveData<MutableList<Product>>()
     }
-
-    val name: MutableLiveData<String> by lazy {
-        MutableLiveData<String>()
-    }
     val buyingPrice: MutableLiveData<String> by lazy {
         MutableLiveData<String>()
     }
     val sellingPrice: MutableLiveData<String> by lazy {
-        MutableLiveData<String>()
-    }
-    val mrp: MutableLiveData<String> by lazy {
         MutableLiveData<String>()
     }
     val expiredDate: MutableLiveData<String> by lazy {
@@ -41,13 +40,12 @@ class ReceiveProductViewModel @Inject constructor(
         MutableLiveData<String>()
     }
 
-    val addProductResponse: MutableLiveData<AddProductResponse> by lazy {
-        MutableLiveData<AddProductResponse>()
+    val imageUploadResponse: MutableLiveData<List<String>> by lazy {
+        MutableLiveData<List<String>>()
     }
 
-    fun addProduct(thumbnail: String?, sampleImage1: String?, sampleImage2: String?,
-                   sampleImage3: String?, sampleImage4: String?, sampleImage5: String?,
-                   categoryId: Int, merchantId: Int, token: String?) {
+    fun uploadReceiveProductImages(user_token: String?, save_modal: String?, return_var: String?,
+                   type: String?, imagePaths: ArrayList<String>) {
         if (checkNetworkStatus()) {
             val handler = CoroutineExceptionHandler { _, exception ->
                 exception.printStackTrace()
@@ -57,13 +55,15 @@ class ReceiveProductViewModel @Inject constructor(
 
             apiCallStatus.postValue(ApiCallStatus.LOADING)
             viewModelScope.launch(handler) {
-                when (val apiResponse = ApiResponse.create(homeRepository.addProduct(thumbnail, sampleImage1,
-                    sampleImage2, sampleImage3, sampleImage4, sampleImage5, name.value, "",
-                    description.value, buyingPrice.value, sellingPrice.value, mrp.value, expiredDate.value,
-                    categoryId, merchantId, token))) {
+                when (val apiResponse = ApiResponse.create(
+                    stockProductRepository.uploadReceiveProductImages(
+                        user_token, save_modal,
+                        return_var, type, imagePaths
+                    )
+                )) {
                     is ApiSuccessResponse -> {
                         apiCallStatus.postValue(ApiCallStatus.SUCCESS)
-                        addProductResponse.postValue(apiResponse.body)
+                        imageUploadResponse.postValue(apiResponse.body.data?.filelists)
                     }
                     is ApiEmptyResponse -> {
                         apiCallStatus.postValue(ApiCallStatus.EMPTY)
@@ -74,6 +74,62 @@ class ReceiveProductViewModel @Inject constructor(
                 }
             }
         }
+    }
+
+    fun getProductDetails(id: Int?): LiveData<ProductDetailsResponse> {
+        val productDetails: MutableLiveData<ProductDetailsResponse> = MutableLiveData()
+        if (checkNetworkStatus()) {
+            val handler = CoroutineExceptionHandler { _, exception ->
+                exception.printStackTrace()
+                apiCallStatus.postValue(ApiCallStatus.ERROR)
+                toastError.postValue(AppConstants.serverConnectionErrorMessage)
+            }
+
+            apiCallStatus.postValue(ApiCallStatus.LOADING)
+            viewModelScope.launch(handler) {
+                when (val apiResponse = ApiResponse.create(homeRepository.getProductDetailsRepo(id))) {
+                    is ApiSuccessResponse -> {
+                        apiCallStatus.postValue(ApiCallStatus.SUCCESS)
+                        productDetails.postValue(apiResponse.body)
+                    }
+                    is ApiEmptyResponse -> {
+                        apiCallStatus.postValue(ApiCallStatus.EMPTY)
+                    }
+                    is ApiErrorResponse -> {
+                        apiCallStatus.postValue(ApiCallStatus.ERROR)
+                    }
+                }
+            }
+        }
+        return productDetails
+    }
+
+    fun storeReceivedProduct(receiveProductStoreBody: ReceiveProductStoreBody): LiveData<ReceiveProductResponse> {
+        val productDetails: MutableLiveData<ReceiveProductResponse> = MutableLiveData()
+        if (checkNetworkStatus()) {
+            val handler = CoroutineExceptionHandler { _, exception ->
+                exception.printStackTrace()
+                apiCallStatus.postValue(ApiCallStatus.ERROR)
+                toastError.postValue(AppConstants.serverConnectionErrorMessage)
+            }
+
+            apiCallStatus.postValue(ApiCallStatus.LOADING)
+            viewModelScope.launch(handler) {
+                when (val apiResponse = ApiResponse.create(stockProductRepository.storeReceivedProduct(receiveProductStoreBody))) {
+                    is ApiSuccessResponse -> {
+                        apiCallStatus.postValue(ApiCallStatus.SUCCESS)
+                        productDetails.postValue(apiResponse.body)
+                    }
+                    is ApiEmptyResponse -> {
+                        apiCallStatus.postValue(ApiCallStatus.EMPTY)
+                    }
+                    is ApiErrorResponse -> {
+                        apiCallStatus.postValue(ApiCallStatus.ERROR)
+                    }
+                }
+            }
+        }
+        return productDetails
     }
 
 }

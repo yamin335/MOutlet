@@ -58,6 +58,8 @@ object ApiEndPoint {
 
     const val STOCK_PRODUCTS = "/$API_REPO/product-ledger/bypage"
     const val STOCK_PRODUCTS_DETAILS = "/$API_REPO/show/barcode/attributes/bydetails"
+    const val RECEIVE_PRODUCT_IMAGE_UPLOAD = "/$API_REPO/lot-receive/images"
+    const val RECEIVE_PRODUCT = "/$API_REPO/lot-receive"
 }
 
 object ResponseCodes {

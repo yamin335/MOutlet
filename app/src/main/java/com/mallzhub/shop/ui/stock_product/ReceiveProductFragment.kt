@@ -12,42 +12,40 @@ import android.os.Environment
 import android.provider.MediaStore
 import android.view.MenuItem
 import android.view.View
-import android.widget.AdapterView
-import android.widget.ArrayAdapter
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AlertDialog
 import androidx.core.content.ContextCompat
 import androidx.core.content.FileProvider
-import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.Observer
 import androidx.navigation.fragment.navArgs
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.target.CustomTarget
 import com.bumptech.glide.request.transition.Transition
-import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.mallzhub.shop.BR
 import com.mallzhub.shop.BuildConfig
 import com.mallzhub.shop.R
 import com.mallzhub.shop.api.ApiCallStatus
 import com.mallzhub.shop.databinding.ReceiveProductFragmentBinding
 import com.mallzhub.shop.models.Product
+import com.mallzhub.shop.models.product_stock.ReceiveProductStoreBody
 import com.mallzhub.shop.ui.add_product.AllProductListAdapter
-import com.mallzhub.shop.ui.add_product.AllProductsFragmentDirections
 import com.mallzhub.shop.ui.add_product.SampleImageListAdapter
 import com.mallzhub.shop.ui.common.BaseFragment
-import com.mallzhub.shop.ui.order.CreateOrderFragmentDirections
 import com.mallzhub.shop.ui.products.SelectProductFragment
 import com.mallzhub.shop.util.BitmapUtilss
 import com.mallzhub.shop.util.PermissionUtils.isCameraAndGalleryPermissionGranted
 import com.mallzhub.shop.util.PermissionUtils.isCameraPermission
 import com.mallzhub.shop.util.PermissionUtils.isGalleryPermission
 import com.mallzhub.shop.util.addNewItem
-import com.mallzhub.shop.util.toRounded
+import com.mallzhub.shop.util.showSuccessToast
 import java.io.File
 import java.io.IOException
 import java.text.SimpleDateFormat
-import java.util.*
+import java.util.Locale
+import java.util.Date
+import kotlin.collections.ArrayList
 
 const val PERMISSION_REQUEST_CODE = 111
 private const val FEATURE_IMAGE = 1
@@ -80,14 +78,25 @@ class ReceiveProductFragment : BaseFragment<ReceiveProductFragmentBinding, Recei
 
     val args: ReceiveProductFragmentArgs by navArgs()
     var isEditMode = false
+    lateinit var receiveProductStoreBody: ReceiveProductStoreBody
 
     override fun onResume() {
         super.onResume()
-        SelectProductFragment.selectedProduct?.let {
+        SelectProductFragment.selectedProduct?.let { product ->
             val list = viewModel.selectedProduct.value ?: mutableListOf()
-            if (!list.contains(it)) {
-                it.available_qty = 1
-                viewModel.selectedProduct.addNewItem(it)
+            if (!list.contains(product)) {
+                product.available_qty = 1
+                viewModel.selectedProduct.addNewItem(product)
+                receiveProductStoreBody.product = product
+                viewModel.getProductDetails(product.id).observe(viewLifecycleOwner, Observer { response ->
+                    response?.let {
+                        receiveProductStoreBody.product_id = product.id
+                        receiveProductStoreBody.unit_price = product.selling_price?.toInt()
+                        receiveProductStoreBody.qty = 1
+                        receiveProductStoreBody.sub_total = 1 * (receiveProductStoreBody.unit_price ?: 0)
+                        receiveProductStoreBody.attributes = response.data?.attributes
+                    }
+                })
             }
             SelectProductFragment.selectedProduct = null
         }
@@ -101,6 +110,12 @@ class ReceiveProductFragment : BaseFragment<ReceiveProductFragmentBinding, Recei
             requireContext(),
             R.drawable.image_placeholder
         )
+
+        receiveProductStoreBody = ReceiveProductStoreBody(3, 3, 0,
+            "", "", "", 0, 0, 0, 0,
+            0, "", 0, "", 0, "",
+            "", "", 0, null, "", "",
+            "", 1, null, "")
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -200,14 +215,8 @@ class ReceiveProductFragment : BaseFragment<ReceiveProductFragmentBinding, Recei
             }
         }
 
-        viewModel.addProductResponse.observe(viewLifecycleOwner, androidx.lifecycle.Observer { response ->
-            response?.let {
-                if (it.data != null) navController.popBackStack()
-            }
-        })
-
-        viewModel.apiCallStatus.observe(viewLifecycleOwner, androidx.lifecycle.Observer {
-            viewDataBinding.btnAddProduct.isEnabled = it != ApiCallStatus.LOADING
+        viewModel.apiCallStatus.observe(viewLifecycleOwner, Observer {
+            viewDataBinding.btnReceiveProduct.isEnabled = it != ApiCallStatus.LOADING
         })
 
         if (isEditMode) {
@@ -306,10 +315,8 @@ class ReceiveProductFragment : BaseFragment<ReceiveProductFragmentBinding, Recei
                     }
                 })
 
-            viewModel.name.postValue(item.name)
             viewModel.buyingPrice.postValue(item.buying_price?.toString())
             viewModel.sellingPrice.postValue(item.selling_price?.toString())
-            viewModel.mrp.postValue(item.mrp?.toString())
             viewModel.expiredDate.postValue(item.expired_date)
             viewModel.description.postValue(item.description)
         }
@@ -329,92 +336,71 @@ class ReceiveProductFragment : BaseFragment<ReceiveProductFragmentBinding, Recei
             }
         })
 
-//        viewDataBinding.btnAddProduct.setOnClickListener {
-//            val sampleImages = sampleImageAdapter.getImageList()
-//            if (BitmapUtilss.makeEmptyFolderIntoExternalStorageWithTitle(requireContext(), IMAGE_FOLDER_NAME)) {
-//                var thumbPath: String? = null
-//                var image1Path: String? = null
-//                var image2Path: String? = null
-//                var image3Path: String? = null
-//                var image4Path: String? = null
-//                var image5Path: String? = null
-//
-//                featureImage?.let {
-//                    val file = BitmapUtilss.makeEmptyFileIntoExternalStorageWithTitle(requireContext(), IMAGE_FOLDER_NAME, "thumbnail.jpg")
-//                    if (file.exists()) file.delete()
-//
-//                    try {
-//                        BitmapUtilss.saveBitmapFileIntoExternalStorageWithTitle(it, file)
-//                    } catch (e: IOException) {
-//                        return@let
-//                    }
-//                    thumbPath = file.path
-//                }
-//
-//                sampleImages[0]?.let {
-//                    val file = BitmapUtilss.makeEmptyFileIntoExternalStorageWithTitle(requireContext(), IMAGE_FOLDER_NAME, "product_image1.jpg")
-//                    if (file.exists()) file.delete()
-//
-//                    try {
-//                        BitmapUtilss.saveBitmapFileIntoExternalStorageWithTitle(it, file)
-//                    } catch (e: IOException) {
-//                        return@let
-//                    }
-//                    image1Path = file.path
-//                }
-//
-//                sampleImages[1]?.let {
-//                    val file = BitmapUtilss.makeEmptyFileIntoExternalStorageWithTitle(requireContext(), IMAGE_FOLDER_NAME, "product_image2.jpg")
-//                    if (file.exists()) file.delete()
-//
-//                    try {
-//                        BitmapUtilss.saveBitmapFileIntoExternalStorageWithTitle(it, file)
-//                    } catch (e: IOException) {
-//                        return@let
-//                    }
-//                    image2Path = file.path
-//                }
-//
-//                sampleImages[2]?.let {
-//                    val file = BitmapUtilss.makeEmptyFileIntoExternalStorageWithTitle(requireContext(), IMAGE_FOLDER_NAME, "product_image3.jpg")
-//                    if (file.exists()) file.delete()
-//
-//                    try {
-//                        BitmapUtilss.saveBitmapFileIntoExternalStorageWithTitle(it, file)
-//                    } catch (e: IOException) {
-//                        return@let
-//                    }
-//                    image3Path = file.path
-//                }
-//
-//                sampleImages[3]?.let {
-//                    val file = BitmapUtilss.makeEmptyFileIntoExternalStorageWithTitle(requireContext(), IMAGE_FOLDER_NAME, "product_image4.jpg")
-//                    if (file.exists()) file.delete()
-//
-//                    try {
-//                        BitmapUtilss.saveBitmapFileIntoExternalStorageWithTitle(it, file)
-//                    } catch (e: IOException) {
-//                        return@let
-//                    }
-//                    image4Path = file.path
-//                }
-//
-//                sampleImages[4]?.let {
-//                    val file = BitmapUtilss.makeEmptyFileIntoExternalStorageWithTitle(requireContext(), IMAGE_FOLDER_NAME, "product_image5.jpg")
-//                    if (file.exists()) file.delete()
-//
-//                    try {
-//                        BitmapUtilss.saveBitmapFileIntoExternalStorageWithTitle(it, file)
-//                    } catch (e: IOException) {
-//                        return@let
-//                    }
-//                    image5Path = file.path
-//                }
-//
-//
-//                viewModel.addProduct(thumbPath, image1Path, image2Path, image3Path, image4Path, image5Path,1, preferencesHelper.merchantId, preferencesHelper.getMerchant().token)
-//            }
-//        }
+        viewModel.imageUploadResponse.observe(viewLifecycleOwner, Observer { response ->
+            response?.let { imageNames ->
+                var images = ""
+                imageNames.forEach { imageName ->
+                    images = if (images.isBlank()) imageName else "$images,$imageName"
+                }
+                receiveProductStoreBody.images = images
+                receiveProductStoreBody.description = viewModel.description.value
+                receiveProductStoreBody.buying_price = viewModel.buyingPrice.value
+                receiveProductStoreBody.selling_price = viewModel.sellingPrice.value
+                receiveProductStoreBody.unitType = "1"
+                receiveProductStoreBody.total_received = 1
+                receiveProductStoreBody.merchant_id = preferencesHelper.merchantId
+
+                viewModel.storeReceivedProduct(
+                    receiveProductStoreBody
+                ).observe(viewLifecycleOwner, Observer { storeResponse ->
+                    if (storeResponse.data != null) {
+                        showSuccessToast(requireContext(), "Product stored successfully!")
+                        navController.popBackStack()
+                    }
+                })
+            }
+        })
+
+        viewDataBinding.btnReceiveProduct.setOnClickListener {
+            val imagePaths = ArrayList<String>()
+            val sampleImages = sampleImageAdapter.getImageList()
+            viewModel.apiCallStatus.postValue(ApiCallStatus.LOADING)
+            if (BitmapUtilss.makeEmptyFolderIntoExternalStorageWithTitle(requireContext(), IMAGE_FOLDER_NAME)) {
+                featureImage?.let {
+                    val file = BitmapUtilss.makeEmptyFileIntoExternalStorageWithTitle(requireContext(), IMAGE_FOLDER_NAME, "thumbnail.jpg")
+                    if (file.exists()) file.delete()
+
+                    try {
+                        BitmapUtilss.saveBitmapFileIntoExternalStorageWithTitle(it, file)
+                    } catch (e: IOException) {
+                        viewModel.apiCallStatus.postValue(ApiCallStatus.ERROR)
+                        return@let
+                    }
+                    imagePaths.add(file.path)
+                }
+
+                sampleImages.forEachIndexed { index, bitmap ->
+                    bitmap?.let {
+                        val file = BitmapUtilss.makeEmptyFileIntoExternalStorageWithTitle(requireContext(), IMAGE_FOLDER_NAME, "product_image$index.jpg")
+                        if (file.exists()) file.delete()
+
+                        try {
+                            BitmapUtilss.saveBitmapFileIntoExternalStorageWithTitle(it, file)
+                        } catch (e: IOException) {
+                            viewModel.apiCallStatus.postValue(ApiCallStatus.ERROR)
+                            return@let
+                        }
+                        imagePaths.add(file.path)
+                    }
+                }
+
+                viewModel.uploadReceiveProductImages(
+                    preferencesHelper.getMerchant().token,
+                    "stock_barcode", "filelists",
+                    "multi", imagePaths
+                )
+            }
+        }
 
     }
 
