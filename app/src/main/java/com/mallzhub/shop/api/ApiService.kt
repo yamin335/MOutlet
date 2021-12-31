@@ -17,6 +17,7 @@ import com.mallzhub.shop.models.product_stock.ReceiveProductImageUploadResponse
 import com.mallzhub.shop.models.product_stock.ReceiveProductResponse
 import com.mallzhub.shop.models.product_stock.StockProductsDetails
 import com.mallzhub.shop.models.product_stock.StockProductsResponse
+import com.mallzhub.shop.models.purchase_list.PurchaseListResponse
 import com.mallzhub.shop.models.registration.InquiryResponse
 import com.mallzhub.shop.models.registration.DefaultResponse
 import okhttp3.MultipartBody
@@ -213,4 +214,9 @@ interface ApiService {
     suspend fun storeReceivedProduct(
         @Body jsonArray: JsonArray
     ): Response<ReceiveProductResponse>
+
+    @GET(ApiEndPoint.PURCHASE_LIST)
+    suspend fun getPurchaseList(
+        @Query("page") page: Int?,
+        @Query("token") token: String?): Response<PurchaseListResponse>
 }

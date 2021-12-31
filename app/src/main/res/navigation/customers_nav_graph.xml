@@ -21,5 +21,13 @@
         android:id="@+id/addCustomerFragment"
         android:name="com.mallzhub.shop.ui.customers.AddCustomerFragment"
         android:label="Add New Customer"
-        tools:layout="@layout/fragment_add_customer"/>
+        tools:layout="@layout/fragment_add_customer">
+        <argument
+            android:name="isDetails"
+            app:argType="boolean" />
+        <argument
+            android:name="customer"
+            app:argType="com.mallzhub.shop.models.customers.Customer"
+            app:nullable="true" />
+    </fragment>
 </navigation>

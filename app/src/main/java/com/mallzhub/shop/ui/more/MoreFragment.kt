@@ -98,6 +98,10 @@ class MoreFragment : BaseFragment<MoreFragmentBinding, MoreViewModel>() {
             navigateTo(MoreFragmentDirections.actionMoreFragmentToStockProductsFragment())
         }
 
+        viewDataBinding.menuPurchaseList.setOnClickListener {
+            navigateTo(MoreFragmentDirections.actionMoreFragmentToProductPurchaseFragment())
+        }
+
     }
 
 }

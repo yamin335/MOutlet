@@ -6,6 +6,7 @@ import android.view.View
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.navArgs
 import com.mallzhub.shop.BR
 import com.mallzhub.shop.R
 import com.mallzhub.shop.databinding.AddCustomerFragmentBinding
@@ -22,6 +23,8 @@ class AddCustomerFragment : BaseFragment<AddCustomerFragmentBinding, AddCustomer
         viewModelFactory
     }
 
+    val args: AddCustomerFragmentArgs by navArgs()
+
     var cityList = arrayOf("Select City", "Dhaka", "Khulna", "Chattogram", "Cumilla", "Rajshahi", "Barishal", "Rangpur")
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -32,6 +35,25 @@ class AddCustomerFragment : BaseFragment<AddCustomerFragmentBinding, AddCustomer
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         registerToolbar(viewDataBinding.toolbar)
+
+        if (args.isDetails) {
+            val customer = args.customer
+            viewDataBinding.cardSpinnerCity.visibility = View.GONE
+            viewDataBinding.btnAdd.visibility = View.GONE
+            viewDataBinding.etName.isEnabled = false
+            viewDataBinding.etMobile.isEnabled = false
+            viewDataBinding.etEmail.isEnabled = false
+            viewDataBinding.etContactPerson.isEnabled = false
+            viewDataBinding.etDiscountAmount.isEnabled = false
+            viewDataBinding.etAddress.isEnabled = false
+
+            viewDataBinding.etName.setText(customer?.name)
+            viewDataBinding.etMobile.setText(customer?.phone)
+            viewDataBinding.etEmail.setText(customer?.email)
+            viewDataBinding.etContactPerson.setText(customer?.contact_person)
+            viewDataBinding.etDiscountAmount.setText(customer?.discountAmount?.toString())
+            viewDataBinding.etAddress.setText(customer?.address)
+        }
 
         val cityAdapter = ArrayAdapter(requireContext(), R.layout.spinner_item, cityList)
         cityAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)

@@ -50,6 +50,7 @@ import com.mallzhub.shop.ui.otp_signin.OtpSignInFragment
 import com.mallzhub.shop.ui.pin_number.PinNumberFragment
 import com.mallzhub.shop.ui.products.SelectProductFragment
 import com.mallzhub.shop.ui.profile_signin.ProfileSignInFragment
+import com.mallzhub.shop.ui.purchase_list.ProductPurchaseFragment
 import com.mallzhub.shop.ui.shops.ShopDetailsContactUsFragment
 import com.mallzhub.shop.ui.shops.ShopDetailsFragment
 import com.mallzhub.shop.ui.shops.ShopDetailsProductListFragment
@@ -286,4 +287,7 @@ abstract class FragmentBuildersModule {
 
     @ContributesAndroidInjector
     abstract fun contributeReceiveProductFragment(): ReceiveProductFragment
+
+    @ContributesAndroidInjector
+    abstract fun contributeProductPurchaseFragment(): ProductPurchaseFragment
 }

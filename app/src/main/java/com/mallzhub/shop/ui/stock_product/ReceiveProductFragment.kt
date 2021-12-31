@@ -35,6 +35,7 @@ import com.mallzhub.shop.ui.add_product.SampleImageListAdapter
 import com.mallzhub.shop.ui.common.BaseFragment
 import com.mallzhub.shop.ui.products.SelectProductFragment
 import com.mallzhub.shop.util.BitmapUtilss
+import com.mallzhub.shop.util.DatePickerDialogFragment
 import com.mallzhub.shop.util.PermissionUtils.isCameraAndGalleryPermissionGranted
 import com.mallzhub.shop.util.PermissionUtils.isCameraPermission
 import com.mallzhub.shop.util.PermissionUtils.isGalleryPermission
@@ -74,6 +75,8 @@ class ReceiveProductFragment : BaseFragment<ReceiveProductFragmentBinding, Recei
 
     lateinit var selectedProductListAdapter: AllProductListAdapter
 
+    lateinit var attributeEditListAdapter: AttributeEditListAdapter
+
     var product: Product? = null
 
     val args: ReceiveProductFragmentArgs by navArgs()
@@ -86,6 +89,7 @@ class ReceiveProductFragment : BaseFragment<ReceiveProductFragmentBinding, Recei
             val list = viewModel.selectedProduct.value ?: mutableListOf()
             if (!list.contains(product)) {
                 product.available_qty = 1
+                viewModel.selectedProduct.value?.clear()
                 viewModel.selectedProduct.addNewItem(product)
                 receiveProductStoreBody.product = product
                 viewModel.getProductDetails(product.id).observe(viewLifecycleOwner, Observer { response ->
@@ -95,6 +99,15 @@ class ReceiveProductFragment : BaseFragment<ReceiveProductFragmentBinding, Recei
                         receiveProductStoreBody.qty = 1
                         receiveProductStoreBody.sub_total = 1 * (receiveProductStoreBody.unit_price ?: 0)
                         receiveProductStoreBody.attributes = response.data?.attributes
+                        val attributes = response.data?.attributes
+                        if (attributes.isNullOrEmpty()) {
+                            viewDataBinding.labelAttributes.visibility = View.GONE
+                            viewDataBinding.recyclerAttributes.visibility = View.GONE
+                        } else {
+                            viewDataBinding.labelAttributes.visibility = View.VISIBLE
+                            viewDataBinding.recyclerAttributes.visibility = View.VISIBLE
+                            attributeEditListAdapter.submitList(attributes)
+                        }
                     }
                 })
             }
@@ -123,6 +136,9 @@ class ReceiveProductFragment : BaseFragment<ReceiveProductFragmentBinding, Recei
         registerToolbar(viewDataBinding.toolbar)
 
         isEditMode = args.isEdit
+
+        attributeEditListAdapter = AttributeEditListAdapter()
+        viewDataBinding.recyclerAttributes.adapter = attributeEditListAdapter
 
         selectedProductListAdapter = AllProductListAdapter(
             appExecutors
@@ -329,7 +345,7 @@ class ReceiveProductFragment : BaseFragment<ReceiveProductFragmentBinding, Recei
         viewModel.selectedProduct.observe(viewLifecycleOwner, androidx.lifecycle.Observer { orderItems ->
             orderItems?.let {
                 val size = viewModel.selectedProduct.value?.size ?: 0
-                viewDataBinding.btnSelectProduct.visibility = if (size > 0) View.INVISIBLE else View.VISIBLE
+                //viewDataBinding.btnSelectProduct.visibility = if (size > 0) View.INVISIBLE else View.VISIBLE
                 showHideDataView()
                 selectedProductListAdapter.submitList(it)
                 selectedProductListAdapter.notifyDataSetChanged()
@@ -361,9 +377,18 @@ class ReceiveProductFragment : BaseFragment<ReceiveProductFragmentBinding, Recei
             }
         })
 
+        viewDataBinding.btnExpiryDate.setOnClickListener {
+            DatePickerDialogFragment({ year, month, day ->
+                val date = "${year}/${(if (month < 10) "0$month" else "$month")}/${(if (day < 10) "0$day" else "$day")}"
+                viewDataBinding.btnExpiryDate.text = date
+                receiveProductStoreBody.expire_date = date
+            }, null, null, null).show(childFragmentManager, "#DatePickerDialogFragment")
+        }
+
         viewDataBinding.btnReceiveProduct.setOnClickListener {
             val imagePaths = ArrayList<String>()
             val sampleImages = sampleImageAdapter.getImageList()
+            receiveProductStoreBody.attributes = attributeEditListAdapter.getItemList()
             viewModel.apiCallStatus.postValue(ApiCallStatus.LOADING)
             if (BitmapUtilss.makeEmptyFolderIntoExternalStorageWithTitle(requireContext(), IMAGE_FOLDER_NAME)) {
                 featureImage?.let {

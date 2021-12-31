@@ -225,15 +225,39 @@
                         android:layout_marginStart="16dp"
                         android:layout_marginTop="16dp"
                         android:layout_marginEnd="16dp"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Expiry Date" />
+
+                        <com.google.android.material.button.MaterialButton
+                            android:id="@+id/btnExpiryDate"
+                            style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="@string/year_month_day"
+                            android:textAllCaps="false"
+                            android:layout_marginStart="16dp"
+                            android:textColor="@color/textColorNormal"
+                            app:rippleColor="@color/white" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="16dp"
+                        android:layout_marginTop="16dp"
+                        android:layout_marginEnd="16dp"
                         android:orientation="vertical"
                         app:layout_constraintTop_toBottomOf="@+id/llName">
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Buying Price"
-                            android:textColor="#555555"
-                            android:textSize="12sp" />
+                            android:text="Buying Price" />
 
                         <EditText
                             android:layout_width="match_parent"
@@ -262,9 +286,7 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Selling Price"
-                            android:textColor="#555555"
-                            android:textSize="12sp" />
+                            android:text="Selling Price" />
 
                         <EditText
                             android:layout_width="match_parent"
@@ -284,8 +306,38 @@
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="16dp"
                         android:layout_marginTop="16dp"
+                        android:orientation="vertical"
+                        app:layout_constraintTop_toBottomOf="@+id/llName">
+
+                        <TextView
+                            android:id="@+id/labelAttributes"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Attributes"
+                            android:visibility="gone"
+                            android:layout_marginStart="16dp"
+                            android:layout_marginEnd="16dp"/>
+
+                        <androidx.recyclerview.widget.RecyclerView
+                            android:id="@+id/recyclerAttributes"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:clipToPadding="false"
+                            android:orientation="vertical"
+                            android:visibility="gone"
+                            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/textView4"
+                            tools:itemCount="3"
+                            tools:listitem="@layout/list_item_edit_product_attributes" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="16dp"
                         android:layout_marginEnd="16dp"
                         android:layout_marginBottom="16dp"
                         android:orientation="vertical"
@@ -298,9 +350,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="16dp"
-                            android:text="Product Description"
-                            android:textColor="#555555"
-                            android:textSize="12sp" />
+                            android:text="Product Description"/>
 
                         <EditText
                             android:layout_width="match_parent"

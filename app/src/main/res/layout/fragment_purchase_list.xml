@@ -3,10 +3,10 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
-    <data class="StockProductFragmentBinding">
+    <data class="PurchaseListFragmentBinding">
         <variable
             name="viewModel"
-            type="com.mallzhub.shop.ui.stock_product.StockProductsViewModel" />
+            type="com.mallzhub.shop.ui.purchase_list.PurchaseListFragmentViewModel" />
     </data>
 
     <RelativeLayout
@@ -21,7 +21,7 @@
             android:background="@color/themeColor"
             android:theme="@style/AppTheme.AppBarOverlay"
             app:popupTheme="@style/AppTheme.PopupOverlay"
-            app:title="Stock Products"
+            app:title="Products Purchase List"
             app:titleTextColor="@color/white" />
 
         <ProgressBar
@@ -47,7 +47,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="16dp"
-                android:text="All Stock Products"
+                android:text="Purchase List"
                 android:textColor="#555555"
                 android:textSize="12sp"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -56,7 +56,7 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/productRecycler"
+                android:id="@+id/purchaseListRecycler"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
                 android:clipToPadding="false"
@@ -68,13 +68,13 @@
                 app:layout_constraintTop_toBottomOf="@+id/textView2"
                 app:layout_constraintVertical_bias="0.0"
                 tools:itemCount="5"
-                tools:listitem="@layout/list_item_stock_product" />
+                tools:listitem="@layout/list_item_purchase_list" />
 
             <TextView
                 android:id="@+id/emptyView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="No products found"
+                android:text="No data found"
                 android:textColor="#BBBBBB"
                 android:textSize="25sp"
                 android:textAlignment="center"
@@ -83,30 +83,6 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 android:layout_gravity="center" />
-
-            <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
-                android:id="@+id/btnReceiveProduct"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:layout_marginTop="16dp"
-                android:layout_marginEnd="16dp"
-                android:layout_marginBottom="16dp"
-                android:contentDescription="Simple description"
-                android:text="Add To Stock"
-                android:textAllCaps="false"
-                android:textColor="@color/colorWhite"
-                android:textSize="15sp"
-                app:backgroundTint="#E5525D"
-                app:icon="@drawable/ic_baseline_add_24"
-                app:iconPadding="8dp"
-                app:iconTint="@color/colorWhite"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="1.0"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="1.0" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </RelativeLayout>

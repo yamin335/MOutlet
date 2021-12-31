@@ -9,9 +9,11 @@ import com.mallzhub.shop.models.GiftPointRequestListResponse
 import com.mallzhub.shop.models.GiftPointsHistoryDetailsResponse
 import com.mallzhub.shop.models.ShopWiseGiftPointResponse
 import com.mallzhub.shop.models.add_product.AddProductResponse
+import com.mallzhub.shop.models.order.OrderListResponse
 import com.mallzhub.shop.models.order.OrderStoreBody
 import com.mallzhub.shop.models.order.OrderStoreResponse
 import com.mallzhub.shop.models.product_stock.*
+import com.mallzhub.shop.models.purchase_list.PurchaseListResponse
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
@@ -72,6 +74,12 @@ class StockProductRepository @Inject constructor(private val apiService: ApiServ
         }
         return withContext(Dispatchers.IO) {
             apiService.storeReceivedProduct(jsonArray)
+        }
+    }
+
+    suspend fun getPurchaseList(page: Int?, token: String?): Response<PurchaseListResponse> {
+        return withContext(Dispatchers.IO) {
+            apiService.getPurchaseList(page, token)
         }
     }
 }

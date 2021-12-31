@@ -29,7 +29,8 @@ data class StockWithDetails(val current_page: Int?, val data: List<StockProductW
                             val next_page_url: String?, val path: String?, val per_page: Int?,
                             val prev_page_url: String?, val to: Int?, val total: Int?)
 
-data class StockProductWithDetails(val product: Product?, val details: List<StockProductDetail>?, val product_id: Int?, val qty: Int?, var isExpanded: Boolean = false)
+data class StockProductWithDetails(val product: Product?, val details: List<StockProductDetail>?, val product_id: Int?,
+                                   val qty: Int?, var isExpanded: Boolean = false)
 
 data class StockProductDetail(val lot: String?, val qty: Int?, val is_opening_stock: Int?, val id: Int?, val created_at: String?)
 
@@ -78,5 +79,5 @@ data class ReceiveProductStoreBody(val id: Int?, val purchase_id: Int?, var prod
                                    val taxTypeValue: Int?, val discountType: String?, val discountTypeValue: Int?,
                                    val type: Any?, val created_at: String?, val updated_at: String?,
                                    var merchant_id: Int?, var product: Product?, var buying_price: String?,
-                                   var selling_price: String?, val expire_date: String?, val receive: Int?,
+                                   var selling_price: String?, var expire_date: String?, val receive: Int?,
                                    var attributes: List<Attribute>?, var images: String?)

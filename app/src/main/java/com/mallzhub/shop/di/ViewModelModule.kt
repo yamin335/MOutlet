@@ -54,6 +54,7 @@ import com.mallzhub.shop.ui.otp_signin.OtpSignInViewModel
 import com.mallzhub.shop.ui.pin_number.PinNumberViewModel
 import com.mallzhub.shop.ui.products.SelectProductViewModel
 import com.mallzhub.shop.ui.profile_signin.ProfileSignInViewModel
+import com.mallzhub.shop.ui.purchase_list.PurchaseListFragmentViewModel
 import com.mallzhub.shop.ui.shops.ShopDetailsContactUsViewModel
 import com.mallzhub.shop.ui.shops.ShopDetailsViewModel
 import com.mallzhub.shop.ui.stock_product.ReceiveProductViewModel
@@ -446,4 +447,9 @@ abstract class ViewModelModule {
     @IntoMap
     @ViewModelKey(ReceiveProductViewModel::class)
     abstract fun bindReceiveProductViewModel(viewModel: ReceiveProductViewModel): ViewModel
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(PurchaseListFragmentViewModel::class)
+    abstract fun bindPurchaseListFragmentViewModel(viewModel: PurchaseListFragmentViewModel): ViewModel
 }

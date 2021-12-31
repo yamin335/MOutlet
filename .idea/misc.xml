@@ -13,6 +13,7 @@
         <entry key="app/src/main/res/layout/button_and_progress.xml" value="0.23854166666666668" />
         <entry key="app/src/main/res/layout/camera_preview_overlay.xml" value="0.23854166666666668" />
         <entry key="app/src/main/res/layout/fragment_add_bank.xml" value="0.2015625" />
+        <entry key="app/src/main/res/layout/fragment_add_customer.xml" value="0.2234375" />
         <entry key="app/src/main/res/layout/fragment_add_product.xml" value="0.36041666666666666" />
         <entry key="app/src/main/res/layout/fragment_all_products.xml" value="0.36041666666666666" />
         <entry key="app/src/main/res/layout/fragment_create_mpos_order.xml" value="0.25625" />
@@ -33,6 +34,7 @@
         <entry key="app/src/main/res/layout/fragment_product_list.xml" value="0.36041666666666666" />
         <entry key="app/src/main/res/layout/fragment_profile_sign_in.xml" value="0.36041666666666666" />
         <entry key="app/src/main/res/layout/fragment_profiles.xml" value="0.36041666666666666" />
+        <entry key="app/src/main/res/layout/fragment_purchase_list.xml" value="0.2234375" />
         <entry key="app/src/main/res/layout/fragment_receive_product.xml" value="0.36041666666666666" />
         <entry key="app/src/main/res/layout/fragment_select_product.xml" value="0.36041666666666666" />
         <entry key="app/src/main/res/layout/fragment_stock_products.xml" value="0.36041666666666666" />
@@ -41,6 +43,7 @@
         <entry key="app/src/main/res/layout/fragment_transactions.xml" value="0.36041666666666666" />
         <entry key="app/src/main/res/layout/fragment_wallet.xml" value="0.375" />
         <entry key="app/src/main/res/layout/layout_payment_method_row.xml" value="0.246875" />
+        <entry key="app/src/main/res/layout/list_item_edit_product_attributes.xml" value="0.36041666666666666" />
         <entry key="app/src/main/res/layout/list_item_gift_point_history.xml" value="0.36041666666666666" />
         <entry key="app/src/main/res/layout/list_item_gift_point_history_details.xml" value="0.36041666666666666" />
         <entry key="app/src/main/res/layout/list_item_gift_point_request.xml" value="0.36041666666666666" />
@@ -52,6 +55,7 @@
         <entry key="app/src/main/res/layout/list_item_order_details_product.xml" value="0.36041666666666666" />
         <entry key="app/src/main/res/layout/list_item_order_product.xml" value="0.36041666666666666" />
         <entry key="app/src/main/res/layout/list_item_product_category.xml" value="0.25092592592592594" />
+        <entry key="app/src/main/res/layout/list_item_purchase_list.xml" value="0.375" />
         <entry key="app/src/main/res/layout/list_item_stock_product.xml" value="0.335" />
         <entry key="app/src/main/res/layout/list_item_stock_product_details.xml" value="0.36041666666666666" />
         <entry key="app/src/main/res/layout/list_item_transaction.xml" value="0.36041666666666666" />

@@ -63,6 +63,7 @@
                         android:textSize="12sp" />
 
                     <EditText
+                        android:id="@+id/etName"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:background="@drawable/rounded_bg_common_edittext_gray"
@@ -94,6 +95,7 @@
                         android:textSize="12sp" />
 
                     <EditText
+                        android:id="@+id/etMobile"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:background="@drawable/rounded_bg_common_edittext_gray"
@@ -126,6 +128,7 @@
                         android:textSize="12sp" />
 
                     <EditText
+                        android:id="@+id/etEmail"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:background="@drawable/rounded_bg_common_edittext_gray"
@@ -157,6 +160,7 @@
                         android:textSize="12sp" />
 
                     <EditText
+                        android:id="@+id/etContactPerson"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:background="@drawable/rounded_bg_common_edittext_gray"
@@ -188,6 +192,7 @@
                         android:textSize="12sp" />
 
                     <EditText
+                        android:id="@+id/etDiscountAmount"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:background="@drawable/rounded_bg_common_edittext_gray"
@@ -203,7 +208,7 @@
                 </LinearLayout>
 
                 <com.google.android.material.card.MaterialCardView
-                    android:id="@+id/cardSpinnerCategory"
+                    android:id="@+id/cardSpinnerCity"
                     android:layout_width="match_parent"
                     android:layout_height="45dp"
                     android:layout_marginStart="16dp"
@@ -248,6 +253,7 @@
                         android:textSize="12sp" />
 
                     <EditText
+                        android:id="@+id/etAddress"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="8dp"

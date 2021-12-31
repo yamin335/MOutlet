@@ -1,5 +1,6 @@
 package com.mallzhub.shop.models.customers
 import com.mallzhub.shop.models.login.Merchant
+import java.io.Serializable
 
 data class CustomerListResponse(val code: String?, val status: String?, val message: String?, val data: CustomerListResponseData?)
 
@@ -14,7 +15,7 @@ data class Customer(val id: Int?, val name: String?, val address: String?, val c
                     val state: String?, val zipcode: String?, val phone: String?,
                     val password: String?, val email: String?, val discountAmount: Int?,
                     val contact_person: String?, val merchant_id: Int?, val created_at: String?,
-                    val updated_at: String?)
+                    val updated_at: String?): Serializable
 
 data class AddCustomerResponse(val code: String?, val status: String?, val message: String?, val data: AddCustomerResponseData?)
 data class AddCustomerResponseData(val customer: Customer?)

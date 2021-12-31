@@ -68,13 +68,13 @@ class AllCustomersFragment : BaseFragment<AllCustomersFragmentBinding, AllCustom
         allCustomersListAdapter = AllCustomersListAdapter (
             appExecutors
         ) { item ->
-            //navController.navigate(FavoriteFragmentDirections.actionFavoriteFragmentToProductDetailsFragment2(item))
+            navigateTo(AllCustomersFragmentDirections.actionAllCustomersFragmentToAddCustomerFragment(true, item))
         }
 
         viewDataBinding.allCustomersRecycler.adapter = allCustomersListAdapter
 
         viewDataBinding.addCustomer.setOnClickListener {
-            navigateTo(AllCustomersFragmentDirections.actionAllCustomersFragmentToAddCustomerFragment())
+            navigateTo(AllCustomersFragmentDirections.actionAllCustomersFragmentToAddCustomerFragment(false, null))
         }
 
         viewModel.customerList.observe(viewLifecycleOwner, Observer { customers ->
