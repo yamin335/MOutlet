@@ -427,6 +427,35 @@ class ReceiveProductFragment : BaseFragment<ReceiveProductFragmentBinding, Recei
             }
         }
 
+        val purchase = args.purchase ?: return
+        val productList = purchase.details
+        if (productList.isNullOrEmpty()) return
+        val purchasedProductLot = productList[0]
+        val productId = purchasedProductLot.product_id ?: return
+        viewModel.selectedProduct.value?.clear()
+        viewModel.selectedProduct.addNewItem(purchasedProductLot.product ?: return)
+        viewDataBinding.btnSelectProduct.visibility = View.GONE
+        receiveProductStoreBody.product = product
+        viewModel.getProductDetails(productId).observe(viewLifecycleOwner, Observer { response ->
+            response?.let {
+                receiveProductStoreBody.id = purchase.id
+                receiveProductStoreBody.purchase_id = purchasedProductLot.purchase_id
+                receiveProductStoreBody.product_id = productId
+                receiveProductStoreBody.unit_price = response.data?.selling_price?.toInt()
+                receiveProductStoreBody.qty = purchasedProductLot.qty
+                receiveProductStoreBody.sub_total = purchasedProductLot.sub_total?.toInt()
+                receiveProductStoreBody.attributes = response.data?.attributes
+                val attributes = response.data?.attributes
+                if (attributes.isNullOrEmpty()) {
+                    viewDataBinding.labelAttributes.visibility = View.GONE
+                    viewDataBinding.recyclerAttributes.visibility = View.GONE
+                } else {
+                    viewDataBinding.labelAttributes.visibility = View.VISIBLE
+                    viewDataBinding.recyclerAttributes.visibility = View.VISIBLE
+                    attributeEditListAdapter.submitList(attributes)
+                }
+            }
+        })
     }
 
     private fun showHideDataView() {

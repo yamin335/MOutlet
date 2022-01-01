@@ -355,6 +355,28 @@
             </LayoutPositions>
           </value>
         </entry>
+        <entry key="barcode_print_nav_graph.xml">
+          <value>
+            <LayoutPositions>
+              <option name="myPositions">
+                <map>
+                  <entry key="printBarcodeFragment">
+                    <value>
+                      <LayoutPositions>
+                        <option name="myPosition">
+                          <Point>
+                            <option name="x" value="40" />
+                            <option name="y" value="40" />
+                          </Point>
+                        </option>
+                      </LayoutPositions>
+                    </value>
+                  </entry>
+                </map>
+              </option>
+            </LayoutPositions>
+          </value>
+        </entry>
         <entry key="customers_nav_graph.xml">
           <value>
             <LayoutPositions>
@@ -1272,6 +1294,18 @@
             <LayoutPositions>
               <option name="myPositions">
                 <map>
+                  <entry key="barcode_print_nav_graph">
+                    <value>
+                      <LayoutPositions>
+                        <option name="myPosition">
+                          <Point>
+                            <option name="x" value="880" />
+                            <option name="y" value="870" />
+                          </Point>
+                        </option>
+                      </LayoutPositions>
+                    </value>
+                  </entry>
                   <entry key="drawer_nav_graph">
                     <value>
                       <LayoutPositions>
@@ -1349,6 +1383,11 @@
                               </value>
                             </entry>
                             <entry key="action_moreFragment_to_order_nav">
+                              <value>
+                                <LayoutPositions />
+                              </value>
+                            </entry>
+                            <entry key="action_moreFragment_to_productPurchaseFragment">
                               <value>
                                 <LayoutPositions />
                               </value>
@@ -1435,6 +1474,15 @@
                             <option name="y" value="899" />
                           </Point>
                         </option>
+                        <option name="myPositions">
+                          <map>
+                            <entry key="action_productPurchaseFragment_to_receive_product_nav">
+                              <value>
+                                <LayoutPositions />
+                              </value>
+                            </entry>
+                          </map>
+                        </option>
                       </LayoutPositions>
                     </value>
                   </entry>
@@ -1450,34 +1498,13 @@
                       </LayoutPositions>
                     </value>
                   </entry>
-                  <entry key="receiveProductFragment">
+                  <entry key="receive_product_nav_graph">
                     <value>
                       <LayoutPositions>
                         <option name="myPosition">
                           <Point>
-                            <option name="x" value="574" />
-                            <option name="y" value="959" />
-                          </Point>
-                        </option>
-                        <option name="myPositions">
-                          <map>
-                            <entry key="action_receiveProductFragment_to_select_product_nav_graph">
-                              <value>
-                                <LayoutPositions />
-                              </value>
-                            </entry>
-                          </map>
-                        </option>
-                      </LayoutPositions>
-                    </value>
-                  </entry>
-                  <entry key="select_product_nav_graph">
-                    <value>
-                      <LayoutPositions>
-                        <option name="myPosition">
-                          <Point>
-                            <option name="x" value="798" />
-                            <option name="y" value="1225" />
+                            <option name="x" value="498" />
+                            <option name="y" value="1094" />
                           </Point>
                         </option>
                       </LayoutPositions>
@@ -1500,8 +1527,8 @@
                       <LayoutPositions>
                         <option name="myPosition">
                           <Point>
-                            <option name="x" value="800" />
-                            <option name="y" value="826" />
+                            <option name="x" value="678" />
+                            <option name="y" value="846" />
                           </Point>
                         </option>
                       </LayoutPositions>
@@ -1518,7 +1545,7 @@
                         </option>
                         <option name="myPositions">
                           <map>
-                            <entry key="action_stockProductsFragment_to_receiveProductFragment">
+                            <entry key="action_stockProductsFragment_to_receive_product_nav">
                               <value>
                                 <LayoutPositions />
                               </value>
@@ -1956,6 +1983,49 @@
                           <Point>
                             <option name="x" value="12" />
                             <option name="y" value="12" />
+                          </Point>
+                        </option>
+                      </LayoutPositions>
+                    </value>
+                  </entry>
+                </map>
+              </option>
+            </LayoutPositions>
+          </value>
+        </entry>
+        <entry key="receive_product_nav_graph.xml">
+          <value>
+            <LayoutPositions>
+              <option name="myPositions">
+                <map>
+                  <entry key="receiveProductFragment">
+                    <value>
+                      <LayoutPositions>
+                        <option name="myPosition">
+                          <Point>
+                            <option name="x" value="12" />
+                            <option name="y" value="12" />
+                          </Point>
+                        </option>
+                        <option name="myPositions">
+                          <map>
+                            <entry key="action_receiveProductFragment_to_select_product_nav_graph">
+                              <value>
+                                <LayoutPositions />
+                              </value>
+                            </entry>
+                          </map>
+                        </option>
+                      </LayoutPositions>
+                    </value>
+                  </entry>
+                  <entry key="select_product_nav_graph">
+                    <value>
+                      <LayoutPositions>
+                        <option name="myPosition">
+                          <Point>
+                            <option name="x" value="256" />
+                            <option name="y" value="121" />
                           </Point>
                         </option>
                       </LayoutPositions>

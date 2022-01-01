@@ -62,7 +62,7 @@ class StockProductsFragment : BaseFragment<StockProductFragmentBinding, StockPro
         })
 
         viewDataBinding.btnReceiveProduct.setOnClickListener {
-            navigateTo(StockProductsFragmentDirections.actionStockProductsFragmentToReceiveProductFragment(product = null, isEdit = false))
+            navigateTo(StockProductsFragmentDirections.actionStockProductsFragmentToReceiveProductNav(product = null, isEdit = false, purchase = null))
         }
 
         if (viewModel.stockProductsList.value.isNullOrEmpty()) {

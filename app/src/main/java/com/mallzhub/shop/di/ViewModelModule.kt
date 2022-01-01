@@ -12,6 +12,7 @@ import com.mallzhub.shop.ui.add_payment_methods.AddCardViewModel
 import com.mallzhub.shop.ui.add_payment_methods.AddPaymentMethodsViewModel
 import com.mallzhub.shop.ui.add_product.AddProductViewModel
 import com.mallzhub.shop.ui.add_product.AllProductViewModel
+import com.mallzhub.shop.ui.barcode_print.BarcodePrintViewModel
 import com.mallzhub.shop.ui.cart.CartViewModel
 import com.mallzhub.shop.ui.chapter_list.ChapterListViewModel
 import com.mallzhub.shop.ui.customers.AddCustomerViewModel
@@ -452,4 +453,9 @@ abstract class ViewModelModule {
     @IntoMap
     @ViewModelKey(PurchaseListFragmentViewModel::class)
     abstract fun bindPurchaseListFragmentViewModel(viewModel: PurchaseListFragmentViewModel): ViewModel
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(BarcodePrintViewModel::class)
+    abstract fun bindBarcodePrintViewModel(viewModel: BarcodePrintViewModel): ViewModel
 }

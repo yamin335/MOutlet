@@ -48,6 +48,7 @@
                 android:orientation="vertical">
 
                 <LinearLayout
+                    android:id="@+id/linearName"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="16dp"
@@ -69,6 +70,7 @@
                         android:background="@drawable/rounded_bg_common_edittext_gray"
                         android:hint="name"
                         android:text="@={viewModel.name}"
+                        android:textColor="@color/edittext_text_state_colors"
                         android:inputType="textPersonName"
                         android:imeOptions="actionNext"
                         android:paddingStart="16dp"
@@ -79,6 +81,7 @@
                 </LinearLayout>
 
                 <LinearLayout
+                    android:id="@+id/linearMobile"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="16dp"
@@ -101,6 +104,7 @@
                         android:background="@drawable/rounded_bg_common_edittext_gray"
                         android:hint="mobile"
                         android:text="@={viewModel.phone}"
+                        android:textColor="@color/edittext_text_state_colors"
                         android:inputType="phone"
                         android:maxLength="11"
                         android:imeOptions="actionNext"
@@ -112,6 +116,7 @@
                 </LinearLayout>
 
                 <LinearLayout
+                    android:id="@+id/linearEmail"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="16dp"
@@ -133,6 +138,7 @@
                         android:layout_height="wrap_content"
                         android:background="@drawable/rounded_bg_common_edittext_gray"
                         android:hint="email"
+                        android:textColor="@color/edittext_text_state_colors"
                         android:text="@={viewModel.email}"
                         android:inputType="textEmailAddress"
                         android:imeOptions="actionNext"
@@ -144,6 +150,7 @@
                 </LinearLayout>
 
                 <LinearLayout
+                    android:id="@+id/linearContactPerson"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="16dp"
@@ -165,6 +172,7 @@
                         android:layout_height="wrap_content"
                         android:background="@drawable/rounded_bg_common_edittext_gray"
                         android:hint="contact name"
+                        android:textColor="@color/edittext_text_state_colors"
                         android:text="@={viewModel.contactPerson}"
                         android:inputType="textPersonName"
                         android:imeOptions="actionNext"
@@ -176,6 +184,7 @@
                 </LinearLayout>
 
                 <LinearLayout
+                    android:id="@+id/linearDiscount"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
@@ -200,6 +209,7 @@
                         android:inputType="numberDecimal"
                         android:text="@={viewModel.discountAmount}"
                         android:hint="amount"
+                        android:textColor="@color/edittext_text_state_colors"
                         android:paddingStart="16dp"
                         android:paddingEnd="8dp"
                         android:paddingTop="10dp"
@@ -232,7 +242,7 @@
                 </com.google.android.material.card.MaterialCardView>
 
                 <LinearLayout
-                    android:id="@+id/llDescription"
+                    android:id="@+id/linearAddress"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="16dp"
@@ -260,6 +270,7 @@
                         android:background="@drawable/rounded_bg_common_edittext_gray"
                         android:gravity="start|top"
                         android:hint="address in details"
+                        android:textColor="@color/edittext_text_state_colors"
                         android:text="@={viewModel.address}"
                         android:imeOptions="actionDone"
                         android:lines="6"

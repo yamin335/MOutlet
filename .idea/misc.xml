@@ -5,6 +5,7 @@
       <map>
         <entry key="../../../../layout/custom_preview.xml" value="0.26510416666666664" />
         <entry key="app/src/main/res/drawable/barcode_field_box.xml" value="0.2546875" />
+        <entry key="app/src/main/res/drawable/circular_progress_track.xml" value="0.23958333333333334" />
         <entry key="app/src/main/res/drawable/ic_close_vd_white_24.xml" value="0.2546875" />
         <entry key="app/src/main/res/drawable/ic_round_keyboard_arrow_down_24.xml" value="0.3765625" />
         <entry key="app/src/main/res/layout/activity_barcode_reader.xml" value="0.25" />
@@ -30,6 +31,7 @@
         <entry key="app/src/main/res/layout/fragment_offers.xml" value="0.36041666666666666" />
         <entry key="app/src/main/res/layout/fragment_order_list.xml" value="0.375" />
         <entry key="app/src/main/res/layout/fragment_order_track_history.xml" value="0.36041666666666666" />
+        <entry key="app/src/main/res/layout/fragment_print_barcode.xml" value="0.2234375" />
         <entry key="app/src/main/res/layout/fragment_product_details.xml" value="0.36041666666666666" />
         <entry key="app/src/main/res/layout/fragment_product_list.xml" value="0.36041666666666666" />
         <entry key="app/src/main/res/layout/fragment_profile_sign_in.xml" value="0.36041666666666666" />

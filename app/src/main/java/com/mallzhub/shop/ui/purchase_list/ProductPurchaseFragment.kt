@@ -36,7 +36,7 @@ class ProductPurchaseFragment : BaseFragment<PurchaseListFragmentBinding, Purcha
         registerToolbar(viewDataBinding.toolbar)
 
         productPurchaseListAdapter = ProductPurchaseListAdapter {
-
+            navigateTo(ProductPurchaseFragmentDirections.actionProductPurchaseFragmentToReceiveProductNav(product = null, isEdit = false, purchase = it))
         }
 
         viewDataBinding.purchaseListRecycler.adapter = productPurchaseListAdapter

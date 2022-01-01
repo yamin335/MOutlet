@@ -47,12 +47,12 @@ class AddCustomerFragment : BaseFragment<AddCustomerFragmentBinding, AddCustomer
             viewDataBinding.etDiscountAmount.isEnabled = false
             viewDataBinding.etAddress.isEnabled = false
 
-            viewDataBinding.etName.setText(customer?.name)
-            viewDataBinding.etMobile.setText(customer?.phone)
-            viewDataBinding.etEmail.setText(customer?.email)
-            viewDataBinding.etContactPerson.setText(customer?.contact_person)
-            viewDataBinding.etDiscountAmount.setText(customer?.discountAmount?.toString())
-            viewDataBinding.etAddress.setText(customer?.address)
+            viewDataBinding.etName.setText(customer?.name ?: "N/A")
+            viewDataBinding.etMobile.setText(customer?.phone ?: "N/A")
+            viewDataBinding.etEmail.setText(customer?.email ?: "N/A")
+            viewDataBinding.etContactPerson.setText(customer?.contact_person ?: "N/A")
+            viewDataBinding.etDiscountAmount.setText(customer?.discountAmount?.toString() ?: "N/A")
+            viewDataBinding.etAddress.setText(customer?.address ?: "N/A")
         }
 
         val cityAdapter = ArrayAdapter(requireContext(), R.layout.spinner_item, cityList)

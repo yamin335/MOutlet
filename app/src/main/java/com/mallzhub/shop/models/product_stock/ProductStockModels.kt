@@ -72,12 +72,13 @@ data class ReceiveProductPd(val id: Int?, val merchant_id: Int?, val vendor_id: 
               val paid_amount: Int?, val due_amount: Int?, val created_at: String?,
               val updated_at: String?, val received_status: Int?)
 
-data class ReceiveProductStoreBody(val id: Int?, val purchase_id: Int?, var product_id: Int?,
-                                   var description: String?, val linkTo: Any?, var unitType: String?,
-                                   var qty: Int?, var total_received: Int?, val return_qty: Int?,
-                                   var unit_price: Int?, var sub_total: Int?, val taxType: String?,
-                                   val taxTypeValue: Int?, val discountType: String?, val discountTypeValue: Int?,
-                                   val type: Any?, val created_at: String?, val updated_at: String?,
-                                   var merchant_id: Int?, var product: Product?, var buying_price: String?,
-                                   var selling_price: String?, var expire_date: String?, val receive: Int?,
-                                   var attributes: List<Attribute>?, var images: String?)
+data class ReceiveProductStoreBody(
+    var id: Int?, var purchase_id: Int?, var product_id: Int?,
+    var description: String?, val linkTo: Any?, var unitType: String?,
+    var qty: Int?, var total_received: Int?, val return_qty: Int?,
+    var unit_price: Int?, var sub_total: Int?, val taxType: String?,
+    val taxTypeValue: Int?, val discountType: String?, val discountTypeValue: Int?,
+    val type: Any?, val created_at: String?, val updated_at: String?,
+    var merchant_id: Int?, var product: Product?, var buying_price: String?,
+    var selling_price: String?, var expire_date: String?, val receive: Int?,
+    var attributes: List<Attribute>?, var images: String?)

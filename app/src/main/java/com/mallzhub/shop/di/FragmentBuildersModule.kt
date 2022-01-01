@@ -7,6 +7,7 @@ import com.mallzhub.shop.ui.add_payment_methods.AddCardFragment
 import com.mallzhub.shop.ui.add_payment_methods.AddPaymentMethodsFragment
 import com.mallzhub.shop.ui.add_product.AddProductFragment
 import com.mallzhub.shop.ui.add_product.AllProductsFragment
+import com.mallzhub.shop.ui.barcode_print.PrintBarcodeFragment
 import com.mallzhub.shop.ui.cart.CartFragment
 import com.mallzhub.shop.ui.chapter_list.ChapterListFragment
 import com.mallzhub.shop.ui.customers.AddCustomerFragment
@@ -290,4 +291,7 @@ abstract class FragmentBuildersModule {
 
     @ContributesAndroidInjector
     abstract fun contributeProductPurchaseFragment(): ProductPurchaseFragment
+
+    @ContributesAndroidInjector
+    abstract fun contributePrintBarcodeFragment(): PrintBarcodeFragment
 }

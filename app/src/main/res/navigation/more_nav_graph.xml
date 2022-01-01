@@ -168,12 +168,26 @@
             app:popEnterAnim="@anim/slide_in_left"
             app:popExitAnim="@anim/slide_out_right"/>
         <action
-            android:id="@+id/action_stockProductsFragment_to_receiveProductFragment"
-            app:destination="@id/receiveProductFragment"
+            android:id="@+id/action_stockProductsFragment_to_receive_product_nav"
+            app:destination="@id/receive_product_nav"
             app:enterAnim="@anim/slide_in_right"
             app:exitAnim="@anim/slide_out_left"
             app:popEnterAnim="@anim/slide_in_left"
-            app:popExitAnim="@anim/slide_out_right"/>
+            app:popExitAnim="@anim/slide_out_right">
+            <argument
+                android:name="product"
+                app:argType="com.mallzhub.shop.models.Product"
+                app:nullable="true"
+                android:defaultValue="@null" />
+            <argument
+                android:name="isEdit"
+                android:defaultValue="false"
+                app:argType="boolean" />
+            <argument
+                android:name="purchase"
+                app:argType="com.mallzhub.shop.models.purchase_list.PurchaseListResponseData"
+                app:nullable="true" />
+        </action>
     </fragment>
     <fragment
         android:id="@+id/stockProductsDetailsFragment"
@@ -186,33 +200,46 @@
         <argument
             android:name="productDetailId"
             app:argType="integer" />
-    </fragment>
-    <include app:graph="@navigation/select_product_nav_graph" />
-    <fragment
-        android:id="@+id/receiveProductFragment"
-        android:name="com.mallzhub.shop.ui.stock_product.ReceiveProductFragment"
-        android:label="Receive Product"
-        tools:layout="@layout/fragment_receive_product">
-        <argument
-            android:name="product"
-            app:argType="com.mallzhub.shop.models.Product"
-            app:nullable="true"
-            android:defaultValue="@null" />
-        <argument
-            android:name="isEdit"
-            android:defaultValue="false"
-            app:argType="boolean" />
         <action
-            android:id="@+id/action_receiveProductFragment_to_select_product_nav_graph"
-            app:destination="@id/select_product_nav_graph"
+            android:id="@+id/action_stockProductsDetailsFragment_to_barcode_print_nav"
+            app:destination="@id/barcode_print_nav"
             app:enterAnim="@anim/slide_in_right"
             app:exitAnim="@anim/slide_out_left"
             app:popEnterAnim="@anim/slide_in_left"
-            app:popExitAnim="@anim/slide_out_right"/>
+            app:popExitAnim="@anim/slide_out_right">
+            <argument
+                android:name="downloadUrl"
+                app:argType="string" />
+        </action>
     </fragment>
+
     <fragment
         android:id="@+id/productPurchaseFragment"
         android:name="com.mallzhub.shop.ui.purchase_list.ProductPurchaseFragment"
         android:label="Products Purchase List"
-        tools:layout="@layout/fragment_purchase_list"/>
+        tools:layout="@layout/fragment_purchase_list">
+        <action
+            android:id="@+id/action_productPurchaseFragment_to_receive_product_nav"
+            app:destination="@id/receive_product_nav"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right">
+            <argument
+                android:name="product"
+                app:argType="com.mallzhub.shop.models.Product"
+                app:nullable="true"
+                android:defaultValue="@null" />
+            <argument
+                android:name="isEdit"
+                android:defaultValue="false"
+                app:argType="boolean" />
+            <argument
+                android:name="purchase"
+                app:argType="com.mallzhub.shop.models.purchase_list.PurchaseListResponseData"
+                app:nullable="true" />
+        </action>
+    </fragment>
+    <include app:graph="@navigation/receive_product_nav_graph" />
+    <include app:graph="@navigation/barcode_print_nav_graph" />
 </navigation>

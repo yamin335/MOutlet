@@ -5,6 +5,8 @@ import androidx.work.Configuration
 import androidx.work.WorkManager
 import com.mallzhub.shop.binding.FragmentDataBindingComponent
 import com.mallzhub.shop.di.DaggerAppComponent
+import com.mallzhub.shop.util.AppConstants.downloadedPdfFiles
+import com.mallzhub.shop.util.FileUtils
 import com.mallzhub.shop.worker.DaggerWorkerFactory
 import com.squareup.picasso.Picasso
 import dagger.android.support.DaggerApplication
@@ -24,7 +26,7 @@ class App : DaggerApplication() {
 
     override fun onCreate() {
         super.onCreate()
-
+        FileUtils.makeEmptyFolderIntoExternalStorageWithTitle(this, downloadedPdfFiles)
         // Inject this class's @Inject-annotated members.
         applicationInjector.inject(this)
         /*if (BuildConfig.DEBUG) {

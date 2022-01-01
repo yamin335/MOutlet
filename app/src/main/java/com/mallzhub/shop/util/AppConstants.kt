@@ -10,6 +10,7 @@ object AppConstants {
     const val otpWaitMessage = "Please wait until you get an OTP code!"
     const val registrationSuccessMessage = "Welcome! to QPay. Please login to continue."
     const val saveSuccessfulMessage = "Saved Successfully!"
+    const val downloadedPdfFiles = "downloaded_pdf_files"
 
     const val orderPending = "Pending"
     const val orderPicked = "Picked"
