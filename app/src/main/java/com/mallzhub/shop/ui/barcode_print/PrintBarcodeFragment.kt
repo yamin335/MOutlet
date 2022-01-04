@@ -1,6 +1,9 @@
 package com.mallzhub.shop.ui.barcode_print
 
 import android.os.Bundle
+import android.view.Menu
+import android.view.MenuInflater
+import android.view.MenuItem
 import android.view.View
 import androidx.core.os.bundleOf
 import androidx.fragment.app.viewModels
@@ -14,6 +17,7 @@ import com.mallzhub.shop.databinding.PrintBarcodeFragmentBinding
 import com.mallzhub.shop.ui.common.BaseFragment
 import com.mallzhub.shop.util.AppConstants
 import com.mallzhub.shop.util.FileUtils
+import com.mallzhub.shop.util.PrinterUtils
 import com.mallzhub.shop.util.showErrorToast
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -29,6 +33,43 @@ class PrintBarcodeFragment : BaseFragment<PrintBarcodeFragmentBinding, BarcodePr
     }
 
     val args: PrintBarcodeFragmentArgs by navArgs()
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setHasOptionsMenu(true)
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        inflater.inflate(R.menu.menu_print, menu)
+        super.onCreateOptionsMenu(menu, inflater)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when(item.itemId) {
+            android.R.id.home -> {
+                navController.navigateUp()
+            }
+            R.id.menu_print -> {
+                val url = args.downloadUrl
+
+                if (url.isNotBlank()) {
+                    val filepath = FileUtils.getLocalStorageFilePath(
+                        requireContext(),
+                        AppConstants.downloadedPdfFiles
+                    )
+
+                    val fileName = url.split("/").last()
+                    val pdfFile = File("$filepath/$fileName")
+                    if (pdfFile.exists()) {
+                        PrinterUtils.printPDF(requireContext(), pdfFile)
+                    } else {
+                        viewModel.downloadPdfFile(url, filepath, fileName)
+                    }
+                }
+            }
+        }
+        return true
+    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)

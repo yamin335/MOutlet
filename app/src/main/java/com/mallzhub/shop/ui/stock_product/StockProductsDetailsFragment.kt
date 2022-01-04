@@ -48,7 +48,9 @@ class StockProductsDetailsFragment : BaseFragment<StockProductDetailsFragmentBin
         })
 
         viewDataBinding.btnPrint.setOnClickListener {
-            navigateTo(StockProductsDetailsFragmentDirections.actionStockProductsDetailsFragmentToBarcodePrintNav("https://engrsapps.s3.ap-southeast-1.amazonaws.com/fbk/f-sc/f-ssc/f-ssc-sci/f-ssc-sci-ex1/f-ssc-sci-ex1-c/%E0%A7%A7%E0%A6%AE+%E0%A6%85%E0%A6%A7%E0%A7%8D%E0%A6%AF%E0%A6%BE%E0%A7%9F.pdf"))
+//            navigateTo(StockProductsDetailsFragmentDirections.actionStockProductsDetailsFragmentToBarcodePrintNav(
+//                "https://engrsapps.s3.ap-southeast-1.amazonaws.com/fbk/f-sc/f-ssc/f-ssc-sci/f-ssc-sci-ex1/f-ssc-sci-ex1-c/%E0%A7%A7%E0%A6%AE+%E0%A6%85%E0%A6%A7%E0%A7%8D%E0%A6%AF%E0%A6%BE%E0%A7%9F.pdf"))
+            navigateTo(StockProductsDetailsFragmentDirections.actionStockProductsDetailsFragmentToBarcodePrintNav("https://backend.mobmalls.com/api/print?product_detail_id=${args.productDetailId}"))
         }
     }
 
